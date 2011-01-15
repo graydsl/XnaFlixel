@@ -1,0 +1,8 @@
+
+*.user
+*.suo
+/XnaFlixel/bin
+/XnaFlixel/obj
+/XnaFlixelContent/bin
+/XnaFlixelContent/obj
+/_ReSharper.XnaFlixel

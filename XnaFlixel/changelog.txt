@@ -1,0 +1,5 @@
+﻿X-Flixel 2.43 -> XnaFlixel 1.0
+===============================================================================
+* rearranged code to compile XnaFlixel to an assembly
+* fixed FPS in Console
+* made a XnaFlixel extension with a project template: http://visualstudiogallery.msdn.microsoft.com/en-us/eebbf320-11d8-4bb7-a5ec-b4671f708eb7
