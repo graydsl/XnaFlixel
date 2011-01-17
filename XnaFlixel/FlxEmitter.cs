@@ -1,95 +1,95 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using XnaFlixel.data;
 
 namespace XnaFlixel
 {
-    /**
-     * <code>FlxEmitter</code> is a lightweight particle emitter.
-     * It can be used for one-time explosions or for
-     * continuous fx like rain and fire.  <code>FlxEmitter</code>
-     * is not optimized or anything; all it does is launch
-     * <code>FlxSprite</code> objects out at set intervals
-     * by setting their positions and velocities accordingly.
-     * It is easy to use and relatively efficient, since it
-     * automatically redelays its sprites and/or kills
-     * them once they've been launched.
-     */
+    /// <summary>
+    /// <code>FlxEmitter</code> is a lightweight particle emitter.
+    /// It can be used for one-time explosions or for
+    /// continuous fx like rain and fire.  <code>FlxEmitter</code>
+    /// is not optimized or anything; all it does is launch
+    /// <code>FlxSprite</code> objects out at set intervals
+    /// by setting their positions and velocities accordingly.
+    /// It is easy to use and relatively efficient, since it
+    /// automatically redelays its sprites and/or kills
+    /// them once they've been launched.
+    /// </summary>
     public class FlxEmitter : FlxGroup
     {
-		/**
-		 * The minimum possible velocity of a particle.
-		 * The default value is (-100,-100).
-		 */
+		/// <summary>
+		/// The minimum possible velocity of a particle.
+		/// The default value is (-100,-100).
+		/// </summary>
 		public Vector2 minParticleSpeed;
-		/**
-		 * The maximum possible velocity of a particle.
-		 * The default value is (100,100).
-		 */
+		/// <summary>
+		/// The maximum possible velocity of a particle.
+		/// The default value is (100,100).
+		/// </summary>
 		public Vector2 maxParticleSpeed;
-		/**
-		 * The X and Y drag component of particles launched from the emitter.
-		 */
+		/// <summary>
+		/// The X and Y drag component of particles launched from the emitter.
+		/// </summary>
 		public Vector2 particleDrag;
-		/**
-		 * The minimum possible angular velocity of a particle.  The default value is -360.
-		 * NOTE: rotating particles are more expensive to draw than non-rotating ones!
-		 */
+		/// <summary>
+		/// The minimum possible angular velocity of a particle.  The default value is -360.
+		/// NOTE: rotating particles are more expensive to draw than non-rotating ones!
+		/// </summary>
 		public float minRotation;
-		/**
-		 * The maximum possible angular velocity of a particle.  The default value is 360.
-		 * NOTE: rotating particles are more expensive to draw than non-rotating ones!
-		 */
+		/// <summary>
+		/// The maximum possible angular velocity of a particle.  The default value is 360.
+		/// NOTE: rotating particles are more expensive to draw than non-rotating ones!
+		/// </summary>
 		public float maxRotation;
-		/**
-		 * Sets the <code>acceleration.y</code> member of each particle to this value on launch.
-		 */
+		/// <summary>
+		/// Sets the <code>acceleration.y</code> member of each particle to this value on launch.
+		/// </summary>
 		public float gravity;
-		/**
-		 * Determines whether the emitter is currently emitting particles.
-		 */
+		/// <summary>
+		/// Determines whether the emitter is currently emitting particles.
+		/// </summary>
 		public bool on;
-		/**
-		 * This variable has different effects depending on what kind of emission it is.
-		 * During an explosion, delay controls the lifespan of the particles.
-		 * During normal emission, delay controls the time between particle launches.
-		 * NOTE: In older builds, polarity (negative numbers) was used to define emitter behavior.
-		 * THIS IS NO LONGER THE CASE!  FlxEmitter.start() controls that now!
-		 */
+		/// <summary>
+		/// This variable has different effects depending on what kind of emission it is.
+		/// During an explosion, delay controls the lifespan of the particles.
+		/// During normal emission, delay controls the time between particle launches.
+		/// NOTE: In older builds, polarity (negative numbers) was used to define emitter behavior.
+		/// THIS IS NO LONGER THE CASE!  FlxEmitter.start() controls that now!
+		/// </summary>
 		public float delay;
-		/**
-		 * The number of particles to launch at a time.
-		 */
+		/// <summary>
+		/// The number of particles to launch at a time.
+		/// </summary>
 		public int quantity;
-		/**
-		 * Checks whether you already fired a particle this frame.
-		 */
+		/// <summary>
+		/// Checks whether you already fired a particle this frame.
+		/// </summary>
 		public bool justEmitted;
-		/**
-		 * The style of particle emission (all at once, or one at a time).
-		 */
+		/// <summary>
+		/// The style of particle emission (all at once, or one at a time).
+		/// </summary>
 		protected bool _explode;
-		/**
-		 * Internal helper for deciding when to launch particles or kill them.
-		 */
+		/// <summary>
+		/// Internal helper for deciding when to launch particles or kill them.
+		/// </summary>
 		protected float _timer;
-		/**
-		 * Internal marker for where we are in <code>_sprites</code>.
-		 */
+		/// <summary>
+		/// Internal marker for where we are in <code>_sprites</code>.
+		/// </summary>
 		protected int _particle;
-		/**
-		 * Internal counter for figuring out how many particles to launch.
-		 */
+		/// <summary>
+		/// Internal counter for figuring out how many particles to launch.
+		/// </summary>
 		protected int _counter;
 
-        /**
-         * Creates a new <code>FlxEmitter</code> object at a specific position.
-         * Does not automatically generate or attach particles!
-         * 
-         * @param	X			The X position of the emitter.
-         * @param	Y			The Y position of the emitter.
-         */
+        /// <summary>
+        /// Creates a new <code>FlxEmitter</code> object at a specific position.
+        /// Does not automatically generate or attach particles!
+        /// 
+        /// @param	X			The X position of the emitter.
+        /// @param	Y			The Y position of the emitter.
+        /// </summary>
         public FlxEmitter()
         {
             constructor(0, 0);
@@ -120,17 +120,17 @@ namespace XnaFlixel
             justEmitted = false;
         }
 
-        /**
-         * This function generates a new array of sprites to attach to the emitter.
-         * 
-         * @param	Graphics		If you opted to not pre-configure an array of FlxSprite objects, you can simply pass in a particle image or sprite sheet.
-         * @param	Quantity		The number of particles to generate when using the "create from image" option.
-         * @param	Multiple		Whether the image in the Graphics param is a single particle or a bunch of particles (if it's a bunch, they need to be square!).
-         * @param	Collide			Whether the particles should be flagged as not 'dead' (non-colliding particles are higher performance).  0 means no collisions, 0-1 controls scale of particle's bounding box.
-         * @param	Bounce			Whether the particles should bounce after colliding with things.  0 means no bounce, 1 means full reflection.
-         * 
-         * @return	This FlxEmitter instance (nice for chaining stuff together, if you're into that).
-         */
+        /// <summary>
+        /// This function generates a new array of sprites to attach to the emitter.
+        /// 
+        /// @param	Graphics		If you opted to not pre-configure an array of FlxSprite objects, you can simply pass in a particle image or sprite sheet.
+        /// @param	Quantity		The number of particles to generate when using the "create from image" option.
+        /// @param	Multiple		Whether the image in the Graphics param is a single particle or a bunch of particles (if it's a bunch, they need to be square!).
+        /// @param	Collide			Whether the particles should be flagged as not 'dead' (non-colliding particles are higher performance).  0 means no collisions, 0-1 controls scale of particle's bounding box.
+        /// @param	Bounce			Whether the particles should bounce after colliding with things.  0 means no bounce, 1 means full reflection.
+        /// 
+        /// @return	This FlxEmitter instance (nice for chaining stuff together, if you're into that).
+        /// </summary>
         public FlxEmitter createSprites(Texture2D Graphics, int Quantity)
         {
             return createSprites(Graphics, Quantity, true, 0, 0);
@@ -199,24 +199,24 @@ namespace XnaFlixel
 		}
 		
 
-		/**
-		 * A more compact way of setting the width and height of the emitter.
-		 * 
-		 * @param	Width	The desired width of the emitter (particles are spawned randomly within these dimensions).
-		 * @param	Height	The desired height of the emitter.
-		 */
+		/// <summary>
+		/// A more compact way of setting the width and height of the emitter.
+		/// 
+		/// @param	Width	The desired width of the emitter (particles are spawned randomly within these dimensions).
+		/// @param	Height	The desired height of the emitter.
+		/// </summary>
 		public void setSize(int Width, int Height)
 		{
 			width = Width;
 			height = Height;
 		}
 
-		/**
-		 * A more compact way of setting the X velocity range of the emitter.
-		 * 
-		 * @param	Min		The minimum value for this range.
-		 * @param	Max		The maximum value for this range.
-		 */
+		/// <summary>
+		/// A more compact way of setting the X velocity range of the emitter.
+		/// 
+		/// @param	Min		The minimum value for this range.
+		/// @param	Max		The maximum value for this range.
+		/// </summary>
         public void setXSpeed()
         {
             setXSpeed(0, 0);
@@ -227,12 +227,12 @@ namespace XnaFlixel
 			maxParticleSpeed.X = Max;
 		}
 
-		/**
-		 * A more compact way of setting the Y velocity range of the emitter.
-		 * 
-		 * @param	Min		The minimum value for this range.
-		 * @param	Max		The maximum value for this range.
-		 */
+		/// <summary>
+		/// A more compact way of setting the Y velocity range of the emitter.
+		/// 
+		/// @param	Min		The minimum value for this range.
+		/// @param	Max		The maximum value for this range.
+		/// </summary>
         public void setYSpeed()
         {
             setYSpeed(0, 0);
@@ -243,12 +243,12 @@ namespace XnaFlixel
 			maxParticleSpeed.Y = Max;
 		}
 
-		/**
-		 * A more compact way of setting the angular velocity constraints of the emitter.
-		 * 
-		 * @param	Min		The minimum value for this range.
-		 * @param	Max		The maximum value for this range.
-		 */
+		/// <summary>
+		/// A more compact way of setting the angular velocity constraints of the emitter.
+		/// 
+		/// @param	Min		The minimum value for this range.
+		/// @param	Max		The maximum value for this range.
+		/// </summary>
         public void setRotation()
         {
             setRotation(0, 0);
@@ -259,9 +259,9 @@ namespace XnaFlixel
 			maxRotation = Max;
 		}
 
-		/**
-		 * Internal function that actually performs the emitter update (called by update()).
-		 */
+		/// <summary>
+		/// Internal function that actually performs the emitter update (called by update()).
+		/// </summary>
 		protected void updateEmitter()
 		{
 			if(_explode)
@@ -298,10 +298,10 @@ namespace XnaFlixel
 			}
 		}
 
-		/**
-		 * Internal function that actually goes through and updates all the group members.
-		 * Overridden here to remove the position update code normally used by a FlxGroup.
-		 */
+		/// <summary>
+		/// Internal function that actually goes through and updates all the group members.
+		/// Overridden here to remove the position update code normally used by a FlxGroup.
+		/// </summary>
 		override protected void updateMembers()
 		{
 			FlxObject o;
@@ -315,9 +315,9 @@ namespace XnaFlixel
 			}
 		}
 
-		/**
-		 * Called automatically by the game loop, decides when to launch particles and when to "die".
-		 */
+		/// <summary>
+		/// Called automatically by the game loop, decides when to launch particles and when to "die".
+		/// </summary>
         override public void update()
 		{
 			justEmitted = false;
@@ -325,13 +325,13 @@ namespace XnaFlixel
 			updateEmitter();
 		}
 
-		/**
-		 * Call this function to start emitting particles.
-		 * 
-		 * @param	Explode		Whether the particles should all burst out at once.
-		 * @param	Delay		You can set the delay (or lifespan) here if you want.
-		 * @param	Quantity	How many particles to launch.  Default value is 0, or "all the particles".
-		 */
+		/// <summary>
+		/// Call this function to start emitting particles.
+		/// 
+		/// @param	Explode		Whether the particles should all burst out at once.
+		/// @param	Delay		You can set the delay (or lifespan) here if you want.
+		/// @param	Quantity	How many particles to launch.  Default value is 0, or "all the particles".
+		/// </summary>
         public void start()
         {
             start(true, 0, 0);
@@ -376,9 +376,9 @@ namespace XnaFlixel
 		}
 
 
-		/**
-		 * This function can be used both internally and externally to emit the next particle.
-		 */
+		/// <summary>
+		/// This function can be used both internally and externally to emit the next particle.
+		/// </summary>
 		public void emitParticle()
 		{
 			_counter++;
@@ -405,11 +405,11 @@ namespace XnaFlixel
 			justEmitted = true;
 		}
 
-		/**
-		 * Call this function to stop the emitter without killing it.
-		 * 
-		 * @param	Delay	How long to wait before killing all the particles.  Set to 'zero' to never kill them.
-		 */
+		/// <summary>
+		/// Call this function to stop the emitter without killing it.
+		/// 
+		/// @param	Delay	How long to wait before killing all the particles.  Set to 'zero' to never kill them.
+		/// </summary>
         public void stop()
         {
             stop(3f);
@@ -423,20 +423,20 @@ namespace XnaFlixel
 			on = false;
 		}
 
-		/**
-		 * Change the emitter's position to the origin of a <code>FlxObject</code>.
-		 * 
-		 * @param	Object		The <code>FlxObject</code> that needs to spew particles.
-		 */
+		/// <summary>
+		/// Change the emitter's position to the origin of a <code>FlxObject</code>.
+		/// 
+		/// @param	Object		The <code>FlxObject</code> that needs to spew particles.
+		/// </summary>
 		public void at(FlxObject Object)
 		{
 			x = Object.x + Object.origin.X;
 			y = Object.y + Object.origin.Y;
 		}
 		
-		/**
-		 * Call this function to turn off all the particles and the emitter.
-		 */
+		/// <summary>
+		/// Call this function to turn off all the particles and the emitter.
+		/// </summary>
         override public void kill()
 		{
 			base.kill();

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -7,19 +7,19 @@ namespace XnaFlixel
     //@desc		This class wraps the baseline .NET collection and adds a couple of extra functions...
     public class FlxGroup : FlxObject
     {
-		/**
-		 * Array of all the <code>FlxObject</code>s that exist in this layer.
-		 */
+		/// <summary>
+		/// Array of all the <code>FlxObject</code>s that exist in this layer.
+		/// </summary>
 		public List<FlxObject> members;
-		/**
-		 * Helpers for moving/updating group members.
-		 */
+		/// <summary>
+		/// Helpers for moving/updating group members.
+		/// </summary>
 		protected Vector2 _last;
 		protected bool _first;
 
-		/**
-		 * Constructor
-		 */
+		/// <summary>
+		/// Constructor
+		/// </summary>
 		public FlxGroup()
             : base()
 		{
@@ -30,14 +30,14 @@ namespace XnaFlixel
 			_first = true;
 		}
 
-		/**
-		 * Adds a new <code>FlxObject</code> subclass (FlxSprite, FlxBlock, etc) to the list of children
-		 *
-		 * @param	Object			The object you want to add
-		 * @param	ShareScroll		Whether or not this FlxObject should sync up with this layer's scrollFactor
-		 *
-		 * @return	The same <code>FlxObject</code> object that was passed in.
-		 */
+		/// <summary>
+		/// Adds a new <code>FlxObject</code> subclass (FlxSprite, FlxBlock, etc) to the list of children
+		///
+		/// @param	Object			The object you want to add
+		/// @param	ShareScroll		Whether or not this FlxObject should sync up with this layer's scrollFactor
+		///
+		/// @return	The same <code>FlxObject</code> object that was passed in.
+		/// </summary>
         public FlxObject add(FlxObject Object)
         {
             return add(Object, false);
@@ -52,14 +52,14 @@ namespace XnaFlixel
 			return Object;
 		}
 
-		/**
-		 * Replaces an existing <code>FlxObject</code> with a new one.
-		 * 
-		 * @param	OldObject	The object you want to replace.
-		 * @param	NewObject	The new object you want to use instead.
-		 * 
-		 * @return	The new object.
-		 */
+		/// <summary>
+		/// Replaces an existing <code>FlxObject</code> with a new one.
+		/// 
+		/// @param	OldObject	The object you want to replace.
+		/// @param	NewObject	The new object you want to use instead.
+		/// 
+		/// @return	The new object.
+		/// </summary>
 		public FlxObject replace(FlxObject OldObject, FlxObject NewObject)
 		{
 			int index = members.IndexOf(OldObject);
@@ -69,14 +69,14 @@ namespace XnaFlixel
 			return NewObject;
 		}
 
-		/**
-		 * Removes an object from the group.
-		 * 
-		 * @param	Object	The <code>FlxObject</code> you want to remove.
-		 * @param	Splice	Whether the object should be cut from the array entirely or not.
-		 * 
-		 * @return	The removed object.
-		 */
+		/// <summary>
+		/// Removes an object from the group.
+		/// 
+		/// @param	Object	The <code>FlxObject</code> you want to remove.
+		/// @param	Splice	Whether the object should be cut from the array entirely or not.
+		/// 
+		/// @return	The removed object.
+		/// </summary>
         public FlxObject remove(FlxObject Object)
         {
             return remove(Object, false);
@@ -93,30 +93,30 @@ namespace XnaFlixel
 			return Object;
 		}
 
-        /**
-         * Call this function to sort the group according to a particular value and order.
-         * Due to differences in language capabilities between AS3/C#, you must implement
-         * your own IComparer interface for each sorting operation you want to perform.
-         * 
-         * For example, to sort game objects for Zelda-style overlaps you might call
-         * sort by an objects "y" member at the bottom of your <code>FlxState.update()</code>
-         * override.  To sort all existing objects after a big explosion or bomb attack,
-         * you might sort by "exists."
-         * 
-         * @param	Sorter	The <code>IComparer</code> object which will receive the sorting
-         *          comparisons.
-         */
+        /// <summary>
+        /// Call this function to sort the group according to a particular value and order.
+        /// Due to differences in language capabilities between AS3/C#, you must implement
+        /// your own IComparer interface for each sorting operation you want to perform.
+        /// 
+        /// For example, to sort game objects for Zelda-style overlaps you might call
+        /// sort by an objects "y" member at the bottom of your <code>FlxState.update()</code>
+        /// override.  To sort all existing objects after a big explosion or bomb attack,
+        /// you might sort by "exists."
+        /// 
+        /// @param	Sorter	The <code>IComparer</code> object which will receive the sorting
+        ///          comparisons.
+        /// </summary>
         public void sort(IComparer<FlxObject> Sorter)
 		{
             members.Sort(Sorter);
 		}
 
-		/**
-		 * Call this function to retrieve the first object with exists == false in the group.
-		 * This is handy for recycling in general, e.g. respawning enemies.
-		 * 
-		 * @return	A <code>FlxObject</code> currently flagged as not existing.
-		 */
+		/// <summary>
+		/// Call this function to retrieve the first object with exists == false in the group.
+		/// This is handy for recycling in general, e.g. respawning enemies.
+		/// 
+		/// @return	A <code>FlxObject</code> currently flagged as not existing.
+		/// </summary>
 		public FlxObject getFirstAvail()
 		{
 			int i = 0;
@@ -131,12 +131,12 @@ namespace XnaFlixel
 			return null;
 		}
 
-		/**
-		 * Call this function to retrieve the first index set to 'null'.
-		 * Returns -1 if no index stores a null object.
-		 * 
-		 * @return	An <code>int</code> indicating the first null slot in the group.
-		 */
+		/// <summary>
+		/// Call this function to retrieve the first index set to 'null'.
+		/// Returns -1 if no index stores a null object.
+		/// 
+		/// @return	An <code>int</code> indicating the first null slot in the group.
+		/// </summary>
 		public int getFirstNull()
 		{
 			int i = 0;
@@ -151,14 +151,14 @@ namespace XnaFlixel
 			return -1;
 		}
 
-		/**
-		 * Finds the first object with exists == false and calls reset on it.
-		 * 
-		 * @param	X	The new X position of this object.
-		 * @param	Y	The new Y position of this object.
-		 * 
-		 * @return	Whether a suitable <code>FlxObject</code> was found and reset.
-		 */
+		/// <summary>
+		/// Finds the first object with exists == false and calls reset on it.
+		/// 
+		/// @param	X	The new X position of this object.
+		/// @param	Y	The new Y position of this object.
+		/// 
+		/// @return	Whether a suitable <code>FlxObject</code> was found and reset.
+		/// </summary>
 		public bool resetFirstAvail(int X, int Y)
 		{
 			FlxObject o = getFirstAvail();
@@ -168,12 +168,12 @@ namespace XnaFlixel
 			return true;
 		}
 
-		/**
-		 * Call this function to retrieve the first object with exists == true in the group.
-		 * This is handy for checking if everything's wiped out, or choosing a squad leader, etc.
-		 * 
-		 * @return	A <code>FlxObject</code> currently flagged as existing.
-		 */
+		/// <summary>
+		/// Call this function to retrieve the first object with exists == true in the group.
+		/// This is handy for checking if everything's wiped out, or choosing a squad leader, etc.
+		/// 
+		/// @return	A <code>FlxObject</code> currently flagged as existing.
+		/// </summary>
 		public FlxObject getFirstExtant()
 		{
 			int i = 0;
@@ -188,12 +188,12 @@ namespace XnaFlixel
 			return null;
 		}
 
-		/**
-		 * Call this function to retrieve the first object with dead == false in the group.
-		 * This is handy for checking if everything's wiped out, or choosing a squad leader, etc.
-		 * 
-		 * @return	A <code>FlxObject</code> currently flagged as not dead.
-		 */
+		/// <summary>
+		/// Call this function to retrieve the first object with dead == false in the group.
+		/// This is handy for checking if everything's wiped out, or choosing a squad leader, etc.
+		/// 
+		/// @return	A <code>FlxObject</code> currently flagged as not dead.
+		/// </summary>
 		public FlxObject getFirstAlive()
 		{
 			int i = 0;
@@ -208,12 +208,12 @@ namespace XnaFlixel
 			return null;
 		}
 
-		/**
-		 * Call this function to retrieve the first object with dead == true in the group.
-		 * This is handy for checking if everything's wiped out, or choosing a squad leader, etc.
-		 * 
-		 * @return	A <code>FlxObject</code> currently flagged as dead.
-		 */
+		/// <summary>
+		/// Call this function to retrieve the first object with dead == true in the group.
+		/// This is handy for checking if everything's wiped out, or choosing a squad leader, etc.
+		/// 
+		/// @return	A <code>FlxObject</code> currently flagged as dead.
+		/// </summary>
 		public FlxObject getFirstDead()
 		{
 			int i = 0;
@@ -228,11 +228,11 @@ namespace XnaFlixel
 			return null;
 		}
 
-		/**
-		 * Call this function to find out how many members of the group are not dead.
-		 * 
-		 * @return	The number of <code>FlxObject</code>s flagged as not dead.  Returns -1 if group is empty.
-		 */
+		/// <summary>
+		/// Call this function to find out how many members of the group are not dead.
+		/// 
+		/// @return	The number of <code>FlxObject</code>s flagged as not dead.  Returns -1 if group is empty.
+		/// </summary>
 		public int countLiving()
 		{
 			int count = -1;
@@ -253,11 +253,11 @@ namespace XnaFlixel
 			return count;
 		}
 
-		/**
-		 * Call this function to find out how many members of the group are dead.
-		 * 
-		 * @return	The number of <code>FlxObject</code>s flagged as dead.  Returns -1 if group is empty.
-		 */
+		/// <summary>
+		/// Call this function to find out how many members of the group are dead.
+		/// 
+		/// @return	The number of <code>FlxObject</code>s flagged as dead.  Returns -1 if group is empty.
+		/// </summary>
 		public int countDead()
 		{
 			int count = -1;
@@ -278,11 +278,11 @@ namespace XnaFlixel
 			return count;
 		}
 
-		/**
-		 * Returns a count of how many objects in this group are on-screen right now.
-		 * 
-		 * @return	The number of <code>FlxObject</code>s that are on screen.  Returns -1 if group is empty.
-		 */
+		/// <summary>
+		/// Returns a count of how many objects in this group are on-screen right now.
+		/// 
+		/// @return	The number of <code>FlxObject</code>s that are on screen.  Returns -1 if group is empty.
+		/// </summary>
 		public int countOnScreen()
 		{
 			int count = -1;
@@ -303,11 +303,11 @@ namespace XnaFlixel
 			return count;
 		}		
 
-		/**
-		 * Returns a member at random from the group.
-		 * 
-		 * @return	A <code>FlxObject</code> from the members list.
-		 */
+		/// <summary>
+		/// Returns a member at random from the group.
+		/// 
+		/// @return	A <code>FlxObject</code> from the members list.
+		/// </summary>
 		public FlxObject getRandom()
 		{
 			int c = 0;
@@ -322,9 +322,9 @@ namespace XnaFlixel
 			return o;
 		}
 
-		/**
-		 * Internal function, helps with the moving/updating of group members.
-		 */
+		/// <summary>
+		/// Internal function, helps with the moving/updating of group members.
+		/// </summary>
         protected void saveOldPosition()
 		{
 			if(_first)
@@ -338,10 +338,10 @@ namespace XnaFlixel
 			_last.Y = y;
 		}
 
-		/**
-		 * Internal function that actually goes through and updates all the group members.
-		 * Depends on <code>saveOldPosition()</code> to set up the correct values in <code>_last</code> in order to work properly.
-		 */
+		/// <summary>
+		/// Internal function that actually goes through and updates all the group members.
+		/// Depends on <code>saveOldPosition()</code> to set up the correct values in <code>_last</code> in order to work properly.
+		/// </summary>
 		virtual protected void updateMembers()
 		{
 			float mx = 0;
@@ -389,10 +389,10 @@ namespace XnaFlixel
 			}
 		}
 
-		/**
-		 * Automatically goes through and calls update on everything you added,
-		 * override this function to handle custom input and perform collisions.
-		 */
+		/// <summary>
+		/// Automatically goes through and calls update on everything you added,
+		/// override this function to handle custom input and perform collisions.
+		/// </summary>
         override public void update()
 		{
 			saveOldPosition();
@@ -401,9 +401,9 @@ namespace XnaFlixel
 			updateFlickering();
 		}
 
-		/**
-		 * Internal function that actually loops through and renders all the group members.
-		 */
+		/// <summary>
+		/// Internal function that actually loops through and renders all the group members.
+		/// </summary>
 		protected void renderMembers(SpriteBatch spriteBatch)
 		{
 			int i = 0;
@@ -417,18 +417,18 @@ namespace XnaFlixel
 			}
 		}
 
-		/**
-		 * Automatically goes through and calls render on everything you added,
-		 * override this loop to control render order manually.
-		 */
+		/// <summary>
+		/// Automatically goes through and calls render on everything you added,
+		/// override this loop to control render order manually.
+		/// </summary>
         override public void render(SpriteBatch spriteBatch)
 		{
             renderMembers(spriteBatch);
 		}
 
-		/**
-		 * Internal function that calls kill on all members.
-		 */
+		/// <summary>
+		/// Internal function that calls kill on all members.
+		/// </summary>
 		protected void killMembers()
 		{
 			int i = 0;
@@ -442,18 +442,18 @@ namespace XnaFlixel
 			}
 		}
 
-		/**
-		 * Calls kill on the group and all its members.
-		 */
+		/// <summary>
+		/// Calls kill on the group and all its members.
+		/// </summary>
         override public void kill()
 		{
 			killMembers();
 			base.kill();
 		}
 
-		/**
-		 * Internal function that actually loops through and destroys each member.
-		 */
+		/// <summary>
+		/// Internal function that actually loops through and destroys each member.
+		/// </summary>
 		protected void destroyMembers()
 		{
 			int i = 0;
@@ -468,22 +468,22 @@ namespace XnaFlixel
             members.Clear();
 		}
 
-		/**
-		 * Override this function to handle any deleting or "shutdown" type operations you might need,
-		 * such as removing traditional Flash children like Sprite objects.
-		 */
+		/// <summary>
+		/// Override this function to handle any deleting or "shutdown" type operations you might need,
+		/// such as removing traditional Flash children like Sprite objects.
+		/// </summary>
         override public void destroy()
 		{
 			destroyMembers();
 			base.destroy();
 		}
 
-		/**
-		 * If the group's position is reset, we want to reset all its members too.
-		 * 
-		 * @param	X	The new X position of this object.
-		 * @param	Y	The new Y position of this object.
-		 */
+		/// <summary>
+		/// If the group's position is reset, we want to reset all its members too.
+		/// 
+		/// @param	X	The new X position of this object.
+		/// @param	Y	The new Y position of this object.
+		/// </summary>
 		override public void reset(float X, float Y)
 		{
 			saveOldPosition();

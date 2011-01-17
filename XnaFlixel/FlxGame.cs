@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
@@ -197,9 +197,9 @@ namespace XnaFlixel
             _state.create();
         }
 
-		/**
-		 * Internal function to help with basic pause game functionality.
-		 */
+		/// <summary>
+		/// Internal function to help with basic pause game functionality.
+		/// </summary>
         internal void unpauseGame()
 		{
 			//if(!FlxG.panel.visible) flash.ui.Mouse.hide();
@@ -208,9 +208,9 @@ namespace XnaFlixel
 			//stage.frameRate = _framerate;
 		}
 
-		/**
-		 * Internal function to help with basic pause game functionality.
-		 */
+		/// <summary>
+		/// Internal function to help with basic pause game functionality.
+		/// </summary>
         internal void pauseGame()
 		{
             //if((x != 0) || (y != 0))

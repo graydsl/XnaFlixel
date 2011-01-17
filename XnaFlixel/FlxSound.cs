@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -7,13 +7,13 @@ namespace XnaFlixel
 {
     public class FlxSound : FlxObject
     {
-		/**
-		 * Whether or not this sound should be automatically destroyed when you switch states.
-		 */
+		/// <summary>
+		/// Whether or not this sound should be automatically destroyed when you switch states.
+		/// </summary>
 		public bool survive;
-		/**
-		 * Whether the sound is currently playing or not.
-		 */
+		/// <summary>
+		/// Whether the sound is currently playing or not.
+		/// </summary>
 		public bool playing;
 
 		protected bool _init;
@@ -41,9 +41,9 @@ namespace XnaFlixel
             @fixed = true; //no movement usually
         }
 
-		/**
-		 * An internal function for clearing all the variables used by sounds.
-		 */
+		/// <summary>
+		/// An internal function for clearing all the variables used by sounds.
+		/// </summary>
         protected void init()
 		{
 			_sound = null;
@@ -65,14 +65,14 @@ namespace XnaFlixel
 			playing = false;
 		}
 
-		/**
-		 * One of two main setup functions for sounds, this function loads a sound from an embedded MP3.
-		 * 
-		 * @param	EmbeddedSound	An embedded Class object representing an MP3 file.
-		 * @param	Looped			Whether or not this sound should loop endlessly.
-		 * 
-		 * @return	This <code>FlxSound</code> instance (nice for chaining stuff together, if you're into that).
-		 */
+		/// <summary>
+		/// One of two main setup functions for sounds, this function loads a sound from an embedded MP3.
+		/// 
+		/// @param	EmbeddedSound	An embedded Class object representing an MP3 file.
+		/// @param	Looped			Whether or not this sound should loop endlessly.
+		/// 
+		/// @return	This <code>FlxSound</code> instance (nice for chaining stuff together, if you're into that).
+		/// </summary>
 		public FlxSound loadEmbedded(string EmbeddedSound, bool Looped)
 		{
 			stop();
@@ -85,17 +85,17 @@ namespace XnaFlixel
 			return this;
 		}
 
-		/**
-		 * Call this function if you want this sound's volume to change
-		 * based on distance from a particular FlxCore object.
-		 * 
-		 * @param	X		The X position of the sound.
-		 * @param	Y		The Y position of the sound.
-		 * @param	Core	The object you want to track.
-		 * @param	Radius	The maximum distance this sound can travel.
-		 * 
-		 * @return	This FlxSound instance (nice for chaining stuff together, if you're into that).
-		 */
+		/// <summary>
+		/// Call this function if you want this sound's volume to change
+		/// based on distance from a particular FlxCore object.
+		/// 
+		/// @param	X		The X position of the sound.
+		/// @param	Y		The Y position of the sound.
+		/// @param	Core	The object you want to track.
+		/// @param	Radius	The maximum distance this sound can travel.
+		/// 
+		/// @return	This FlxSound instance (nice for chaining stuff together, if you're into that).
+		/// </summary>
         public FlxSound proximity(float X, float Y, FlxObject Core, float Radius)
         {
             return proximity(X,Y,Core,Radius,true);
@@ -110,9 +110,9 @@ namespace XnaFlixel
 			return this;
 		}
 
-		/**
-		 * Call this function to play the sound.
-		 */
+		/// <summary>
+		/// Call this function to play the sound.
+		/// </summary>
         public void play()
         {
             if (_sound == null) return;
@@ -122,9 +122,9 @@ namespace XnaFlixel
             _position = 0;
         }
 
-		/**
-		 * Call this function to pause this sound.
-		 */
+		/// <summary>
+		/// Call this function to pause this sound.
+		/// </summary>
         public void pause()
 		{
             if (_sound == null) return;
@@ -132,9 +132,9 @@ namespace XnaFlixel
             playing = false;
 		}
 
-		/**
-		 * Call this function to stop this sound.
-		 */
+		/// <summary>
+		/// Call this function to stop this sound.
+		/// </summary>
         public void stop()
 		{
 			_position = 0;
@@ -144,12 +144,12 @@ namespace XnaFlixel
             _sound.Stop();
 		}
 
-		/**
-		 * Call this function to make this sound fade out over a certain time interval.
-		 * 
-		 * @param	Seconds			The amount of time the fade out operation should take.
-		 * @param	PauseInstead	Tells the sound to pause on fadeout, instead of stopping.
-		 */
+		/// <summary>
+		/// Call this function to make this sound fade out over a certain time interval.
+		/// 
+		/// @param	Seconds			The amount of time the fade out operation should take.
+		/// @param	PauseInstead	Tells the sound to pause on fadeout, instead of stopping.
+		/// </summary>
         public void fadeOut(float Seconds)
         {
             fadeOut(Seconds, false);
@@ -162,12 +162,12 @@ namespace XnaFlixel
 			_fadeOutTotal = _fadeOutTimer;
 		}
 
-		/**
-		 * Call this function to make a sound fade in over a certain
-		 * time interval (calls <code>play()</code> automatically).
-		 * 
-		 * @param	Seconds		The amount of time the fade-in operation should take.
-		 */
+		/// <summary>
+		/// Call this function to make a sound fade in over a certain
+		/// time interval (calls <code>play()</code> automatically).
+		/// 
+		/// @param	Seconds		The amount of time the fade-in operation should take.
+		/// </summary>
 		public void fadeIn(float Seconds)
 		{
 			_fadeOutTimer = 0;
@@ -176,9 +176,9 @@ namespace XnaFlixel
 			play();
 		}
 
-        /**
-         * Set <code>volume</code> to a value between 0 and 1 to change how loud this sound is.
-         */
+        /// <summary>
+        /// Set <code>volume</code> to a value between 0 and 1 to change how loud this sound is.
+        /// </summary>
         public float volume
         {
             get { return _volume; }
@@ -193,10 +193,10 @@ namespace XnaFlixel
             }
         }
 
-		/**
-		 * Internal function that performs the actual logical updates to the sound object.
-		 * Doesn't do much except optional proximity and fade calculations.
-		 */
+		/// <summary>
+		/// Internal function that performs the actual logical updates to the sound object.
+		/// Doesn't do much except optional proximity and fade calculations.
+		/// </summary>
 		protected void updateSound()
 		{
 			if(_position != 0)
@@ -261,27 +261,27 @@ namespace XnaFlixel
 			updateTransform();
 		}
 
-		/**
-		 * The basic game loop update function.  Just calls <code>updateSound()</code>.
-		 */
+		/// <summary>
+		/// The basic game loop update function.  Just calls <code>updateSound()</code>.
+		/// </summary>
         override public void update()
 		{
 			base.update();
 			updateSound();
 		}
 
-		/**
-		 * The basic class destructor, stops the music and removes any leftover events.
-		 */
+		/// <summary>
+		/// The basic class destructor, stops the music and removes any leftover events.
+		/// </summary>
         override public void destroy()
 		{
 			if(active)
 				stop();
 		}
 
-		/**
-		 * An internal function used to help organize and change the volume of the sound.
-		 */
+		/// <summary>
+		/// An internal function used to help organize and change the volume of the sound.
+		/// </summary>
         internal void updateTransform()
 		{
             if (_sound == null)

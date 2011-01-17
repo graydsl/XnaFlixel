@@ -1,13 +1,13 @@
-﻿using System;
+using System;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace XnaFlixel.data
 {
-    /**
-     * This class helps contain and track the mouse pointer in your game.
-     * Automatically accounts for parallax scrolling, etc.
-     */
+    /// <summary>
+    /// This class helps contain and track the mouse pointer in your game.
+    /// Automatically accounts for parallax scrolling, etc.
+    /// </summary>
     public class FlxMouse
     {
     	private Texture2D ImgDefaultCursor;
@@ -52,28 +52,28 @@ namespace XnaFlixel.data
 #endif
         }
 
-		/**
-		 * Current "delta" value of mouse wheel.  If the wheel was just scrolled up, it will have a positive value.  If it was just scrolled down, it will have a negative value.  If it wasn't just scroll this frame, it will be 0.
-		 */
+		/// <summary>
+		/// Current "delta" value of mouse wheel.  If the wheel was just scrolled up, it will have a positive value.  If it was just scrolled down, it will have a negative value.  If it wasn't just scroll this frame, it will be 0.
+		/// </summary>
 		public int wheel;
 
-		/**
-		 * Current X position of the mouse pointer on the screen.
-		 */
+		/// <summary>
+		/// Current X position of the mouse pointer on the screen.
+		/// </summary>
 		public int screenX;
-		/**
-		 * Current Y position of the mouse pointer on the screen.
-		 */
+		/// <summary>
+		/// Current Y position of the mouse pointer on the screen.
+		/// </summary>
 		public int screenY;
-		/**
-		 * Graphical representation of the mouse pointer.
-		 */
+		/// <summary>
+		/// Graphical representation of the mouse pointer.
+		/// </summary>
 		public FlxSprite cursor;
 
 
-		/**
-		 * Constructor.
-		 */
+		/// <summary>
+		/// Constructor.
+		/// </summary>
         public FlxMouse()
         {
 			screenX = 0;
@@ -92,13 +92,13 @@ namespace XnaFlixel.data
 			show(ImgDefaultCursor, 0, 0);
 		}
 
-		/**
-		 * Either show an existing cursor or load a new one.
-		 * 
-		 * @param	Graphic		The image you want to use for the cursor.
-		 * @param	XOffset		The number of pixels between the mouse's screen position and the graphic's top left corner.
-		 * * @param	YOffset		The number of pixels between the mouse's screen position and the graphic's top left corner. 
-		 */
+		/// <summary>
+		/// Either show an existing cursor or load a new one.
+		/// 
+		/// @param	Graphic		The image you want to use for the cursor.
+		/// @param	XOffset		The number of pixels between the mouse's screen position and the graphic's top left corner.
+		////// @param	YOffset		The number of pixels between the mouse's screen position and the graphic's top left corner. 
+		/// </summary>
         public void show(Texture2D Graphic)
         {
             show(Graphic, 0, 0);
@@ -114,9 +114,9 @@ namespace XnaFlixel.data
 				load(null);
 		}
 		
-		/**
-		 * Hides the mouse cursor
-		 */
+		/// <summary>
+		/// Hides the mouse cursor
+		/// </summary>
 		public void hide()
 		{
 			if(cursor != null)
@@ -125,13 +125,13 @@ namespace XnaFlixel.data
 			}
 		}
 
-		/**
-		 * Load a new mouse cursor graphic
-		 * 
-		 * @param	Graphic		The image you want to use for the cursor.
-		 * @param	XOffset		The number of pixels between the mouse's screen position and the graphic's top left corner.
-		 * * @param	YOffset		The number of pixels between the mouse's screen position and the graphic's top left corner. 
-		 */
+		/// <summary>
+		/// Load a new mouse cursor graphic
+		/// 
+		/// @param	Graphic		The image you want to use for the cursor.
+		/// @param	XOffset		The number of pixels between the mouse's screen position and the graphic's top left corner.
+		////// @param	YOffset		The number of pixels between the mouse's screen position and the graphic's top left corner. 
+		/// </summary>
         public void load(Texture2D Graphic)
         {
             load(Graphic, 0, 0);
@@ -147,10 +147,10 @@ namespace XnaFlixel.data
 			cursor.offset.Y = YOffset;
 		}
 
-		/**
-		 * Unload the current cursor graphic.  If the current cursor is visible,
-		 * then the default system cursor is loaded up to replace the old one.
-		 */
+		/// <summary>
+		/// Unload the current cursor graphic.  If the current cursor is visible,
+		/// then the default system cursor is loaded up to replace the old one.
+		/// </summary>
         public void unload()
 		{
 			if(cursor != null)
@@ -162,10 +162,10 @@ namespace XnaFlixel.data
 			}
 		}
 
-        /**
-         * Called by the internal game loop to update the mouse pointer's position in the game world.
-         * Also updates the just pressed/just released flags.
-         */
+        /// <summary>
+        /// Called by the internal game loop to update the mouse pointer's position in the game world.
+        /// Also updates the just pressed/just released flags.
+        /// </summary>
         public void update()
         {
             _lastMouse = _curMouse;

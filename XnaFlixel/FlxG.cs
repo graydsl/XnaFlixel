@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -9,10 +9,10 @@ namespace XnaFlixel
 
     public delegate void FlxAnimationCallback(string Name, uint Frame, int FrameIndex);
 
-    /**
-     * This is a global helper class full of useful functions for audio,
-     * input, basic info, and the camera system among other things.
-     */
+    /// <summary>
+    /// This is a global helper class full of useful functions for audio,
+    /// input, basic info, and the camera system among other things.
+    /// </summary>
     public class FlxG
     {
         //@benbaird Global, XNA-specific stuff that any component should be able
@@ -26,53 +26,53 @@ namespace XnaFlixel
 		// added by graydsl
     	public static GameTime GameTime;
 
-		/**
-		 * If you build and maintain your own version of flixel,
-		 * you can give it your own name here.  Appears in the console.
-		 */
+		/// <summary>
+		/// If you build and maintain your own version of flixel,
+		/// you can give it your own name here.  Appears in the console.
+		/// </summary>
 		static public string LIBRARY_NAME = "XnaFlixel";
-		/**
-		 * Assign a major version to your library.
-		 * Appears before the decimal in the console.
-		 */
+		/// <summary>
+		/// Assign a major version to your library.
+		/// Appears before the decimal in the console.
+		/// </summary>
 		static public uint LIBRARY_MAJOR_VERSION = 1;
-		/**
-		 * Assign a minor version to your library.
-		 * Appears after the decimal in the console.
-		 */
+		/// <summary>
+		/// Assign a minor version to your library.
+		/// Appears after the decimal in the console.
+		/// </summary>
 		static public uint LIBRARY_MINOR_VERSION = 0;
 
-        /**
-         * Internal tracker for game object (so we can pause & unpause)
-         */
+        /// <summary>
+        /// Internal tracker for game object (so we can pause & unpause)
+        /// </summary>
         static protected internal FlxGame _flxGame;
-		/**
-		 * Internal tracker for game pause state.
-		 */
+		/// <summary>
+		/// Internal tracker for game pause state.
+		/// </summary>
 		static protected bool _pause;
-		/**
-		 * Whether you are running in Debug or Release mode.
-		 * Set automatically by <code>FlxFactory</code> during startup.
-		 */
+		/// <summary>
+		/// Whether you are running in Debug or Release mode.
+		/// Set automatically by <code>FlxFactory</code> during startup.
+		/// </summary>
 		static public bool debug;
-		/**
-		 * Set <code>showBounds</code> to true to display the bounding boxes of the in-game objects.
-		 */
+		/// <summary>
+		/// Set <code>showBounds</code> to true to display the bounding boxes of the in-game objects.
+		/// </summary>
 		static public bool showBounds;
 
-        /**
-         * Represents the amount of time in seconds that passed since last frame.
-         */
+        /// <summary>
+        /// Represents the amount of time in seconds that passed since last frame.
+        /// </summary>
         public static float elapsed = 0f;
         //@benbaird compatibility with AS3's getTimer()
         public static uint getTimer = 0;
-		/**
-		 * Essentially locks the framerate to a minimum value - any slower and you'll get slowdown instead of frameskip; default is 1/30th of a second.
-		 */
+		/// <summary>
+		/// Essentially locks the framerate to a minimum value - any slower and you'll get slowdown instead of frameskip; default is 1/30th of a second.
+		/// </summary>
 		static public float maxElapsed;
-		/**
-		 * How fast or slow time should pass in the game; default is 1.0.
-		 */
+		/// <summary>
+		/// How fast or slow time should pass in the game; default is 1.0.
+		/// </summary>
 		static public float timeScale;
 
         //@desc A reference or pointer to the current FlxState object being used by the game
@@ -88,34 +88,34 @@ namespace XnaFlixel
             }
         }
 
-        /**
-         * The width of the screen in game pixels.
-         */
+        /// <summary>
+        /// The width of the screen in game pixels.
+        /// </summary>
         public static int width = 1280;
-        /**
-         * The height of the screen in game pixels.
-         */
+        /// <summary>
+        /// The height of the screen in game pixels.
+        /// </summary>
         public static int height = 720;
 
         public static Color backColor = Color.Black;
 
-		/**
-		 * Setting this to true will disable/skip stuff that isn't necessary for mobile platforms like Android (or Windows Phone 7). [BETA]
-		 */
+		/// <summary>
+		/// Setting this to true will disable/skip stuff that isn't necessary for mobile platforms like Android (or Windows Phone 7). [BETA]
+		/// </summary>
 		static public bool mobile; 
 
-		/**
-		 * <code>FlxG.levels</code> and <code>FlxG.scores</code> are generic
-		 * global variables that can be used for various cross-state stuff.
-		 */
+		/// <summary>
+		/// <code>FlxG.levels</code> and <code>FlxG.scores</code> are generic
+		/// global variables that can be used for various cross-state stuff.
+		/// </summary>
         static public List<int> levels = new List<int>();
         static public int level;
         static public List<int> scores = new List<int>();
         static public int score;
-		/**
-		 * <code>FlxG.saves</code> is a generic bucket for storing
-		 * FlxSaves so you can access them whenever you want.
-		 */
+		/// <summary>
+		/// <code>FlxG.saves</code> is a generic bucket for storing
+		/// FlxSaves so you can access them whenever you want.
+		/// </summary>
 #if !WINDOWS_PHONE
         static public List<FlxSave> saves = new List<FlxSave>(); 
         static public int save;
@@ -128,17 +128,17 @@ namespace XnaFlixel
             get { return _scale; }
         }
 
-		/**
-		 * A reference to a <code>FlxMouse</code> object.  Important for input!
-		 */
+		/// <summary>
+		/// A reference to a <code>FlxMouse</code> object.  Important for input!
+		/// </summary>
 		static public FlxMouse mouse = new FlxMouse();
-		/**
-		 * A reference to a <code>FlxKeyboard</code> object.  Important for input!
-		 */
+		/// <summary>
+		/// A reference to a <code>FlxKeyboard</code> object.  Important for input!
+		/// </summary>
 		static public FlxKeyboard keys = new FlxKeyboard();
-		/**
-		 * An array of <code>FlxGamepad</code> objects.  Important for input!
-		 */
+		/// <summary>
+		/// An array of <code>FlxGamepad</code> objects.  Important for input!
+		/// </summary>
 		static public FlxGamepad gamepads = new FlxGamepad();
 
         //@benbaird Used for compatibility with Xbox input standards
@@ -148,95 +148,95 @@ namespace XnaFlixel
             set;
         }
 
-		/**
-		 * A handy container for a background music object.
-		 */
+		/// <summary>
+		/// A handy container for a background music object.
+		/// </summary>
 		static public FlxSound music;
-		/**
-		 * A list of all the sounds being played in the game.
-		 */
+		/// <summary>
+		/// A list of all the sounds being played in the game.
+		/// </summary>
 		static public List<FlxSound> sounds = new List<FlxSound>();
-		/**
-		 * Internal flag for whether or not the game is muted.
-		 */
+		/// <summary>
+		/// Internal flag for whether or not the game is muted.
+		/// </summary>
 		static protected bool _mute;
-		/**
-		 * Internal volume level, used for global sound control.
-		 */
+		/// <summary>
+		/// Internal volume level, used for global sound control.
+		/// </summary>
 		static protected float _volume;
 
-		/**
-		 * Tells the camera to follow this <code>FlxCore</code> object around.
-		 */
+		/// <summary>
+		/// Tells the camera to follow this <code>FlxCore</code> object around.
+		/// </summary>
 		static public FlxObject followTarget;
-		/**
-		 * Used to force the camera to look ahead of the <code>followTarget</code>.
-		 */
+		/// <summary>
+		/// Used to force the camera to look ahead of the <code>followTarget</code>.
+		/// </summary>
 		static public Vector2 followLead;
-		/**
-		 * Used to smoothly track the camera as it follows.
-		 */
+		/// <summary>
+		/// Used to smoothly track the camera as it follows.
+		/// </summary>
 		static public float followLerp;
-		/**
-		 * Stores the top and left edges of the camera area.
-		 */
+		/// <summary>
+		/// Stores the top and left edges of the camera area.
+		/// </summary>
 		static public Point followMin;
-		/**
-		 * Stores the bottom and right edges of the camera area.
-		 */
+		/// <summary>
+		/// Stores the bottom and right edges of the camera area.
+		/// </summary>
 		static public Point followMax;
-		/**
-		 * Internal, used to assist camera and scrolling.
-		 */
+		/// <summary>
+		/// Internal, used to assist camera and scrolling.
+		/// </summary>
 		static protected Vector2 _scrollTarget;
 
-        /**
-         * Stores the basic parallax scrolling values.
-         */
+        /// <summary>
+        /// Stores the basic parallax scrolling values.
+        /// </summary>
         static public Vector2 scroll;
 
-		/**
-		 * Reference to the active graphics buffer.
-		 * Can also be referenced via <code>FlxState.screen</code>.
-		 */
+		/// <summary>
+		/// Reference to the active graphics buffer.
+		/// Can also be referenced via <code>FlxState.screen</code>.
+		/// </summary>
         //static public var buffer:BitmapData;
-		/**
-		 * Internal storage system to prevent graphics from being used repeatedly in memory.
-		 */
+		/// <summary>
+		/// Internal storage system to prevent graphics from being used repeatedly in memory.
+		/// </summary>
         //static protected var _cache:Object;
 
-		/**
-		 * Access to the Kongregate high scores and achievements API.
-		 */
+		/// <summary>
+		/// Access to the Kongregate high scores and achievements API.
+		/// </summary>
         //static public var kong:FlxKong;
 
-		/**
-		 * The support panel (twitter, reddit, stumbleupon, paypal, etc) visor thing
-		 */
+		/// <summary>
+		/// The support panel (twitter, reddit, stumbleupon, paypal, etc) visor thing
+		/// </summary>
         //static public FlxPanel panel;
-		/**
-		 * A special effect that shakes the screen.  Usage: FlxG.quake.start();
-		 */
+		/// <summary>
+		/// A special effect that shakes the screen.  Usage: FlxG.quake.start();
+		/// </summary>
 		static public FlxQuake quake;
-		/**
-		 * A special effect that flashes a color on the screen.  Usage: FlxG.flash.start();
-		 */
+		/// <summary>
+		/// A special effect that flashes a color on the screen.  Usage: FlxG.flash.start();
+		/// </summary>
 		static public FlxFlash flash;
-		/**
-		 * A special effect that fades a color onto the screen.  Usage: FlxG.fade.start();
-		 */
+		/// <summary>
+		/// A special effect that fades a color onto the screen.  Usage: FlxG.fade.start();
+		/// </summary>
         static public FlxFade fade;
 
-        /**
-         * Log data to the developer console.
-         * 
-         * @param	Data		Anything you want to log to the console.
-         */
+        /// <summary>
+        /// Log data to the developer console.
+        /// 
+        /// @param	Data		Anything you want to log to the console.
+        /// </summary>
         public static void log(string Data) { _flxGame._console.log(Data); }
 
-        /**
-         * Set <code>pause</code> to true to pause the game, all sounds, and display the pause popup.
-         */
+        /// <summary>
+        /// Set <code>pause</code> to true to pause the game, all sounds, and display the pause popup.
+        /// </summary>
         static public bool pause
         {
             get { return _pause; }
@@ -295,9 +295,9 @@ namespace XnaFlixel
         }
         //@benbaird End XNA-specific public static properties
 
-		/**
-		 * Reset the input helper objects (useful when changing screens or states)
-		 */
+		/// <summary>
+		/// Reset the input helper objects (useful when changing screens or states)
+		/// </summary>
 		static public void resetInput()
 		{
 			keys.reset();
@@ -305,12 +305,12 @@ namespace XnaFlixel
             gamepads.reset();
 		}
 
-		/**
-		 * Set up and play a looping background soundtrack.
-		 * 
-		 * @param	Music		The sound file you want to loop in the background.
-		 * @param	Volume		How loud the sound should be, from 0 to 1.
-		 */
+		/// <summary>
+		/// Set up and play a looping background soundtrack.
+		/// 
+		/// @param	Music		The sound file you want to loop in the background.
+		/// @param	Volume		How loud the sound should be, from 0 to 1.
+		/// </summary>
         static public void playMusic(string Music)
         {
             playMusic(Music, 1.0f);
@@ -327,15 +327,15 @@ namespace XnaFlixel
 			music.play();
 		}
 
-		/**
-		 * Creates a new sound object from an embedded <code>Class</code> object.
-		 * 
-		 * @param	EmbeddedSound	The sound you want to play.
-		 * @param	Volume			How loud to play it (0 to 1).
-		 * @param	Looped			Whether or not to loop this sound.
-		 * 
-		 * @return	A <code>FlxSound</code> object.
-		 */
+		/// <summary>
+		/// Creates a new sound object from an embedded <code>Class</code> object.
+		/// 
+		/// @param	EmbeddedSound	The sound you want to play.
+		/// @param	Volume			How loud to play it (0 to 1).
+		/// @param	Looped			Whether or not to loop this sound.
+		/// 
+		/// @return	A <code>FlxSound</code> object.
+		/// </summary>
         static public FlxSound play(string EmbeddedSound)
         {
             return play(EmbeddedSound, 1.0f, false);
@@ -362,22 +362,22 @@ namespace XnaFlixel
             return sounds[i];
 		}
 
-        /**
-         * Set <code>mute</code> to true to turn off the sound.
-         * 
-         * @default false
-         */
+        /// <summary>
+        /// Set <code>mute</code> to true to turn off the sound.
+        /// 
+        /// @default false
+        /// </summary>
         public static bool mute
         {
             get { return _mute; }
             set { _mute = value; changeSounds(); }
         }
 
-		/**
-		 * Get a number that represents the mute state that we can multiply into a sound transform.
-		 * 
-		 * @return		An unsigned integer - 0 if muted, 1 if not muted.
-		 */
+		/// <summary>
+		/// Get a number that represents the mute state that we can multiply into a sound transform.
+		/// 
+		/// @return		An unsigned integer - 0 if muted, 1 if not muted.
+		/// </summary>
 		static public int getMuteValue()
 		{
 			if(_mute)
@@ -400,11 +400,11 @@ namespace XnaFlixel
             }
         }
 
-		/**
-		 * Called by FlxGame on state changes to stop and destroy sounds.
-		 * 
-		 * @param	ForceDestroy		Kill sounds even if they're flagged <code>survive</code>.
-		 */
+		/// <summary>
+		/// Called by FlxGame on state changes to stop and destroy sounds.
+		/// 
+		/// @param	ForceDestroy		Kill sounds even if they're flagged <code>survive</code>.
+		/// </summary>
 		static internal void destroySounds(bool ForceDestroy)
 		{
 			if(sounds == null)
@@ -422,9 +422,9 @@ namespace XnaFlixel
 			}
 		}
 
-		/**
-		 * An internal function that adjust the volume levels and the music channel after a change.
-		 */
+		/// <summary>
+		/// An internal function that adjust the volume levels and the music channel after a change.
+		/// </summary>
 		static protected void changeSounds()
 		{
 			if((music != null) && music.active)
@@ -440,9 +440,9 @@ namespace XnaFlixel
 			}
 		}
 
-		/**
-		 * Called by the game loop to make sure the sounds get updated each frame.
-		 */
+		/// <summary>
+		/// Called by the game loop to make sure the sounds get updated each frame.
+		/// </summary>
 		static internal void updateSounds()
 		{
 			if((music != null) && music.active)
@@ -458,9 +458,9 @@ namespace XnaFlixel
 			}
 		}
 
-		/**
-		 * Internal helper, pauses all game sounds.
-		 */
+		/// <summary>
+		/// Internal helper, pauses all game sounds.
+		/// </summary>
 		static protected void pauseSounds()
 		{
 			if((music != null) && music.active)
@@ -476,9 +476,9 @@ namespace XnaFlixel
 			}
 		}
 
-		/**
-		 * Internal helper, pauses all game sounds.
-		 */
+		/// <summary>
+		/// Internal helper, pauses all game sounds.
+		/// </summary>
 		static protected void playSounds()
 		{
 			if((music != null) && music.active)
@@ -517,15 +517,15 @@ namespace XnaFlixel
 			followLead = new Vector2(LeadX, LeadY);
 		}
 
-        /**
-         * Specify the boundaries of the level or where the camera is allowed to move.
-         * 
-         * @param	MinX				The smallest X value of your level (usually 0).
-         * @param	MinY				The smallest Y value of your level (usually 0).
-         * @param	MaxX				The largest X value of your level (usually the level width).
-         * @param	MaxY				The largest Y value of your level (usually the level height).
-         * @param	UpdateWorldBounds	Whether the quad tree's dimensions should be updated to match.
-         */
+        /// <summary>
+        /// Specify the boundaries of the level or where the camera is allowed to move.
+        /// 
+        /// @param	MinX				The smallest X value of your level (usually 0).
+        /// @param	MinY				The smallest Y value of your level (usually 0).
+        /// @param	MaxX				The largest X value of your level (usually the level width).
+        /// @param	MaxY				The largest Y value of your level (usually the level height).
+        /// @param	UpdateWorldBounds	Whether the quad tree's dimensions should be updated to match.
+        /// </summary>
         static public void followBounds(int MinX, int MinY, int MaxX, int MaxY)
         {
             followBounds(MinX, MinY, MaxX, MaxY, true);
@@ -543,9 +543,9 @@ namespace XnaFlixel
             doFollow();
         }
 
-        /**
-         * Stops and resets the camera.
-         */
+        /// <summary>
+        /// Stops and resets the camera.
+        /// </summary>
         internal static void unfollow()
         {
             followTarget = null;
@@ -557,9 +557,9 @@ namespace XnaFlixel
             _scrollTarget = new Vector2();
         }
 
-        /**
-         * Called by <code>FlxGame</code> to set up <code>FlxG</code> during <code>FlxGame</code>'s constructor.
-         */
+        /// <summary>
+        /// Called by <code>FlxGame</code> to set up <code>FlxG</code> during <code>FlxGame</code>'s constructor.
+        /// </summary>
         static internal void setGameData(FlxGame flxGame, int Width, int Height)
 		{
             _flxGame = flxGame;
@@ -588,9 +588,9 @@ namespace XnaFlixel
         }
 
 
-        /**
-         * Internal function that updates the camera and parallax scrolling.
-         */
+        /// <summary>
+        /// Internal function that updates the camera and parallax scrolling.
+        /// </summary>
         internal static void doFollow()
 		{
 			if(followTarget != null)

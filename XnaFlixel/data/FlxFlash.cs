@@ -1,22 +1,22 @@
-﻿using System;
+using System;
 using Microsoft.Xna.Framework;
 
 namespace XnaFlixel.data
 {
     public class FlxFlash : FlxSprite
     {
-		/**
-		 * How long the effect should last.
-		 */
+		/// <summary>
+		/// How long the effect should last.
+		/// </summary>
 		protected float _delay;
-		/**
-		 * Callback for when the effect is finished.
-		 */
+		/// <summary>
+		/// Callback for when the effect is finished.
+		/// </summary>
 		protected EventHandler<FlxEffectCompletedEvent> _complete;
 		
-		/**
-		 * Constructor initializes the fade object
-		 */
+		/// <summary>
+		/// Constructor initializes the fade object
+		/// </summary>
         public FlxFlash()
             : base(0, 0)
 		{
@@ -28,14 +28,14 @@ namespace XnaFlixel.data
 			@fixed = true;
 		}
 
-		/**
-		 * Reset and trigger this special effect
-		 * 
-		 * @param	Color			The color you want to use
-		 * @param	Duration		How long it takes for the flash to fade
-		 * @param	FlashComplete	A function you want to run when the flash finishes
-		 * @param	Force			Force the effect to reset
-		 */
+		/// <summary>
+		/// Reset and trigger this special effect
+		/// 
+		/// @param	Color			The color you want to use
+		/// @param	Duration		How long it takes for the flash to fade
+		/// @param	FlashComplete	A function you want to run when the flash finishes
+		/// @param	Force			Force the effect to reset
+		/// </summary>
         public void start(Color Color)
         {
             start(Color, 1f, null, false);
@@ -54,17 +54,17 @@ namespace XnaFlixel.data
 			exists = true;
 		}
 
-		/**
-		 * Stops and hides this screen effect.
-		 */
+		/// <summary>
+		/// Stops and hides this screen effect.
+		/// </summary>
         public void stop()
 		{
 			exists = false;
 		}
 
-		/**
-		 * Updates and/or animates this special effect
-		 */
+		/// <summary>
+		/// Updates and/or animates this special effect
+		/// </summary>
         override public void update()
 		{
 			alpha -= FlxG.elapsed/_delay;

@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using XnaFlixel.data;
 
 namespace XnaFlixel
 {
-    /**
-     * A fairly generic quad tree structure for rapid overlap checks.
-     * FlxQuadTree is also configured for single or dual list operation.
-     * You can add items either to its A list or its B list.
-     * When you do an overlap check, you can compare the A list to itself,
-     * or the A list against the B list.  Handy for different things!
-     */
+    /// <summary>
+    /// A fairly generic quad tree structure for rapid overlap checks.
+    /// FlxQuadTree is also configured for single or dual list operation.
+    /// You can add items either to its A list or its B list.
+    /// When you do an overlap check, you can compare the A list to itself,
+    /// or the A list against the B list.  Handy for different things!
+    /// </summary>
     public class FlxQuadTree
     {
         // Rect stuff
@@ -36,45 +36,45 @@ namespace XnaFlixel
         }
 
 
-		/**
-		 * Set this to null to force it to refresh on the next collide.
-		 */
+		/// <summary>
+		/// Set this to null to force it to refresh on the next collide.
+		/// </summary>
 		static public FlxQuadTree quadTree;
-		/**
-		 * This variable stores the dimensions of the root of the quad tree.
-		 * This is the eligible game collision space.
-		 */
+		/// <summary>
+		/// This variable stores the dimensions of the root of the quad tree.
+		/// This is the eligible game collision space.
+		/// </summary>
 		static public FlxRect bounds = new FlxRect(0,0,0,0);
-		/**
-		 * Controls the granularity of the quad tree.  Default is 3 (decent performance on large and small worlds).
-		 */
+		/// <summary>
+		/// Controls the granularity of the quad tree.  Default is 3 (decent performance on large and small worlds).
+		/// </summary>
 		static public uint divisions;
-		/**
-		 * Flag for specifying that you want to add an object to the A list.
-		 */
+		/// <summary>
+		/// Flag for specifying that you want to add an object to the A list.
+		/// </summary>
 		public const uint A_LIST = 0;
-		/**
-		 * Flag for specifying that you want to add an object to the B list.
-		 */
+		/// <summary>
+		/// Flag for specifying that you want to add an object to the B list.
+		/// </summary>
 		public const uint B_LIST = 1;
 		
-		/**
-		 * Whether this branch of the tree can be subdivided or not.
-		 */
+		/// <summary>
+		/// Whether this branch of the tree can be subdivided or not.
+		/// </summary>
 		protected bool _canSubdivide;
 		
-		/**
-		 * These variables refer to the internal A and B linked lists,
-		 * which are used to store objects in the leaves.
-		 */
+		/// <summary>
+		/// These variables refer to the internal A and B linked lists,
+		/// which are used to store objects in the leaves.
+		/// </summary>
 		protected FlxList _headA;
 		protected FlxList _tailA;
 		protected FlxList _headB;
 		protected FlxList _tailB;
 
-		/**
-		 * These variables refer to the potential child quadrants for this node.
-		 */
+		/// <summary>
+		/// These variables refer to the potential child quadrants for this node.
+		/// </summary>
 		static protected uint _min;
 		protected FlxQuadTree _nw;
 		protected FlxQuadTree _ne;
@@ -89,9 +89,9 @@ namespace XnaFlixel
 		protected float _mx;
 		protected float _my;
 		
-		/**
-		 * These objects are used to reduce recursive parameters internally.
-		 */
+		/// <summary>
+		/// These objects are used to reduce recursive parameters internally.
+		/// </summary>
 		static protected FlxObject _o;
 		static protected float _ol;
 		static protected float _ot;
@@ -100,15 +100,15 @@ namespace XnaFlixel
 		static protected uint _oa;
         static protected SpriteCollisionEvent _oc;
 
-		/**
-		 * Instantiate a new Quad Tree node.
-		 * 
-		 * @param	X			The X-coordinate of the point in space.
-		 * @param	Y			The Y-coordinate of the point in space.
-		 * @param	Width		Desired width of this node.
-		 * @param	Height		Desired height of this node.
-		 * @param	Parent		The parent branch or node.  Pass null to create a root.
-		 */
+		/// <summary>
+		/// Instantiate a new Quad Tree node.
+		/// 
+		/// @param	X			The X-coordinate of the point in space.
+		/// @param	Y			The Y-coordinate of the point in space.
+		/// @param	Width		Desired width of this node.
+		/// @param	Height		Desired height of this node.
+		/// @param	Parent		The parent branch or node.  Pass null to create a root.
+		/// </summary>
 		public FlxQuadTree(float X, float Y, float Width, float Height, FlxQuadTree Parent)
 		{
             x = X;
@@ -182,14 +182,14 @@ namespace XnaFlixel
             _my = _t + _hh;
 		}
 
-		/**
-		 * Call this function to add an object to the root of the tree.
-		 * This function will recursively add all group members, but
-		 * not the groups themselves.
-		 * 
-		 * @param	Object		The <code>FlxObject</code> you want to add.  <code>FlxGroup</code> objects will be recursed and their applicable members added automatically.
-		 * @param	List		A <code>uint</code> flag indicating the list to which you want to add the objects.  Options are <code>A_LIST</code> and <code>B_LIST</code>.
-		 */
+		/// <summary>
+		/// Call this function to add an object to the root of the tree.
+		/// This function will recursively add all group members, but
+		/// not the groups themselves.
+		/// 
+		/// @param	Object		The <code>FlxObject</code> you want to add.  <code>FlxGroup</code> objects will be recursed and their applicable members added automatically.
+		/// @param	List		A <code>uint</code> flag indicating the list to which you want to add the objects.  Options are <code>A_LIST</code> and <code>B_LIST</code>.
+		/// </summary>
 		public void add(FlxObject Object, uint List)
 		{
 			_oa = List;
@@ -229,10 +229,10 @@ namespace XnaFlixel
 			}
 		}
 
-		/**
-		 * Internal function for recursively navigating and creating the tree
-		 * while adding objects to the appropriate nodes.
-		 */
+		/// <summary>
+		/// Internal function for recursively navigating and creating the tree
+		/// while adding objects to the appropriate nodes.
+		/// </summary>
 		protected void addObject()
 		{
 			//If this quad (not its children) lies entirely inside this object, add it here
@@ -305,9 +305,9 @@ namespace XnaFlixel
 			}
 		}
 
-		/**
-		 * Internal function for recursively adding objects to leaf lists.
-		 */
+		/// <summary>
+		/// Internal function for recursively adding objects to leaf lists.
+		/// </summary>
 		protected void addToList()
 		{
 			FlxList ot;
@@ -343,15 +343,15 @@ namespace XnaFlixel
 				_sw.addToList();
 		}
 
-		/**
-		 * <code>FlxQuadTree</code>'s other main function.  Call this after adding objects
-		 * using <code>FlxQuadTree.add()</code> to compare the objects that you loaded.
-		 * 
-		 * @param	BothLists	Whether you are doing an A-B list comparison, or comparing A against itself.
-		 * @param	Callback	A function with two <code>FlxObject</code> parameters - e.g. <code>myOverlapFunction(Object1:FlxObject,Object2:FlxObject);</code>  If no function is provided, <code>FlxQuadTree</code> will call <code>kill()</code> on both objects.
-		 *
-		 * @return	Whether or not any overlaps were found.
-		 */
+		/// <summary>
+		/// <code>FlxQuadTree</code>'s other main function.  Call this after adding objects
+		/// using <code>FlxQuadTree.add()</code> to compare the objects that you loaded.
+		/// 
+		/// @param	BothLists	Whether you are doing an A-B list comparison, or comparing A against itself.
+		/// @param	Callback	A function with two <code>FlxObject</code> parameters - e.g. <code>myOverlapFunction(Object1:FlxObject,Object2:FlxObject);</code>  If no function is provided, <code>FlxQuadTree</code> will call <code>kill()</code> on both objects.
+		///
+		/// @return	Whether or not any overlaps were found.
+		/// </summary>
 		public bool overlap(bool BothLists, SpriteCollisionEvent Callback)
 		{
 			_oc = Callback;
@@ -423,13 +423,13 @@ namespace XnaFlixel
 			return c;
 		}
 
-		/**
-		 * An internal function for comparing an object against the contents of a node.
-		 * 
-		 * @param	Iterator	An optional pointer to a linked list entry (for comparing A against itself).
-		 * 
-		 * @return	Whether or not any overlaps were found.
-		 */
+		/// <summary>
+		/// An internal function for comparing an object against the contents of a node.
+		/// 
+		/// @param	Iterator	An optional pointer to a linked list entry (for comparing A against itself).
+		/// 
+		/// @return	Whether or not any overlaps were found.
+		/// </summary>
         protected bool overlapNode()
         {
             return overlapNode(null);

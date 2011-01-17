@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace XnaFlixel
@@ -11,18 +11,18 @@ namespace XnaFlixel
         Center = 2
     }
 
-    /**
-     * Extends <code>FlxSprite</code> to support rendering text.
-     * Can tint, fade, rotate and scale just like a sprite.
-     * Doesn't really animate though, as far as I know.
-     * Also does nice pixel-perfect centering on pixel fonts
-     * as long as they are only one liners.
-     * 
-     * FlxText's internal implementation in X-flixel hasn't
-     * changed drastically from its v1.25 debut. The primary
-     * modifications are to its public interface in order
-     * to align it with AS3 flixel.
-     */
+    /// <summary>
+    /// Extends <code>FlxSprite</code> to support rendering text.
+    /// Can tint, fade, rotate and scale just like a sprite.
+    /// Doesn't really animate though, as far as I know.
+    /// Also does nice pixel-perfect centering on pixel fonts
+    /// as long as they are only one liners.
+    /// 
+    /// FlxText's internal implementation in X-flixel hasn't
+    /// changed drastically from its v1.25 debut. The primary
+    /// modifications are to its public interface in order
+    /// to align it with AS3 flixel.
+    /// </summary>
     public class FlxText : FlxSprite
     {
 
@@ -68,15 +68,15 @@ namespace XnaFlixel
             height = textHeight;
         }
 
-        /**
-         * Creates a new <code>FlxText</code> object at the specified position.
-         * 
-         * @param	X				The X position of the text.
-         * @param	Y				The Y position of the text.
-         * @param	Width			The width of the text object (height is determined automatically).
-         * @param	Text			The actual text you would like to display initially.
-         * @param	EmbeddedFont	Whether this text field uses embedded fonts or nto
-         */
+        /// <summary>
+        /// Creates a new <code>FlxText</code> object at the specified position.
+        /// 
+        /// @param	X				The X position of the text.
+        /// @param	Y				The Y position of the text.
+        /// @param	Width			The width of the text object (height is determined automatically).
+        /// @param	Text			The actual text you would like to display initially.
+        /// @param	EmbeddedFont	Whether this text field uses embedded fonts or nto
+        /// </summary>
         public FlxText(float X, float Y, float Width)
             : base(X, Y)
         {
@@ -118,18 +118,18 @@ namespace XnaFlixel
             recalcMeasurements();
         }
 
-		/**
-		 * You can use this if you have a lot of text parameters
-		 * to set instead of the individual properties.
-		 * 
-		 * @param	Font		The name of the font face for the text display.
-		 * @param	Scale		The scale of the font (in AS3 flixel, this is Size)
-		 * @param	Color		The color of the text in traditional flash 0xRRGGBB format.
-		 * @param	Alignment	A string representing the desired alignment ("left,"right" or "center").
-		 * @param	ShadowColor	A uint representing the desired text shadow color in flash 0xRRGGBB format.
-		 * 
-		 * @return	This FlxText instance (nice for chaining stuff together, if you're into that).
-		 */
+		/// <summary>
+		/// You can use this if you have a lot of text parameters
+		/// to set instead of the individual properties.
+		/// 
+		/// @param	Font		The name of the font face for the text display.
+		/// @param	Scale		The scale of the font (in AS3 flixel, this is Size)
+		/// @param	Color		The color of the text in traditional flash 0xRRGGBB format.
+		/// @param	Alignment	A string representing the desired alignment ("left,"right" or "center").
+		/// @param	ShadowColor	A uint representing the desired text shadow color in flash 0xRRGGBB format.
+		/// 
+		/// @return	This FlxText instance (nice for chaining stuff together, if you're into that).
+		/// </summary>
 		public FlxText setFormat(SpriteFont Font, float Scale, Color Color, FlxJustification Alignment, Color ShadowColor)
 		{
 			if(Font == null)
@@ -143,18 +143,18 @@ namespace XnaFlixel
 			return this;
 		}
 
-        /**
-         * The text being displayed.
-         */
+        /// <summary>
+        /// The text being displayed.
+        /// </summary>
         public string text
         {
             get { return _text; }
             set { _text = value; recalcMeasurements(); }
         }
 
-        /**
-         * The size of the text being displayed.
-         */
+        /// <summary>
+        /// The size of the text being displayed.
+        /// </summary>
         public new float scale
         {
             get { return _scale; }
@@ -169,33 +169,33 @@ namespace XnaFlixel
             }
         }
 
-        /**
-         * The color of the text being displayed.
-         */
+        /// <summary>
+        /// The color of the text being displayed.
+        /// </summary>
         //public Color color;
 
-        /**
-         * The font used for this text.
-         */
+        /// <summary>
+        /// The font used for this text.
+        /// </summary>
         public SpriteFont font
         {
             get { return _font; }
             set { _font = value; if (_font == null) _font = FlxG.Font; recalcMeasurements(); }
         }
 
-        /**
-         * The alignment of the font ("left", "right", or "center").
-         */
+        /// <summary>
+        /// The alignment of the font ("left", "right", or "center").
+        /// </summary>
         public FlxJustification alignment = FlxJustification.Left;
 
-        /**
-         * The color of the text's shadow.
-         */
+        /// <summary>
+        /// The color of the text's shadow.
+        /// </summary>
         public Color shadow;
 
-        /**
-         * The color of the background behind the text (X-flixel only).
-         */
+        /// <summary>
+        /// The color of the background behind the text (X-flixel only).
+        /// </summary>
         public Color backColor;
 
         //@benbaird X-flixel only. Used to ensure the textWidth and textHeight properties

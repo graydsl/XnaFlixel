@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
@@ -11,21 +11,21 @@ namespace XnaFlixel
         [ThreadStatic]
         private static Random _rand;
 
-		/**
-		 * Helps to eliminate false collisions and/or rendering glitches caused by rounding errors
-		 */
+		/// <summary>
+		/// Helps to eliminate false collisions and/or rendering glitches caused by rounding errors
+		/// </summary>
         static internal float roundingError = 0.0001f; // Rounding error is actually 0.0000001f in AS3 flixel, but doesn't work correctly
                                                        // here because we don't use double-precision floats.
-		/**
-		 * The last quad tree you generated will be stored here for reference or whatever.
-		 */
+		/// <summary>
+		/// The last quad tree you generated will be stored here for reference or whatever.
+		/// </summary>
 		static public FlxQuadTree quadTree;
 		
-		/**
-		 * Opens a web page in a new tab or window.
-		 * 
-		 * @param	URL		The address of the web page.
-		 */
+		/// <summary>
+		/// Opens a web page in a new tab or window.
+		/// 
+		/// @param	URL		The address of the web page.
+		/// </summary>
 		static public void openURL(string URL)
 		{
 			//navigateToURL(new URLRequest(URL), "_blank");
@@ -58,15 +58,15 @@ namespace XnaFlixel
 			return (N1 >= N2)?N1:N2;
 		}
 
-		/**
-		 * Generates a random number.  NOTE: To create a series of predictable
-		 * random numbers, add the random number you generate each time
-		 * to the <code>Seed</code> value before calling <code>random()</code> again.
-		 * 
-		 * @param	Seed	A user-provided value used to calculate a predictable random number.
-		 * 
-		 * @return	A <code>Number</code> between 0 and 1.
-		 */
+		/// <summary>
+		/// Generates a random number.  NOTE: To create a series of predictable
+		/// random numbers, add the random number you generate each time
+		/// to the <code>Seed</code> value before calling <code>random()</code> again.
+		/// 
+		/// @param	Seed	A user-provided value used to calculate a predictable random number.
+		/// 
+		/// @return	A <code>Number</code> between 0 and 1.
+		/// </summary>
         static public float random()
         {
             if (_rand == null)
@@ -95,25 +95,25 @@ namespace XnaFlixel
 			return ((69621 * (int)(Seed * 0x7FFFFFFF)) % 0x7FFFFFFF) / 0x7FFFFFFF;
 		}
 
-		/**
-		 * Useful for finding out how long it takes to execute specific blocks of code.
-		 * 
-		 * @return	A <code>uint</code> to be passed to <code>FlxU.endProfile()</code>.
-		 */
+		/// <summary>
+		/// Useful for finding out how long it takes to execute specific blocks of code.
+		/// 
+		/// @return	A <code>uint</code> to be passed to <code>FlxU.endProfile()</code>.
+		/// </summary>
 		static public uint startProfile()
 		{
 			return FlxG.getTimer;
 		}
 
-		/**
-		 * Useful for finding out how long it takes to execute specific blocks of code.
-		 * 
-		 * @param	Start	A <code>uint</code> created by <code>FlxU.startProfile()</code>.
-		 * @param	Name	Optional tag (for debug console display).  Default value is "Profiler".
-		 * @param	Log		Whether or not to log this elapsed time in the debug console.
-		 * 
-		 * @return	A <code>uint</code> to be passed to <code>FlxU.endProfile()</code>.
-		 */
+		/// <summary>
+		/// Useful for finding out how long it takes to execute specific blocks of code.
+		/// 
+		/// @param	Start	A <code>uint</code> created by <code>FlxU.startProfile()</code>.
+		/// @param	Name	Optional tag (for debug console display).  Default value is "Profiler".
+		/// @param	Log		Whether or not to log this elapsed time in the debug console.
+		/// 
+		/// @return	A <code>uint</code> to be passed to <code>FlxU.endProfile()</code>.
+		/// </summary>
 		static public uint endProfile(uint Start, string Name, bool Log)
 		{
 			uint t = FlxG.getTimer;
@@ -122,18 +122,18 @@ namespace XnaFlixel
 			return t;
 		}
 
-        /**
-         * Rotates a point in 2D space around another point by the given angle.
-         * 
-         * @param	X		The X coordinate of the point you want to rotate.
-         * @param	Y		The Y coordinate of the point you want to rotate.
-         * @param	PivotX	The X coordinate of the point you want to rotate around.
-         * @param	PivotY	The Y coordinate of the point you want to rotate around.
-         * @param	Angle	Rotate the point by this many degrees.
-         * @param	P		Optional <code>FlxPoint</code> to store the results in.
-         * 
-         * @return	A <code>FlxPoint</code> containing the coordinates of the rotated point.
-         */
+        /// <summary>
+        /// Rotates a point in 2D space around another point by the given angle.
+        /// 
+        /// @param	X		The X coordinate of the point you want to rotate.
+        /// @param	Y		The Y coordinate of the point you want to rotate.
+        /// @param	PivotX	The X coordinate of the point you want to rotate around.
+        /// @param	PivotY	The Y coordinate of the point you want to rotate around.
+        /// @param	Angle	Rotate the point by this many degrees.
+        /// @param	P		Optional <code>FlxPoint</code> to store the results in.
+        /// 
+        /// @return	A <code>FlxPoint</code> containing the coordinates of the rotated point.
+        /// </summary>
         public static Vector2 rotatePoint(float X, float Y, float PivotX, float PivotY, float Angle)
         {
             float radians = -Angle / 180f * (float)Math.PI;
@@ -142,29 +142,29 @@ namespace XnaFlixel
             return new Vector2((float)(PivotX + Math.Cos(radians) * dx - Math.Sin(radians) * dy), (float)(PivotY - (Math.Sin(radians) * dx + Math.Cos(radians) * dy)));
         }
 
-        /**
-         * Calculates the angle between a point and the origin (0,0).
-         * 
-         * @param	X		The X coordinate of the point.
-         * @param	Y		The Y coordinate of the point.
-         * 
-         * @return	The angle in degrees.
-         */
+        /// <summary>
+        /// Calculates the angle between a point and the origin (0,0).
+        /// 
+        /// @param	X		The X coordinate of the point.
+        /// @param	Y		The Y coordinate of the point.
+        /// 
+        /// @return	The angle in degrees.
+        /// </summary>
         public static float getAngle(float X, float Y)
         {
             return (float)(Math.Atan2(Y, X) * 180f / Math.PI);
         }
 
-		/**
-		 * Generate a Flash <code>uint</code> color from RGBA components.
-		 * 
-		 * @param   Red     The red component, between 0 and 255.
-		 * @param   Green   The green component, between 0 and 255.
-		 * @param   Blue    The blue component, between 0 and 255.
-		 * @param   Alpha   How opaque the color should be, either between 0 and 1 or 0 and 255.
-		 * 
-		 * @return  The color as a <code>uint</code>.
-		 */
+		/// <summary>
+		/// Generate a Flash <code>uint</code> color from RGBA components.
+		/// 
+		/// @param   Red     The red component, between 0 and 255.
+		/// @param   Green   The green component, between 0 and 255.
+		/// @param   Blue    The blue component, between 0 and 255.
+		/// @param   Alpha   How opaque the color should be, either between 0 and 1 or 0 and 255.
+		/// 
+		/// @return  The color as a <code>uint</code>.
+		/// </summary>
         static public uint getColor(uint Red, uint Green, uint Blue)
         {
             return getColor(Red, Green, Blue, 1.0f);
@@ -174,16 +174,16 @@ namespace XnaFlixel
             return ((uint)((Alpha > 1) ? Alpha : (Alpha * 255)) & 0xFF) << 24 | (Red & 0xFF) << 16 | (Green & 0xFF) << 8 | (Blue & 0xFF);
 		}
 
-		/**
-		 * Generate a Flash <code>uint</code> color from HSB components.
-		 * 
-		 * @param	Hue			A number between 0 and 360, indicating position on a color strip or wheel.
-		 * @param	Saturation	A number between 0 and 1, indicating how colorful or gray the color should be.  0 is gray, 1 is vibrant.
-		 * @param	Brightness	A number between 0 and 1, indicating how bright the color should be.  0 is black, 1 is full bright.
-		 * @param   Alpha   	How opaque the color should be, either between 0 and 1 or 0 and 255.
-		 * 
-		 * @return	The color as a <code>uint</code>.
-		 */
+		/// <summary>
+		/// Generate a Flash <code>uint</code> color from HSB components.
+		/// 
+		/// @param	Hue			A number between 0 and 360, indicating position on a color strip or wheel.
+		/// @param	Saturation	A number between 0 and 1, indicating how colorful or gray the color should be.  0 is gray, 1 is vibrant.
+		/// @param	Brightness	A number between 0 and 1, indicating how bright the color should be.  0 is black, 1 is full bright.
+		/// @param   Alpha   	How opaque the color should be, either between 0 and 1 or 0 and 255.
+		/// 
+		/// @return	The color as a <code>uint</code>.
+		/// </summary>
         static public uint getColorHSB(float Hue, float Saturation, float Brightness)
         {
             return getColorHSB(Hue, Saturation, Brightness, 1.0f);
@@ -223,15 +223,15 @@ namespace XnaFlixel
 			return ((uint)((Alpha>1)?Alpha:(Alpha * 255)) & 0xFF) << 24 | (uint)(red*255) << 16 | (uint)(green*255) << 8 | (uint)(blue*255);
 		}
 
-		/**
-		 * Loads an array with the RGBA values of a Flash <code>uint</code> color.
-		 * RGB values are stored 0-255.  Alpha is stored as a floating point number between 0 and 1.
-		 * 
-		 * @param	Color	The color you want to break into components.
-		 * @param	Results	An optional parameter, allows you to use an array that already exists in memory to store the result.
-		 * 
-		 * @return	An <code>Array</code> object containing the Red, Green, Blue and Alpha values of the given color.
-		 */
+		/// <summary>
+		/// Loads an array with the RGBA values of a Flash <code>uint</code> color.
+		/// RGB values are stored 0-255.  Alpha is stored as a floating point number between 0 and 1.
+		/// 
+		/// @param	Color	The color you want to break into components.
+		/// @param	Results	An optional parameter, allows you to use an array that already exists in memory to store the result.
+		/// 
+		/// @return	An <code>Array</code> object containing the Red, Green, Blue and Alpha values of the given color.
+		/// </summary>
 		static public List<object> getRGBA(uint Color, List<object> Results)
 		{
 			if(Results == null)
@@ -243,16 +243,16 @@ namespace XnaFlixel
 			return Results;
 		}
 
-		/**
-		 * Loads an array with the HSB values of a Flash <code>uint</code> color.
-		 * Hue is a value between 0 and 360.  Saturation, Brightness and Alpha
-		 * are as floating point numbers between 0 and 1.
-		 * 
-		 * @param	Color	The color you want to break into components.
-		 * @param	Results	An optional parameter, allows you to use an array that already exists in memory to store the result.
-		 * 
-		 * @return	An <code>Array</code> object containing the Red, Green, Blue and Alpha values of the given color.
-		 */
+		/// <summary>
+		/// Loads an array with the HSB values of a Flash <code>uint</code> color.
+		/// Hue is a value between 0 and 360.  Saturation, Brightness and Alpha
+		/// are as floating point numbers between 0 and 1.
+		/// 
+		/// @param	Color	The color you want to break into components.
+		/// @param	Results	An optional parameter, allows you to use an array that already exists in memory to store the result.
+		/// 
+		/// @return	An <code>Array</code> object containing the Red, Green, Blue and Alpha values of the given color.
+		/// </summary>
 		static public List<object> getHSB(uint Color, List<object> Results)
 		{
 			if(Results == null)
@@ -291,14 +291,14 @@ namespace XnaFlixel
 			return Results;
 		}
 
-		/**
-		 * Get the <code>String</code> name of any <code>Object</code>.
-		 * 
-		 * @param	Obj		The <code>Object</code> object in question.
-		 * @param	Simple	Returns only the class name, not the package or packages.
-		 * 
-		 * @return	The name of the <code>Class</code> as a <code>String</code> object.
-		 */
+		/// <summary>
+		/// Get the <code>String</code> name of any <code>Object</code>.
+		/// 
+		/// @param	Obj		The <code>Object</code> object in question.
+		/// @param	Simple	Returns only the class name, not the package or packages.
+		/// 
+		/// @return	The name of the <code>Class</code> as a <code>String</code> object.
+		/// </summary>
 		static public string getClassName(object Obj, bool Simple)
 		{
             if (Simple)
@@ -311,13 +311,13 @@ namespace XnaFlixel
             }
 		}
 
-		/**
-		 * Look up a <code>Class</code> object by its string name.
-		 * 
-		 * @param	Name	The <code>String</code> name of the <code>Class</code> you are interested in.
-		 * 
-		 * @return	A <code>Class</code> object.
-		 */
+		/// <summary>
+		/// Look up a <code>Class</code> object by its string name.
+		/// 
+		/// @param	Name	The <code>String</code> name of the <code>Class</code> you are interested in.
+		/// 
+		/// @return	A <code>Class</code> object.
+		/// </summary>
 		static public object getClass(string Name)
 		{
             return null;
@@ -325,17 +325,17 @@ namespace XnaFlixel
 		}
 
 
-        /**
-         * A tween-like function that takes a starting velocity
-         * and some other factors and returns an altered velocity.
-         * 
-         * @param	Velocity		Any component of velocity (e.g. 20).
-         * @param	Acceleration	Rate at which the velocity is changing.
-         * @param	Drag			Really kind of a deceleration, this is how much the velocity changes if Acceleration is not set.
-         * @param	Max				An absolute value cap for the velocity.
-         * 
-         * @return	The altered Velocity value.
-         */
+        /// <summary>
+        /// A tween-like function that takes a starting velocity
+        /// and some other factors and returns an altered velocity.
+        /// 
+        /// @param	Velocity		Any component of velocity (e.g. 20).
+        /// @param	Acceleration	Rate at which the velocity is changing.
+        /// @param	Drag			Really kind of a deceleration, this is how much the velocity changes if Acceleration is not set.
+        /// @param	Max				An absolute value cap for the velocity.
+        /// 
+        /// @return	The altered Velocity value.
+        /// </summary>
         public static float computeVelocity(float Velocity, float Acceleration, float Drag, float Max)
         {
             if (Acceleration != 0)
@@ -374,19 +374,19 @@ namespace XnaFlixel
         }
 
 
-		/**
-		 * Call this function to specify a more efficient boundary for your game world.
-		 * This boundary is used by <code>overlap()</code> and <code>collide()</code>, so it
-		 * can't hurt to have it be the right size!  Flixel will invent a size for you, but
-		 * it's pretty huge - 256x the size of the screen, whatever that may be.
-		 * Leave width and height empty if you want to just update the game world's position.
-		 * 
-		 * @param	X			The X-coordinate of the left side of the game world.
-		 * @param	Y			The Y-coordinate of the top of the game world.
-		 * @param	Width		Desired width of the game world.
-		 * @param	Height		Desired height of the game world.
-		 * @param	Divisions	Pass a non-zero value to set <code>quadTreeDivisions</code>.  Default value is 3.
-		 */
+		/// <summary>
+		/// Call this function to specify a more efficient boundary for your game world.
+		/// This boundary is used by <code>overlap()</code> and <code>collide()</code>, so it
+		/// can't hurt to have it be the right size!  Flixel will invent a size for you, but
+		/// it's pretty huge - 256x the size of the screen, whatever that may be.
+		/// Leave width and height empty if you want to just update the game world's position.
+		/// 
+		/// @param	X			The X-coordinate of the left side of the game world.
+		/// @param	Y			The Y-coordinate of the top of the game world.
+		/// @param	Width		Desired width of the game world.
+		/// @param	Height		Desired height of the game world.
+		/// @param	Divisions	Pass a non-zero value to set <code>quadTreeDivisions</code>.  Default value is 3.
+		/// </summary>
         static public void setWorldBounds(float X, float Y, float Width, float Height)
         {
             setWorldBounds(X, Y, Width, Height, 3);
@@ -404,18 +404,18 @@ namespace XnaFlixel
 		}
 
 
-		/**
-		 * Call this function to see if one <code>FlxObject</code> overlaps another.
-		 * Can be called with one object and one group, or two groups, or two objects,
-		 * whatever floats your boat!  It will put everything into a quad tree and then
-		 * check for overlaps.  For maximum performance try bundling a lot of objects
-		 * together using a <code>FlxGroup</code> (even bundling groups together!)
-		 * NOTE: does NOT take objects' scrollfactor into account.
-		 * 
-		 * @param	Object1		The first object or group you want to check.
-		 * @param	Object2		The second object or group you want to check.  If it is the same as the first, flixel knows to just do a comparison within that group.
-		 * @param	Callback	A function with two <code>FlxObject</code> parameters - e.g. <code>myOverlapFunction(Object1:FlxObject,Object2:FlxObject);</code>  If no function is provided, <code>FlxQuadTree</code> will call <code>kill()</code> on both objects.
-		 */
+		/// <summary>
+		/// Call this function to see if one <code>FlxObject</code> overlaps another.
+		/// Can be called with one object and one group, or two groups, or two objects,
+		/// whatever floats your boat!  It will put everything into a quad tree and then
+		/// check for overlaps.  For maximum performance try bundling a lot of objects
+		/// together using a <code>FlxGroup</code> (even bundling groups together!)
+		/// NOTE: does NOT take objects' scrollfactor into account.
+		/// 
+		/// @param	Object1		The first object or group you want to check.
+		/// @param	Object2		The second object or group you want to check.  If it is the same as the first, flixel knows to just do a comparison within that group.
+		/// @param	Callback	A function with two <code>FlxObject</code> parameters - e.g. <code>myOverlapFunction(Object1:FlxObject,Object2:FlxObject);</code>  If no function is provided, <code>FlxQuadTree</code> will call <code>kill()</code> on both objects.
+		/// </summary>
         static public bool overlap(FlxObject Object1, FlxObject Object2, SpriteCollisionEvent Callback)
 		{
 			if( (Object1 == null) || !Object1.exists ||
@@ -429,17 +429,17 @@ namespace XnaFlixel
 			return quadTree.overlap(true,Callback);
 		}
 
-		/**
-		 * Call this function to see if one <code>FlxObject</code> collides with another.
-		 * Can be called with one object and one group, or two groups, or two objects,
-		 * whatever floats your boat!  It will put everything into a quad tree and then
-		 * check for collisions.  For maximum performance try bundling a lot of objects
-		 * together using a <code>FlxGroup</code> (even bundling groups together!)
-		 * NOTE: does NOT take objects' scrollfactor into account.
-		 * 
-		 * @param	Object1		The first object or group you want to check.
-		 * @param	Object2		The second object or group you want to check.  If it is the same as the first, flixel knows to just do a comparison within that group.
-		 */
+		/// <summary>
+		/// Call this function to see if one <code>FlxObject</code> collides with another.
+		/// Can be called with one object and one group, or two groups, or two objects,
+		/// whatever floats your boat!  It will put everything into a quad tree and then
+		/// check for collisions.  For maximum performance try bundling a lot of objects
+		/// together using a <code>FlxGroup</code> (even bundling groups together!)
+		/// NOTE: does NOT take objects' scrollfactor into account.
+		/// 
+		/// @param	Object1		The first object or group you want to check.
+		/// @param	Object2		The second object or group you want to check.  If it is the same as the first, flixel knows to just do a comparison within that group.
+		/// </summary>
 		static public bool collide(FlxObject Object1, FlxObject Object2)
 		{
 			if( (Object1 == null) || !Object1.exists ||
@@ -455,13 +455,13 @@ namespace XnaFlixel
 			return cx || cy;			
 		}
 
-		/**
-		 * This quad tree callback function can be used externally as well.
-		 * Takes two objects and separates them along their X axis (if possible/reasonable).
-		 * 
-		 * @param	Object1		The first object or group you want to check.
-		 * @param	Object2		The second object or group you want to check.
-		 */
+		/// <summary>
+		/// This quad tree callback function can be used externally as well.
+		/// Takes two objects and separates them along their X axis (if possible/reasonable).
+		/// 
+		/// @param	Object1		The first object or group you want to check.
+		/// @param	Object2		The second object or group you want to check.
+		/// </summary>
 		static public bool solveXCollision(object sender, FlxSpriteCollisionEvent e)
 		{
 			//Avoid messed up collisions ahead of time
@@ -667,13 +667,13 @@ namespace XnaFlixel
             return hit;
 		}
 		
-		/**
-		 * This quad tree callback function can be used externally as well.
-		 * Takes two objects and separates them along their Y axis (if possible/reasonable).
-		 * 
-		 * @param	Object1		The first object or group you want to check.
-		 * @param	Object2		The second object or group you want to check.
-		 */
+		/// <summary>
+		/// This quad tree callback function can be used externally as well.
+		/// Takes two objects and separates them along their Y axis (if possible/reasonable).
+		/// 
+		/// @param	Object1		The first object or group you want to check.
+		/// @param	Object2		The second object or group you want to check.
+		/// </summary>
 		static public bool solveYCollision(object sender, FlxSpriteCollisionEvent e)
 		{
 			//Avoid messed up collisions ahead of time

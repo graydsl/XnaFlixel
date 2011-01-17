@@ -1,4 +1,4 @@
-﻿namespace XnaFlixel.data
+namespace XnaFlixel.data
 {
     public class FlxParticle : FlxSprite
     {

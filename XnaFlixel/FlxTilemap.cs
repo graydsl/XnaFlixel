@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -18,68 +18,68 @@ namespace XnaFlixel
             data = Data;
         }
     }
-    /**
-     * This is a traditional tilemap display and collision class.
-     * It takes a string of comma-separated numbers and then associates
-     * those values with tiles from the sheet you pass in.
-     * It also includes some handy static parsers that can convert
-     * arrays or PNG files into strings that can be successfully loaded.
-     */
+    /// <summary>
+    /// This is a traditional tilemap display and collision class.
+    /// It takes a string of comma-separated numbers and then associates
+    /// those values with tiles from the sheet you pass in.
+    /// It also includes some handy static parsers that can convert
+    /// arrays or PNG files into strings that can be successfully loaded.
+    /// </summary>
     public class FlxTilemap : FlxObject
     {
         static public Texture2D ImgAuto;
         static public Texture2D ImgAutoAlt;
 
-		/**
-		 * No auto-tiling.
-		 */
+		/// <summary>
+		/// No auto-tiling.
+		/// </summary>
 		public const int OFF = 0;
-		/**
-		 * Platformer-friendly auto-tiling.
-		 */
+		/// <summary>
+		/// Platformer-friendly auto-tiling.
+		/// </summary>
 		public const int AUTO = 1;
-		/**
-		 * Top-down auto-tiling.
-		 */
+		/// <summary>
+		/// Top-down auto-tiling.
+		/// </summary>
 		public const int ALT = 2;
 
-		/**
-		 * What tile index will you start colliding with (default: 1).
-		 */
+		/// <summary>
+		/// What tile index will you start colliding with (default: 1).
+		/// </summary>
 		public int collideIndex;
-		/**
-		 * The first index of your tile sheet (default: 0) If you want to change it, do so before calling loadMap().
-		 */
+		/// <summary>
+		/// The first index of your tile sheet (default: 0) If you want to change it, do so before calling loadMap().
+		/// </summary>
 		public int startingIndex;
-		/**
-		 * What tile index will you start drawing with (default: 1)  NOTE: should always be >= startingIndex.
-		 * If you want to change it, do so before calling loadMap().
-		 */
+		/// <summary>
+		/// What tile index will you start drawing with (default: 1)  NOTE: should always be >= startingIndex.
+		/// If you want to change it, do so before calling loadMap().
+		/// </summary>
 		public int drawIndex;
-		/**
-		 * Set this flag to use one of the 16-tile binary auto-tile algorithms (OFF, AUTO, or ALT).
-		 */
+		/// <summary>
+		/// Set this flag to use one of the 16-tile binary auto-tile algorithms (OFF, AUTO, or ALT).
+		/// </summary>
 		public int auto;
-		/**
-		 * Set this flag to true to force the tilemap buffer to refresh on the next render frame.
-		 */
+		/// <summary>
+		/// Set this flag to true to force the tilemap buffer to refresh on the next render frame.
+		/// </summary>
 		public bool refresh;
 
-		/**
-		 * Read-only variable, do NOT recommend changing after the map is loaded!
-		 */
+		/// <summary>
+		/// Read-only variable, do NOT recommend changing after the map is loaded!
+		/// </summary>
 		public int widthInTiles;
-		/**
-		 * Read-only variable, do NOT recommend changing after the map is loaded!
-		 */
+		/// <summary>
+		/// Read-only variable, do NOT recommend changing after the map is loaded!
+		/// </summary>
 		public int heightInTiles;
-		/**
-		 * Read-only variable, do NOT recommend changing after the map is loaded!
-		 */
+		/// <summary>
+		/// Read-only variable, do NOT recommend changing after the map is loaded!
+		/// </summary>
 		public int totalTiles;
-		/**
-		 * Rendering helper.
-		 */
+		/// <summary>
+		/// Rendering helper.
+		/// </summary>
 		protected Rectangle _flashRect;
 		protected Rectangle _flashRect2;
 
@@ -95,9 +95,9 @@ namespace XnaFlixel
 
         protected Texture2D _tileBitmap;
 
-        /**
-         * The tilemap constructor just initializes some basic variables.
-         */
+        /// <summary>
+        /// The tilemap constructor just initializes some basic variables.
+        /// </summary>
         public FlxTilemap()
 		{
             if (ImgAuto == null || ImgAutoAlt == null)
@@ -127,16 +127,16 @@ namespace XnaFlixel
             moves = false;
 		}
 
-		/**
-		 * Load the tilemap with string data and a tile graphic.
-		 * 
-		 * @param	MapData			A string of comma and line-return delineated indices indicating what order the tiles should go in.
-		 * @param	TileGraphic		All the tiles you want to use, arranged in a strip corresponding to the numbers in MapData.
-		 * @param	TileWidth		The width of your tiles (e.g. 8) - defaults to height of the tile graphic if unspecified.
-		 * @param	TileHeight		The height of your tiles (e.g. 8) - defaults to width if unspecified.
-		 * 
-		 * @return	A pointer this instance of FlxTilemap, for chaining as usual :)
-		 */
+		/// <summary>
+		/// Load the tilemap with string data and a tile graphic.
+		/// 
+		/// @param	MapData			A string of comma and line-return delineated indices indicating what order the tiles should go in.
+		/// @param	TileGraphic		All the tiles you want to use, arranged in a strip corresponding to the numbers in MapData.
+		/// @param	TileWidth		The width of your tiles (e.g. 8) - defaults to height of the tile graphic if unspecified.
+		/// @param	TileHeight		The height of your tiles (e.g. 8) - defaults to width if unspecified.
+		/// 
+		/// @return	A pointer this instance of FlxTilemap, for chaining as usual :)
+		/// </summary>
         public FlxTilemap loadMap(string MapData, Texture2D TileGraphic)
         {
             return loadMap(MapData, TileGraphic, 0, 0);
@@ -222,16 +222,16 @@ namespace XnaFlixel
 			return this;
 		}
 
-        /**
-		 * Generates a bounding box version of the tiles, flixel should call this automatically when necessary.
-		 */
+        /// <summary>
+		/// Generates a bounding box version of the tiles, flixel should call this automatically when necessary.
+		/// </summary>
         protected void generateBoundingTiles()
 		{
         }
 
-        /**
-         * Draws the tilemap.
-         */
+        /// <summary>
+        /// Draws the tilemap.
+        /// </summary>
         public override void render(SpriteBatch spriteBatch)
         {
             //NOTE: While this will only draw the tiles that are actually on screen, it will ALWAYS draw one screen's worth of tiles
@@ -271,11 +271,11 @@ namespace XnaFlixel
             }
         }
 
-        /**
-         * Checks for overlaps between the provided object and any tiles above the collision index.
-         * 
-         * @param	Core		The <code>FlxObject</code> you want to check against.
-         */
+        /// <summary>
+        /// Checks for overlaps between the provided object and any tiles above the collision index.
+        /// 
+        /// @param	Core		The <code>FlxObject</code> you want to check against.
+        /// </summary>
         override public bool overlaps(FlxObject Core)
 		{
 			int d;
@@ -319,15 +319,15 @@ namespace XnaFlixel
 			return false;
 		}
 
-		/**
-		 * Checks to see if a point in 2D space overlaps a solid tile.
-		 * 
-		 * @param	X			The X coordinate of the point.
-		 * @param	Y			The Y coordinate of the point.
-		 * @param	PerPixel	Not available in <code>FlxTilemap</code>, ignored.
-		 * 
-		 * @return	Whether or not the point overlaps this object.
-		 */
+		/// <summary>
+		/// Checks to see if a point in 2D space overlaps a solid tile.
+		/// 
+		/// @param	X			The X coordinate of the point.
+		/// @param	Y			The Y coordinate of the point.
+		/// @param	PerPixel	Not available in <code>FlxTilemap</code>, ignored.
+		/// 
+		/// @return	Whether or not the point overlaps this object.
+		/// </summary>
         override public bool overlapsPoint(float X, float Y)
         {
             return overlapsPoint(X, Y, false);
@@ -337,10 +337,10 @@ namespace XnaFlixel
 			return getTile((int)((X-x)/_tileWidth),(int)((Y-y)/_tileHeight)) >= this.collideIndex;
 		}
 
-		/**
-		 * Called by <code>FlxObject.updateMotion()</code> and some constructors to
-		 * rebuild the basic collision data for this object.
-		 */
+		/// <summary>
+		/// Called by <code>FlxObject.updateMotion()</code> and some constructors to
+		/// rebuild the basic collision data for this object.
+		/// </summary>
         override public void refreshHulls()
 		{
 			colHullX.x = 0;
@@ -353,13 +353,13 @@ namespace XnaFlixel
 			colHullY.height = _tileHeight;
 		}
 
-		/**
-		 * <code>FlxU.collide()</code> (and thus <code>FlxObject.collide()</code>) call
-		 * this function each time two objects are compared to see if they collide.
-		 * It doesn't necessarily mean these objects WILL collide, however.
-		 * 
-		 * @param	Object	The <code>FlxObject</code> you're about to run into.
-		 */
+		/// <summary>
+		/// <code>FlxU.collide()</code> (and thus <code>FlxObject.collide()</code>) call
+		/// this function each time two objects are compared to see if they collide.
+		/// It doesn't necessarily mean these objects WILL collide, however.
+		/// 
+		/// @param	Object	The <code>FlxObject</code> you're about to run into.
+		/// </summary>
 		override public void preCollide(FlxObject Object)
 		{
 			//Collision fix, in case updateMotion() is called
@@ -402,41 +402,41 @@ namespace XnaFlixel
 			}
 		}
 
-		/**
-		 * Check the value of a particular tile.
-		 * 
-		 * @param	X		The X coordinate of the tile (in tiles, not pixels).
-		 * @param	Y		The Y coordinate of the tile (in tiles, not pixels).
-		 * 
-		 * @return	A uint containing the value of the tile at this spot in the array.
-		 */
+		/// <summary>
+		/// Check the value of a particular tile.
+		/// 
+		/// @param	X		The X coordinate of the tile (in tiles, not pixels).
+		/// @param	Y		The Y coordinate of the tile (in tiles, not pixels).
+		/// 
+		/// @return	A uint containing the value of the tile at this spot in the array.
+		/// </summary>
 		public int getTile(int X, int Y)
 		{
 			return getTileByIndex(Y * widthInTiles + X);
 		}
 
-		/**
-		 * Get the value of a tile in the tilemap by index.
-		 * 
-		 * @param	Index	The slot in the data array (Y * widthInTiles + X) where this tile is stored.
-		 * 
-		 * @return	A uint containing the value of the tile at this spot in the array.
-		 */
+		/// <summary>
+		/// Get the value of a tile in the tilemap by index.
+		/// 
+		/// @param	Index	The slot in the data array (Y/// widthInTiles + X) where this tile is stored.
+		/// 
+		/// @return	A uint containing the value of the tile at this spot in the array.
+		/// </summary>
 		public int getTileByIndex(int Index)
 		{
 			return _data[Index];
 		}
 
-		/**
-		 * Change the data and graphic of a tile in the tilemap.
-		 * 
-		 * @param	X				The X coordinate of the tile (in tiles, not pixels).
-		 * @param	Y				The Y coordinate of the tile (in tiles, not pixels).
-		 * @param	Tile			The new integer data you wish to inject.
-		 * @param	UpdateGraphics	Whether the graphical representation of this tile should change.
-		 * 
-		 * @return	Whether or not the tile was actually changed.
-		 */
+		/// <summary>
+		/// Change the data and graphic of a tile in the tilemap.
+		/// 
+		/// @param	X				The X coordinate of the tile (in tiles, not pixels).
+		/// @param	Y				The Y coordinate of the tile (in tiles, not pixels).
+		/// @param	Tile			The new integer data you wish to inject.
+		/// @param	UpdateGraphics	Whether the graphical representation of this tile should change.
+		/// 
+		/// @return	Whether or not the tile was actually changed.
+		/// </summary>
         public bool setTile(int X, int Y, int Tile)
         {
             if ((X >= widthInTiles) || (Y >= heightInTiles))
@@ -450,15 +450,15 @@ namespace XnaFlixel
 			return setTileByIndex(Y * widthInTiles + X,Tile,UpdateGraphics);
 		}
 
-		/**
-		 * Change the data and graphic of a tile in the tilemap.
-		 * 
-		 * @param	Index			The slot in the data array (Y * widthInTiles + X) where this tile is stored.
-		 * @param	Tile			The new integer data you wish to inject.
-		 * @param	UpdateGraphics	Whether the graphical representation of this tile should change.
-		 * 
-		 * @return	Whether or not the tile was actually changed.
-		 */
+		/// <summary>
+		/// Change the data and graphic of a tile in the tilemap.
+		/// 
+		/// @param	Index			The slot in the data array (Y/// widthInTiles + X) where this tile is stored.
+		/// @param	Tile			The new integer data you wish to inject.
+		/// @param	UpdateGraphics	Whether the graphical representation of this tile should change.
+		/// 
+		/// @return	Whether or not the tile was actually changed.
+		/// </summary>
 		public bool setTileByIndex(int Index, int Tile, bool UpdateGraphics)
 		{
 			if(Index >= _data.Length)
@@ -503,13 +503,13 @@ namespace XnaFlixel
 			return ok;
 		}
 
-		/**
-		 * Bind a function Callback(Core:FlxCore,X:uint,Y:uint,Tile:uint) to a range of tiles.
-		 * 
-		 * @param	Tile		The tile to trigger the callback.
-		 * @param	Callback	The function to trigger.  Parameters should be <code>(Core:FlxCore,X:uint,Y:uint,Tile:uint)</code>.
-		 * @param	Range		If you want this callback to work for a bunch of different tiles, input the range here.  Default value is 1.
-		 */
+		/// <summary>
+		/// Bind a function Callback(Core:FlxCore,X:uint,Y:uint,Tile:uint) to a range of tiles.
+		/// 
+		/// @param	Tile		The tile to trigger the callback.
+		/// @param	Callback	The function to trigger.  Parameters should be <code>(Core:FlxCore,X:uint,Y:uint,Tile:uint)</code>.
+		/// @param	Range		If you want this callback to work for a bunch of different tiles, input the range here.  Default value is 1.
+		/// </summary>
 		public void setCallback(int Tile, int Callback, int Range)
 		{
 			FlxG.log("WARNING: FlxTilemap.setCallback()\nhas been temporarily deprecated.");
@@ -518,11 +518,11 @@ namespace XnaFlixel
 			//	_callbacks[i] = Callback;
 		}
 
-		/**
-		 * Call this function to lock the automatic camera to the map's edges.
-		 * 
-		 * @param	Border		Adjusts the camera follow boundary by whatever number of tiles you specify here.  Handy for blocking off deadends that are offscreen, etc.  Use a negative number to add padding instead of hiding the edges.
-		 */
+		/// <summary>
+		/// Call this function to lock the automatic camera to the map's edges.
+		/// 
+		/// @param	Border		Adjusts the camera follow boundary by whatever number of tiles you specify here.  Handy for blocking off deadends that are offscreen, etc.  Use a negative number to add padding instead of hiding the edges.
+		/// </summary>
         public void follow()
         {
             follow(0);
@@ -532,18 +532,18 @@ namespace XnaFlixel
             FlxG.followBounds((int)x + Border * _tileWidth, (int)y + Border * _tileHeight, (int)width - Border * _tileWidth, (int)height - Border * _tileHeight);
 		}
 
-		/**
-		 * Shoots a ray from the start point to the end point.
-		 * If/when it passes through a tile, it stores and returns that point.
-		 * 
-		 * @param	StartX		The X component of the ray's start.
-		 * @param	StartY		The Y component of the ray's start.
-		 * @param	EndX		The X component of the ray's end.
-		 * @param	EndY		The Y component of the ray's end.
-		 * @param	Result		A <code>Point</code> object containing the first wall impact.
-		 * @param	Resolution	Defaults to 1, meaning check every tile or so.  Higher means more checks!
-		 * @return	Whether or not there was a collision between the ray and a colliding tile.
-		 */
+		/// <summary>
+		/// Shoots a ray from the start point to the end point.
+		/// If/when it passes through a tile, it stores and returns that point.
+		/// 
+		/// @param	StartX		The X component of the ray's start.
+		/// @param	StartY		The Y component of the ray's start.
+		/// @param	EndX		The X component of the ray's end.
+		/// @param	EndY		The Y component of the ray's end.
+		/// @param	Result		A <code>Point</code> object containing the first wall impact.
+		/// @param	Resolution	Defaults to 1, meaning check every tile or so.  Higher means more checks!
+		/// @return	Whether or not there was a collision between the ray and a colliding tile.
+		/// </summary>
 		public bool ray(int StartX, int StartY, int EndX, int EndY, Vector2 Result, int Resolution)
 		{
 			int step = _tileWidth;
@@ -617,14 +617,14 @@ namespace XnaFlixel
 			return false;
 		}
 
-		/**
-		 * Converts a one-dimensional array of tile data to a comma-separated string.
-		 * 
-		 * @param	Data		An array full of integer tile references.
-		 * @param	Width		The number of tiles in each row.
-		 * 
-		 * @return	A comma-separated string containing the level data in a <code>FlxTilemap</code>-friendly format.
-		 */
+		/// <summary>
+		/// Converts a one-dimensional array of tile data to a comma-separated string.
+		/// 
+		/// @param	Data		An array full of integer tile references.
+		/// @param	Width		The number of tiles in each row.
+		/// 
+		/// @return	A comma-separated string containing the level data in a <code>FlxTilemap</code>-friendly format.
+		/// </summary>
 		static public string arrayToCSV(int[] Data, int Width)
 		{
 			int r = 0;
@@ -652,17 +652,17 @@ namespace XnaFlixel
 			return csv;
 		}
 
-        /**
-         * Converts a <code>BitmapData</code> object to a comma-separated string.
-         * Black pixels are flagged as 'solid' by default,
-         * non-black pixels are set as non-colliding.
-         * Black pixels must be PURE BLACK.
-         * 
-         * @param	bitmapData	A Texture2D, preferably black and white.
-         * @param	Invert		Load white pixels as solid instead.
-         * 
-         * @return	A comma-separated string containing the level data in a <code>FlxTilemap</code>-friendly format.
-         */
+        /// <summary>
+        /// Converts a <code>BitmapData</code> object to a comma-separated string.
+        /// Black pixels are flagged as 'solid' by default,
+        /// non-black pixels are set as non-colliding.
+        /// Black pixels must be PURE BLACK.
+        /// 
+        /// @param	bitmapData	A Texture2D, preferably black and white.
+        /// @param	Invert		Load white pixels as solid instead.
+        /// 
+        /// @return	A comma-separated string containing the level data in a <code>FlxTilemap</code>-friendly format.
+        /// </summary>
         static public string bitmapToCSV(Texture2D bitmapData)
         {
             return bitmapToCSV(bitmapData, false);
@@ -709,11 +709,11 @@ namespace XnaFlixel
 			return csv;
 		}
 
-		/**
-		 * An internal function used by the binary auto-tilers.
-		 * 
-		 * @param	Index		The index of the tile you want to analyze.
-		 */
+		/// <summary>
+		/// An internal function used by the binary auto-tilers.
+		/// 
+		/// @param	Index		The index of the tile you want to analyze.
+		/// </summary>
 		protected void autoTile(int Index)
 		{
 			if(_data[Index] == 0) return;
@@ -740,11 +740,11 @@ namespace XnaFlixel
 			_data[Index] += 1;
 		}
 		
-		/**
-		 * Internal function used in setTileByIndex() and the constructor to update the map.
-		 * 
-		 * @param	Index		The index of the tile you want to update.
-		 */
+		/// <summary>
+		/// Internal function used in setTileByIndex() and the constructor to update the map.
+		/// 
+		/// @param	Index		The index of the tile you want to update.
+		/// </summary>
 		protected void updateTile(int Index)
 		{
 			if(_data[Index] < drawIndex)
