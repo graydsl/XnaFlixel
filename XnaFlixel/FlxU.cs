@@ -596,28 +596,28 @@ namespace XnaFlixel
 					if(!f1 && f2)
 					{
 						if(e.Object1._group)
-							e.Object1.reset((e.Object1.x - overlap), e.Object1.y);
+							e.Object1.reset((e.Object1.X - overlap), e.Object1.Y);
 						else
-							e.Object1.x = e.Object1.x - overlap;
+							e.Object1.X = e.Object1.X - overlap;
 					}
 					else if(f1 && !f2)
 					{
 						if(e.Object2._group)
-							e.Object2.reset((e.Object2.x + overlap),e.Object2.y);
+							e.Object2.reset((e.Object2.X + overlap),e.Object2.Y);
 						else
-							e.Object2.x += overlap;
+							e.Object2.X += overlap;
 					}
 					else if(!f1 && !f2)
 					{
 						overlap /= 2;
 						if(e.Object1._group)
-							e.Object1.reset((e.Object1.x - overlap),e.Object1.y);
+							e.Object1.reset((e.Object1.X - overlap),e.Object1.Y);
 						else
-							e.Object1.x = e.Object1.x - overlap;
+							e.Object1.X = e.Object1.X - overlap;
 						if(e.Object2._group)
-							e.Object2.reset((e.Object2.x + overlap),e.Object2.y);
+							e.Object2.reset((e.Object2.X + overlap),e.Object2.Y);
 						else
-							e.Object2.x += overlap;
+							e.Object2.X += overlap;
 						sv1 *= 0.5f;
 						sv2 *= 0.5f;
 					}
@@ -813,28 +813,28 @@ namespace XnaFlixel
 					if(!f1 && f2)
 					{
 						if(e.Object1._group)
-                            e.Object1.reset(e.Object1.x, (e.Object1.y - overlap));
+                            e.Object1.reset(e.Object1.X, (e.Object1.Y - overlap));
 						else
-							e.Object1.y = e.Object1.y - overlap;
+							e.Object1.Y = e.Object1.Y - overlap;
 					}
 					else if(f1 && !f2)
 					{
 						if(e.Object2._group)
-                            e.Object2.reset(e.Object2.x, (e.Object2.y + overlap));
+                            e.Object2.reset(e.Object2.X, (e.Object2.Y + overlap));
 						else
-							e.Object2.y += overlap;
+							e.Object2.Y += overlap;
 					}
 					else if(!f1 && !f2)
 					{
 						overlap /= 2;
 						if(e.Object1._group)
-                            e.Object1.reset(e.Object1.x, (e.Object1.y - overlap));
+                            e.Object1.reset(e.Object1.X, (e.Object1.Y - overlap));
 						else
-							e.Object1.y = e.Object1.y - overlap;
+							e.Object1.Y = e.Object1.Y - overlap;
 						if(e.Object2._group)
-                            e.Object2.reset(e.Object2.x, (e.Object2.y + overlap));
+                            e.Object2.reset(e.Object2.X, (e.Object2.Y + overlap));
 						else
-							e.Object2.y += overlap;
+							e.Object2.Y += overlap;
 						sv1 *= 0.5f;
 						sv2 *= 0.5f;
 					}
@@ -860,7 +860,7 @@ namespace XnaFlixel
 							if(f2 && e.Object2.moves)
 							{
 								sv1 = e.Object2.colVector.X;
-								e.Object1.x += sv1;
+								e.Object1.X += sv1;
 								obj1Hull.x += sv1;
 								e.Object1.colHullX.x += sv1;
 							}
@@ -886,7 +886,7 @@ namespace XnaFlixel
 							if(f1 && e.Object1.moves)
 							{
 								sv2 = e.Object1.colVector.X;
-								e.Object2.x += sv2;
+								e.Object2.X += sv2;
 								obj2Hull.x += sv2;
 								e.Object2.colHullX.x += sv2;
 							}

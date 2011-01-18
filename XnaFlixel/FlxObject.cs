@@ -195,8 +195,8 @@ namespace XnaFlixel
 
         // X-flixel only: Positioning variables to compensate for the fact that in
         // standard flixel, FlxObject inherits from FlxRect.
-        public float x;
-        public float y;
+        public float X;
+        public float Y;
         public float width;
         public float height;
 
@@ -219,8 +219,8 @@ namespace XnaFlixel
         }
         private void constructor1(float X, float Y, float Width, float Height)
         {
-            x = X;
-            y = Y;
+            this.X = X;
+            this.Y = Y;
             width = Width;
             height = Height;
 
@@ -300,12 +300,12 @@ namespace XnaFlixel
 		/// </summary>
         virtual public void refreshHulls()
 		{
-			colHullX.x = x;
-			colHullX.y = y;
+			colHullX.x = X;
+			colHullX.y = Y;
 			colHullX.width = width;
 			colHullX.height = height;
-			colHullY.x = x;
-			colHullY.y = y;
+			colHullY.x = X;
+			colHullY.y = Y;
 			colHullY.width = width;
 			colHullY.height = height;
 		}
@@ -345,8 +345,8 @@ namespace XnaFlixel
             }
             velocity.X = FlxU.computeVelocity(velocity.X, acceleration.X + thrustComponents.X, drag.X, maxVelocity.X);
             velocity.Y = FlxU.computeVelocity(velocity.Y, acceleration.Y + thrustComponents.Y, drag.Y, maxVelocity.Y);
-            x += velocity.X * FlxG.elapsed;
-            y += velocity.Y * FlxG.elapsed;
+            X += velocity.X * FlxG.elapsed;
+            Y += velocity.Y * FlxG.elapsed;
 
             //Update collision data with new movement results
             if (!_solid)
@@ -356,7 +356,7 @@ namespace XnaFlixel
             colHullX.width += ((colVector.X > 0) ? colVector.X : -colVector.X);
             if (colVector.X < 0)
                 colHullX.x += colVector.X;
-            colHullY.x = x;
+            colHullY.x = X;
             colHullY.height += ((colVector.Y > 0) ? colVector.Y : -colVector.Y);
             if (colVector.Y < 0)
                 colHullY.y += colVector.Y;
@@ -576,8 +576,8 @@ namespace XnaFlixel
         virtual public Vector2 getScreenXY()
 		{
             Vector2 Point = Vector2.Zero;
-			Point.X = FlxU.floor(x + FlxU.roundingError)+FlxU.floor(FlxG.scroll.X*scrollFactor.X);
-			Point.Y = FlxU.floor(y + FlxU.roundingError)+FlxU.floor(FlxG.scroll.Y*scrollFactor.Y);
+			Point.X = FlxU.floor(X + FlxU.roundingError)+FlxU.floor(FlxG.scroll.X*scrollFactor.X);
+			Point.Y = FlxU.floor(Y + FlxU.roundingError)+FlxU.floor(FlxG.scroll.Y*scrollFactor.Y);
 			return Point;
 		}
 		
@@ -603,8 +603,8 @@ namespace XnaFlixel
 		/// </summary>
         virtual public void reset(float X, float Y)
 		{
-			x = X;
-			y = Y;
+			this.X = X;
+			this.Y = Y;
 			exists = true;
 			dead = false;
 		}

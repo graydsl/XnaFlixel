@@ -505,8 +505,8 @@ namespace XnaFlixel
             if (Target == null)
                 return;
 
-            scroll.X = _scrollTarget.X = (width >> 1) - followTarget.x - ((int)followTarget.width >> 1);
-            scroll.Y = _scrollTarget.Y = (height >> 1) - followTarget.y - ((int)followTarget.height >> 1);
+            scroll.X = _scrollTarget.X = (width >> 1) - followTarget.X - ((int)followTarget.width >> 1);
+            scroll.Y = _scrollTarget.Y = (height >> 1) - followTarget.Y - ((int)followTarget.height >> 1);
 		}
 		
 		//@desc		Specify an additional camera component - the velocity-based "lead", or amount the camera should track in front of a sprite
@@ -597,8 +597,8 @@ namespace XnaFlixel
 			{
 				if(followTarget.exists && !followTarget.dead)
 				{
-                    _scrollTarget.X = (width >> 1) - followTarget.x - ((int)followTarget.width >> 1);
-                    _scrollTarget.Y = (height >> 1) - followTarget.y - ((int)followTarget.height >> 1);
+                    _scrollTarget.X = (width >> 1) - followTarget.X - ((int)followTarget.width >> 1);
+                    _scrollTarget.Y = (height >> 1) - followTarget.Y - ((int)followTarget.height >> 1);
 					if((followLead != null) && (followTarget is FlxSprite))
 					{
                         _scrollTarget.X -= (followTarget as FlxSprite).velocity.X * followLead.X;

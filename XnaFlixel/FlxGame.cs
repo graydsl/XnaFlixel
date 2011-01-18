@@ -213,10 +213,10 @@ namespace XnaFlixel
 		/// </summary>
         internal void pauseGame()
 		{
-            //if((x != 0) || (y != 0))
+            //if((X != 0) || (Y != 0))
             //{
-            //    x = 0;
-            //    y = 0;
+            //    X = 0;
+            //    Y = 0;
             //}
             //flash.ui.Mouse.show();
 			_paused = true;
@@ -246,10 +246,10 @@ namespace XnaFlixel
 			else if(_soundTrayRect.Y > -_soundTrayRect.Height)
 			{
 				_soundTrayRect.Y -= (int)(FlxG.elapsed * FlxG.height * 2);
-                _soundCaption.y = (_soundTrayRect.Y + 4);
+                _soundCaption.Y = (_soundTrayRect.Y + 4);
                 for (int i = 0; i < _soundTrayBars.Length; i++)
                 {
-                    _soundTrayBars[i].y = (_soundTrayRect.Y + _soundTrayRect.Height - _soundTrayBars[i].height - 2);
+                    _soundTrayBars[i].Y = (_soundTrayRect.Y + _soundTrayRect.Height - _soundTrayBars[i].height - 2);
                 }
 				if(_soundTrayRect.Y < -_soundTrayRect.Height)
 					_soundTrayVisible = false;
@@ -383,14 +383,14 @@ namespace XnaFlixel
 			_soundTrayRect.Y = 0;
 			_soundTrayVisible = true;
 
-            _soundCaption.y = (_soundTrayRect.Y + 4);
+            _soundCaption.Y = (_soundTrayRect.Y + 4);
 
 			int gv = (int)Math.Round(FlxG.volume * 10);
 			if(FlxG.mute)
 				gv = 0;
 			for (int i = 0; i < _soundTrayBars.Length; i++)
 			{
-                _soundTrayBars[i].y = (_soundTrayRect.Y + _soundTrayRect.Height - _soundTrayBars[i].height - 2);
+                _soundTrayBars[i].Y = (_soundTrayRect.Y + _soundTrayRect.Height - _soundTrayBars[i].height - 2);
 				if(i < gv) _soundTrayBars[i].alpha = 1;
 				else _soundTrayBars[i].alpha = 0.5f;
 			}

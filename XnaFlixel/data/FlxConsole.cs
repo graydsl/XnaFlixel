@@ -98,8 +98,8 @@ namespace XnaFlixel.data
 				//    _consoleFPS.text = ((int)Math.Floor((double)(fps / _FPS.Length))).ToString() + " fps";
 				//}
 
-                _consoleText.y = (-FlxG.spriteBatch.GraphicsDevice.Viewport.Height + _consoleRect.Height + 8);
-                _consoleFPS.y = _consoleText.y;
+                _consoleText.Y = (-FlxG.spriteBatch.GraphicsDevice.Viewport.Height + _consoleRect.Height + 8);
+                _consoleFPS.Y = _consoleText.Y;
             }
             if (_consoleY < _consoleYT)
                 _consoleY += FlxG.height * 10 * FlxG.elapsed;

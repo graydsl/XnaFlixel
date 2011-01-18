@@ -115,8 +115,8 @@ namespace XnaFlixel
             y = Y;
             width = Width;
             height = Height;
-            //x = 0;
-            //y = 0;
+            //X = 0;
+            //Y = 0;
             //width = 0;
             //height = 0;
 
@@ -125,7 +125,7 @@ namespace XnaFlixel
 			
 			/*DEBUG: draw a randomly colored rectangle indicating this quadrant (may induce seizures)
 			var brush:FlxSprite = new FlxSprite().createGraphic(Width,Height,0xffffffff*FlxU.random());
-			FlxState.screen.draw(brush,X+FlxG.scroll.x,Y+FlxG.scroll.y);//*/
+			FlxState.screen.draw(brush,X+FlxG.scroll.X,Y+FlxG.scroll.Y);//*/
 
 			//Copy the parent's children (if there are any)
             if (Parent != null)
@@ -209,10 +209,10 @@ namespace XnaFlixel
 						else if(m.solid)
 						{
 							_o = m;
-							_ol = _o.x;
-							_ot = _o.y;
-							_or = _o.x + _o.width;
-							_ob = _o.y + _o.height;
+							_ol = _o.X;
+							_ot = _o.Y;
+							_or = _o.X + _o.width;
+							_ob = _o.Y + _o.height;
 							addObject();
 						}
 					}
@@ -221,10 +221,10 @@ namespace XnaFlixel
 			if(Object.solid)
 			{
 				_o = Object;
-				_ol = _o.x;
-				_ot = _o.y;
-				_or = _o.x + _o.width;
-				_ob = _o.y + _o.height;
+				_ol = _o.X;
+				_ot = _o.Y;
+				_or = _o.X + _o.width;
+				_ob = _o.Y + _o.height;
 				addObject();
 			}
 		}
@@ -456,10 +456,10 @@ namespace XnaFlixel
 				{
 					co = itr.@object;
 					if( (_o == co) || !co.exists || !_o.exists || !co.solid || !_o.solid ||
-						(_o.x + _o.width  < co.x + FlxU.roundingError) ||
-						(_o.x + FlxU.roundingError > co.x + co.width) ||
-						(_o.y + _o.height < co.y + FlxU.roundingError) ||
-						(_o.y + FlxU.roundingError > co.y + co.height) )
+						(_o.X + _o.width  < co.X + FlxU.roundingError) ||
+						(_o.X + FlxU.roundingError > co.X + co.width) ||
+						(_o.Y + _o.height < co.Y + FlxU.roundingError) ||
+						(_o.Y + FlxU.roundingError > co.Y + co.height) )
 					{
 						itr = itr.next;
 						continue;

@@ -170,8 +170,8 @@ namespace XnaFlixel.data
         {
             _lastMouse = _curMouse;
             _curMouse = Mouse.GetState();
-            cursor.x = x;
-            cursor.y = y;
+            cursor.X = x;
+            cursor.Y = y;
 
             if (_mouseEvent != null)
             {

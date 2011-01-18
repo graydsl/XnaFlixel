@@ -284,8 +284,8 @@ namespace XnaFlixel
 			List<BlockPoint> blocks = new List<BlockPoint>();
 			
 			//First make a list of all the blocks we'll use for collision
-			int ix = (int)FlxU.floor((Core.x - x)/_tileWidth);
-			int iy = (int)FlxU.floor((Core.y - y)/_tileHeight);
+			int ix = (int)FlxU.floor((Core.X - X)/_tileWidth);
+			int iy = (int)FlxU.floor((Core.Y - Y)/_tileHeight);
             int iw = (int)FlxU.ceil((float)Core.width / (float)_tileWidth) + 1;
             int ih = (int)FlxU.ceil((float)Core.height / (float)_tileHeight) + 1;
 			int r = 0;
@@ -300,7 +300,7 @@ namespace XnaFlixel
 					if(c >= widthInTiles) break;
 					dd = _data[d+c];
 					if(dd >= collideIndex)
-						blocks.Add(new BlockPoint((int)(x+(ix+c)*_tileWidth),(int)(y+(iy+r)*_tileHeight),dd));
+						blocks.Add(new BlockPoint((int)(X+(ix+c)*_tileWidth),(int)(Y+(iy+r)*_tileHeight),dd));
 					c++;
 				}
 				r++;
@@ -311,8 +311,8 @@ namespace XnaFlixel
 			int i = 0;
 			while(i < bl)
 			{
-				_block.x = blocks[i].x;
-				_block.y = blocks[i++].y;
+				_block.X = blocks[i].x;
+				_block.Y = blocks[i++].y;
 				if(_block.overlaps(Core))
 					return true;
 			}
@@ -334,7 +334,7 @@ namespace XnaFlixel
         }
 		override public bool overlapsPoint(float X, float Y, bool PerPixel)
 		{
-			return getTile((int)((X-x)/_tileWidth),(int)((Y-y)/_tileHeight)) >= this.collideIndex;
+			return getTile((int)((X-base.X)/_tileWidth),(int)((Y-base.Y)/_tileHeight)) >= this.collideIndex;
 		}
 
 		/// <summary>
@@ -371,8 +371,8 @@ namespace XnaFlixel
 			int r;
 			int c;
 			int rs;
-			int ix = (int)FlxU.floor((Object.x - x)/_tileWidth);
-			int iy = (int)FlxU.floor((Object.y - y)/_tileHeight);
+			int ix = (int)FlxU.floor((Object.X - X)/_tileWidth);
+			int iy = (int)FlxU.floor((Object.Y - Y)/_tileHeight);
             int iw = ix + (int)FlxU.ceil((float)Object.width / (float)_tileWidth) + 1;
             int ih = iy + (int)FlxU.ceil((float)Object.height / (float)_tileHeight) + 1;
 			if(ix < 0)
@@ -393,7 +393,7 @@ namespace XnaFlixel
 				{
                     if (_data[rs + c] >= collideIndex)
                     {
-                        colOffsets.Add(new Vector2(x + c * _tileWidth, y + r * _tileHeight));
+                        colOffsets.Add(new Vector2(X + c * _tileWidth, Y + r * _tileHeight));
                     }
 					c++;
 				}
@@ -529,7 +529,7 @@ namespace XnaFlixel
         }
 		public void follow(int Border)
 		{
-            FlxG.followBounds((int)x + Border * _tileWidth, (int)y + Border * _tileHeight, (int)width - Border * _tileWidth, (int)height - Border * _tileHeight);
+            FlxG.followBounds((int)X + Border * _tileWidth, (int)Y + Border * _tileHeight, (int)width - Border * _tileWidth, (int)height - Border * _tileHeight);
 		}
 
 		/// <summary>

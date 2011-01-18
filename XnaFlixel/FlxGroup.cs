@@ -334,8 +334,8 @@ namespace XnaFlixel
 				_last.Y = 0;
 				return;
 			}
-			_last.X = x;
-			_last.Y = y;
+			_last.X = X;
+			_last.Y = Y;
 		}
 
 		/// <summary>
@@ -347,11 +347,11 @@ namespace XnaFlixel
 			float mx = 0;
 			float my = 0;
 			bool moved = false;
-			if((x != _last.X) || (y != _last.Y))
+			if((X != _last.X) || (Y != _last.Y))
 			{
 				moved = true;
-				mx = x - _last.X;
-				my = y - _last.Y;
+				mx = X - _last.X;
+				my = Y - _last.Y;
 			}
 			int i = 0;
 			FlxObject o;
@@ -364,11 +364,11 @@ namespace XnaFlixel
 					if(moved)
 					{
                         if (o._group)
-                            o.reset((o.x + mx), (o.y + my));
+                            o.reset((o.X + mx), (o.Y + my));
                         else
                         {
-                            o.x += mx;
-                            o.y += my;
+                            o.X += mx;
+                            o.Y += my;
                         }
 					}
 					if(o.active)
@@ -378,7 +378,7 @@ namespace XnaFlixel
 						o.colHullX.width += ((mx>0)?mx:-mx);
 						if(mx < 0)
 							o.colHullX.x += mx;
-						o.colHullY.x = x;
+						o.colHullY.x = X;
 						o.colHullY.height += ((my>0)?my:-my);
 						if(my < 0)
 							o.colHullY.y += my;
@@ -491,11 +491,11 @@ namespace XnaFlixel
 			float mx = 0;
 			float my = 0;
 			bool moved = false;
-			if((x != _last.X) || (y != _last.Y))
+			if((base.X != _last.X) || (base.Y != _last.Y))
 			{
 				moved = true;
-				mx = x - _last.X;
-				my = y - _last.Y;
+				mx = base.X - _last.X;
+				my = base.Y - _last.Y;
 			}
 			int i = 0;
             FlxObject o;
@@ -508,17 +508,17 @@ namespace XnaFlixel
 					if(moved)
 					{
                         if (o._group)
-                            o.reset((o.x + mx), (o.y + my));
+                            o.reset((o.X + mx), (o.Y + my));
                         else
                         {
-                            o.x += mx;
-                            o.y += my;
+                            o.X += mx;
+                            o.Y += my;
                             if (solid)
                             {
                                 o.colHullX.width += ((mx > 0) ? mx : -mx);
                                 if (mx < 0)
                                     o.colHullX.x += mx;
-                                o.colHullY.x = x;
+                                o.colHullY.x = base.X;
                                 o.colHullY.height += ((my > 0) ? my : -my);
                                 if (my < 0)
                                     o.colHullY.y += my;

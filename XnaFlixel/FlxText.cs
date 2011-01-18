@@ -106,8 +106,8 @@ namespace XnaFlixel
 
             alignment = fJustification;
 
-            x = X;
-            y = Y;
+            ((FlxObject) this).X = X;
+            ((FlxObject) this).Y = Y;
             width = Width;
             height = Height;
 
@@ -221,13 +221,13 @@ namespace XnaFlixel
                 return;
             }
 
-            Vector2 pos = new Vector2(x, y) + origin;
+            Vector2 pos = new Vector2(X, Y) + origin;
             pos += (FlxG.scroll * scrollFactor);
 
             if (backColor.A > 0)
             {
                 //Has a background color
-                spriteBatch.Draw(FlxG.XnaSheet, new Rectangle((int)x, (int)y, (int)width, (int)height),
+                spriteBatch.Draw(FlxG.XnaSheet, new Rectangle((int)X, (int)Y, (int)width, (int)height),
                     new Rectangle(1, 1, 1, 1), backColor);
             }
 

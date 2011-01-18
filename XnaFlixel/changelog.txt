@@ -1,4 +1,10 @@
-﻿X-Flixel 2.43 -> XnaFlixel 1.0
+﻿XnaFlixel 0.1 -> XnaFlixel 0.2 (in progress)
+===============================================================================
+* /** ... */ comments converted to C# /// xml comments
+* FlxButton converted
+* FlxEmitter conversion started...
+
+X-Flixel 2.43 -> XnaFlixel 0.1
 ===============================================================================
 * rearranged code to compile XnaFlixel to an assembly
 * fixed FPS in Console

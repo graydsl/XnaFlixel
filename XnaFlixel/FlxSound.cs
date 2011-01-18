@@ -102,8 +102,8 @@ namespace XnaFlixel
         }
         public FlxSound proximity(float X, float Y, FlxObject Core, float Radius, bool Pan)
         {
-            x = X;
-			y = Y;
+            base.X = X;
+			base.Y = Y;
 			_core = Core;
 			_radius = Radius;
 			_pan = Pan;

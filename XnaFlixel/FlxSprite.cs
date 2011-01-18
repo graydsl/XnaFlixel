@@ -129,8 +129,8 @@ namespace XnaFlixel
 
         private void constructor(float X, float Y, Texture2D SimpleGraphic)
         {
-            x = X;
-            y = Y;
+            base.X = X;
+            base.Y = Y;
 
             _flashRect = new Rectangle();
             _flashRect2 = new Rectangle();
@@ -401,7 +401,7 @@ namespace XnaFlixel
 			Y = Y + FlxU.floor(FlxG.scroll.Y);
 			_point = getScreenXY();
             //if(PerPixel)
-            //    return _framePixels.hitTest(new Point(0,0),0xFF,new Point(X-_point.x,Y-_point.y));
+            //    return _framePixels.hitTest(new Point(0,0),0xFF,new Point(X-_point.X,Y-_point.Y));
 			//else
             if (_stretchToFit == false)
             {
@@ -542,8 +542,8 @@ namespace XnaFlixel
         override public Vector2 getScreenXY()
         {
             Vector2 Point = Vector2.Zero;
-            Point.X = FlxU.floor(x + FlxU.roundingError) + FlxU.floor(FlxG.scroll.X * scrollFactor.X) - offset.X;
-            Point.Y = FlxU.floor(y + FlxU.roundingError) + FlxU.floor(FlxG.scroll.Y * scrollFactor.Y) - offset.Y;
+            Point.X = FlxU.floor(X + FlxU.roundingError) + FlxU.floor(FlxG.scroll.X * scrollFactor.X) - offset.X;
+            Point.Y = FlxU.floor(Y + FlxU.roundingError) + FlxU.floor(FlxG.scroll.Y * scrollFactor.Y) - offset.Y;
             return Point;
         }
 
@@ -582,8 +582,8 @@ namespace XnaFlixel
         protected void drawBounds(SpriteBatch spriteBatch, int X, int Y)
         {
             spriteBatch.Draw(FlxG.XnaSheet,
-                new Rectangle((int)(FlxU.floor(x + FlxU.roundingError) + FlxU.floor(FlxG.scroll.X * scrollFactor.X)),
-                    (int)(FlxU.floor(y + FlxU.roundingError) + FlxU.floor(FlxG.scroll.Y * scrollFactor.Y)), (int)width, (int)height),
+                new Rectangle((int)(FlxU.floor(base.X + FlxU.roundingError) + FlxU.floor(FlxG.scroll.X * scrollFactor.X)),
+                    (int)(FlxU.floor(base.Y + FlxU.roundingError) + FlxU.floor(FlxG.scroll.Y * scrollFactor.Y)), (int)width, (int)height),
                 new Rectangle(1, 1, 1, 1), getBoundingColor());
         }
 
