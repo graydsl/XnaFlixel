@@ -319,7 +319,7 @@ namespace XnaFlixel
 		{
 			if(music == null)
 				music = new FlxSound();
-			else if(music.active)
+			else if(music.Active)
 				music.stop();
 			music.loadEmbedded(Music,true);
 			music.volume = Volume;
@@ -350,7 +350,7 @@ namespace XnaFlixel
 			int sl = sounds.Count;
 			while(i < sl)
 			{
-				if(!(sounds[i] as FlxSound).active)
+				if(!(sounds[i] as FlxSound).Active)
 					break;
 				i++;
 			}
@@ -427,7 +427,7 @@ namespace XnaFlixel
 		/// </summary>
 		static protected void changeSounds()
 		{
-			if((music != null) && music.active)
+			if((music != null) && music.Active)
 				music.updateTransform();
 			int i = 0;
 			FlxSound s;
@@ -435,7 +435,7 @@ namespace XnaFlixel
 			while(i < sl)
 			{
 				s = sounds[i++] as FlxSound;
-				if((s != null) && s.active)
+				if((s != null) && s.Active)
 					s.updateTransform();
 			}
 		}
@@ -445,7 +445,7 @@ namespace XnaFlixel
 		/// </summary>
 		static internal void updateSounds()
 		{
-			if((music != null) && music.active)
+			if((music != null) && music.Active)
 				music.update();
 			int i = 0;
 			FlxSound s;
@@ -453,7 +453,7 @@ namespace XnaFlixel
 			while(i < sl)
 			{
 				s = sounds[i++] as FlxSound;
-				if((s != null) && s.active)
+				if((s != null) && s.Active)
 					s.update();
 			}
 		}
@@ -463,7 +463,7 @@ namespace XnaFlixel
 		/// </summary>
 		static protected void pauseSounds()
 		{
-			if((music != null) && music.active)
+			if((music != null) && music.Active)
 				music.pause();
 			int i = 0;
 			FlxSound s;
@@ -471,7 +471,7 @@ namespace XnaFlixel
 			while(i < sl)
 			{
 				s = sounds[i++] as FlxSound;
-				if((s != null) && s.active)
+				if((s != null) && s.Active)
 					s.pause();
 			}
 		}
@@ -481,7 +481,7 @@ namespace XnaFlixel
 		/// </summary>
 		static protected void playSounds()
 		{
-			if((music != null) && music.active)
+			if((music != null) && music.Active)
 				music.play();
 			int i = 0;
             FlxSound s;
@@ -489,7 +489,7 @@ namespace XnaFlixel
 			while(i < sl)
 			{
 				s = sounds[i++] as FlxSound;
-				if((s != null) && s.active)
+				if((s != null) && s.Active)
 					s.play();
 			}
 		}
@@ -505,8 +505,8 @@ namespace XnaFlixel
             if (Target == null)
                 return;
 
-            scroll.X = _scrollTarget.X = (width >> 1) - followTarget.X - ((int)followTarget.width >> 1);
-            scroll.Y = _scrollTarget.Y = (height >> 1) - followTarget.Y - ((int)followTarget.height >> 1);
+            scroll.X = _scrollTarget.X = (width >> 1) - followTarget.X - ((int)followTarget.Width >> 1);
+            scroll.Y = _scrollTarget.Y = (height >> 1) - followTarget.Y - ((int)followTarget.Height >> 1);
 		}
 		
 		//@desc		Specify an additional camera component - the velocity-based "lead", or amount the camera should track in front of a sprite
@@ -595,10 +595,10 @@ namespace XnaFlixel
 		{
 			if(followTarget != null)
 			{
-				if(followTarget.exists && !followTarget.dead)
+				if(followTarget.Exists && !followTarget.Dead)
 				{
-                    _scrollTarget.X = (width >> 1) - followTarget.X - ((int)followTarget.width >> 1);
-                    _scrollTarget.Y = (height >> 1) - followTarget.Y - ((int)followTarget.height >> 1);
+                    _scrollTarget.X = (width >> 1) - followTarget.X - ((int)followTarget.Width >> 1);
+                    _scrollTarget.Y = (height >> 1) - followTarget.Y - ((int)followTarget.Height >> 1);
 					if((followLead != null) && (followTarget is FlxSprite))
 					{
                         _scrollTarget.X -= (followTarget as FlxSprite).velocity.X * followLead.X;

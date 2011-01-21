@@ -24,7 +24,7 @@ namespace XnaFlixel
             : base()
 		{
 			_group = true;
-			solid = false;
+			Solid = false;
             members = new List<FlxObject>();
             _last = Vector2.Zero;
 			_first = true;
@@ -125,7 +125,7 @@ namespace XnaFlixel
 			while(i < ml)
 			{
 				o = members[i++] as FlxObject;
-				if((o != null) && !o.exists)
+				if((o != null) && !o.Exists)
 					return o;
 			}
 			return null;
@@ -182,7 +182,7 @@ namespace XnaFlixel
 			while(i < ml)
 			{
 				o = members[i++] as FlxObject;
-				if((o != null) && o.exists)
+				if((o != null) && o.Exists)
 					return o;
 			}
 			return null;
@@ -202,7 +202,7 @@ namespace XnaFlixel
 			while(i < ml)
 			{
 				o = members[i++] as FlxObject;
-				if((o != null) && o.exists && !o.dead)
+				if((o != null) && o.Exists && !o.Dead)
 					return o;
 			}
 			return null;
@@ -222,7 +222,7 @@ namespace XnaFlixel
 			while(i < ml)
 			{
 				o = members[i++] as FlxObject;
-				if((o != null) && o.dead)
+				if((o != null) && o.Dead)
 					return o;
 			}
 			return null;
@@ -246,7 +246,7 @@ namespace XnaFlixel
 				{
 					if(count < 0)
 						count = 0;
-					if(o.exists && !o.dead)
+					if(o.Exists && !o.Dead)
 						count++;
 				}
 			}
@@ -271,7 +271,7 @@ namespace XnaFlixel
 				{
 					if(count < 0)
 						count = 0;
-					if(o.dead)
+					if(o.Dead)
 						count++;
 				}
 			}
@@ -359,7 +359,7 @@ namespace XnaFlixel
 			while(i < ml)
 			{
 				o = members[i++] as FlxObject;
-				if((o != null) && o.exists)
+				if((o != null) && o.Exists)
 				{
 					if(moved)
 					{
@@ -371,9 +371,9 @@ namespace XnaFlixel
                             o.Y += my;
                         }
 					}
-					if(o.active)
+					if(o.Active)
 						o.update();
-					if(moved && o.solid)
+					if(moved && o.Solid)
 					{
 						o.colHullX.width += ((mx>0)?mx:-mx);
 						if(mx < 0)
@@ -412,7 +412,7 @@ namespace XnaFlixel
 			while(i < ml)
 			{
 				o = members[i++] as FlxObject;
-				if((o != null) && o.exists && o.visible)
+				if((o != null) && o.Exists && o.Visible)
 					o.render(spriteBatch);
 			}
 		}
@@ -503,7 +503,7 @@ namespace XnaFlixel
 			while(i < ml)
 			{
 				o = members[i++] as FlxObject;
-				if((o != null) && o.exists)
+				if((o != null) && o.Exists)
 				{
 					if(moved)
 					{
@@ -513,7 +513,7 @@ namespace XnaFlixel
                         {
                             o.X += mx;
                             o.Y += my;
-                            if (solid)
+                            if (Solid)
                             {
                                 o.colHullX.width += ((mx > 0) ? mx : -mx);
                                 if (mx < 0)

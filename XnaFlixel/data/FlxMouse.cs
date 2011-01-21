@@ -79,7 +79,7 @@ namespace XnaFlixel.data
 			screenX = 0;
 			screenY = 0;
             cursor = new FlxSprite();
-            cursor.visible = false;
+            cursor.Visible = false;
         }
 
 		public void show()
@@ -109,7 +109,7 @@ namespace XnaFlixel.data
 			if(Graphic != null)
 				load(Graphic,XOffset,YOffset);
 			else if(cursor != null)
-				cursor.visible = true;
+				cursor.Visible = true;
 			else
 				load(null);
 		}
@@ -121,7 +121,7 @@ namespace XnaFlixel.data
 		{
 			if(cursor != null)
 			{
-				cursor.visible = false;
+				cursor.Visible = false;
 			}
 		}
 
@@ -142,7 +142,7 @@ namespace XnaFlixel.data
 			if(Graphic == null)
 				Graphic = ImgDefaultCursor;
 			cursor = new FlxSprite(screenX,screenY,Graphic);
-			cursor.solid = false;
+			cursor.Solid = false;
 			cursor.offset.X = XOffset;
 			cursor.offset.Y = YOffset;
 		}
@@ -155,7 +155,7 @@ namespace XnaFlixel.data
 		{
 			if(cursor != null)
 			{
-				if(cursor.visible)
+				if(cursor.Visible)
 					load(null);
 				else
 					cursor = null;

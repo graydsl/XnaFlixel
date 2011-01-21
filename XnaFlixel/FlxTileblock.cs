@@ -28,7 +28,7 @@ namespace XnaFlixel
             : base(X,Y)
 		{
 			createGraphic(Width,Height,Color.Black);		
-			@fixed = true;
+			Fixed = true;
 		}
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace XnaFlixel
 
             regenRects();
 
-            moves = false;
+            Moves = false;
 
             return this;
         }
@@ -64,10 +64,10 @@ namespace XnaFlixel
         // X-flixel only.
         private void regenRects()
         {
-            int widthInTiles = ((int)width / _tileWidth);
-            int heightInTiles = ((int)height / _tileHeight);
-            width = widthInTiles * _tileWidth;
-            height = heightInTiles * _tileHeight;
+            int widthInTiles = ((int)Width / _tileWidth);
+            int heightInTiles = ((int)Height / _tileHeight);
+            Width = widthInTiles * _tileWidth;
+            Height = heightInTiles * _tileHeight;
 
             int tileCount = widthInTiles * heightInTiles;
             int numGraphics = _tex.Width / _tileWidth;
@@ -121,7 +121,7 @@ namespace XnaFlixel
                     spriteBatch.Draw(_tex, _p, _rects[i], Color.White);
                 }
                 _p.X += _tileWidth;
-                if (_p.X >= opx + width)
+                if (_p.X >= opx + Width)
                 {
                     _p.X = opx;
                     _p.Y += _tileHeight;

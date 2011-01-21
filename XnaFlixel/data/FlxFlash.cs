@@ -23,9 +23,9 @@ namespace XnaFlixel.data
             createGraphic(FlxG.width, FlxG.height, Color.Black);
 			scrollFactor.X = 0;
 			scrollFactor.Y = 0;
-			exists = false;
-			solid = false;
-			@fixed = true;
+			Exists = false;
+			Solid = false;
+			Fixed = true;
 		}
 
 		/// <summary>
@@ -46,12 +46,12 @@ namespace XnaFlixel.data
         }
         public void start(Color Color, float Duration, EventHandler<FlxEffectCompletedEvent> FlashComplete, bool Force)
 		{
-			if(!Force && exists) return;
+			if(!Force && Exists) return;
             color = Color;
 			_delay = Duration;
 			_complete = FlashComplete;
 			alpha = 1;
-			exists = true;
+			Exists = true;
 		}
 
 		/// <summary>
@@ -59,7 +59,7 @@ namespace XnaFlixel.data
 		/// </summary>
         public void stop()
 		{
-			exists = false;
+			Exists = false;
 		}
 
 		/// <summary>
@@ -70,7 +70,7 @@ namespace XnaFlixel.data
 			alpha -= FlxG.elapsed/_delay;
 			if(alpha <= 0)
 			{
-				exists = false;
+				Exists = false;
 				if(_complete != null)
 					_complete(this, new FlxEffectCompletedEvent(EffectType.Flash));
 			}

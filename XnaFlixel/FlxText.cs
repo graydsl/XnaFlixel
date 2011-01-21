@@ -64,8 +64,8 @@ namespace XnaFlixel
         //@benbaird X-flixel only
         public void autoSize()
         {
-            width = textWidth;
-            height = textHeight;
+            Width = textWidth;
+            Height = textHeight;
         }
 
         /// <summary>
@@ -101,20 +101,20 @@ namespace XnaFlixel
             if (fFont == null)
                 fFont = FlxG.Font;
             _font = fFont;
-            angle = fAngle;
+            Angle = fAngle;
             _scale = fScale;
 
             alignment = fJustification;
 
             ((FlxObject) this).X = X;
             ((FlxObject) this).Y = Y;
-            width = Width;
-            height = Height;
+            ((FlxObject) this).Width = Width;
+            ((FlxObject) this).Height = Height;
 
             scrollFactor = Vector2.Zero;
 
-            solid = false;
-            moves = false;
+            Solid = false;
+            Moves = false;
             recalcMeasurements();
         }
 
@@ -216,7 +216,7 @@ namespace XnaFlixel
         //@desc		Called by the game loop automatically, blits the text object to the screen
         public override void render(SpriteBatch spriteBatch)
         {
-            if (visible == false || exists == false)
+            if (Visible == false || Exists == false)
             {
                 return;
             }
@@ -227,7 +227,7 @@ namespace XnaFlixel
             if (backColor.A > 0)
             {
                 //Has a background color
-                spriteBatch.Draw(FlxG.XnaSheet, new Rectangle((int)X, (int)Y, (int)width, (int)height),
+                spriteBatch.Draw(FlxG.XnaSheet, new Rectangle((int)X, (int)Y, (int)Width, (int)Height),
                     new Rectangle(1, 1, 1, 1), backColor);
             }
 
@@ -243,13 +243,13 @@ namespace XnaFlixel
                 else if (alignment == FlxJustification.Right)
                 {
                     spriteBatch.DrawString(_font, _text,
-                        new Vector2(pos.X + width - textWidth, pos.Y), shadow,
+                        new Vector2(pos.X + Width - textWidth, pos.Y), shadow,
                         _radians, _origin, _scale, SpriteEffects.None, 0f);
                 }
                 else if (alignment == FlxJustification.Center)
                 {
                     spriteBatch.DrawString(_font, _text,
-                        new Vector2(pos.X + ((width - textWidth) / 2), pos.Y), shadow,
+                        new Vector2(pos.X + ((Width - textWidth) / 2), pos.Y), shadow,
                         _radians, _origin, _scale, SpriteEffects.None, 0f);
                 }
                 pos += new Vector2(-1, -1);
@@ -264,13 +264,13 @@ namespace XnaFlixel
             else if (alignment == FlxJustification.Right)
             {
                 spriteBatch.DrawString(_font, _text,
-                    new Vector2(pos.X + width - textWidth, pos.Y), color,
+                    new Vector2(pos.X + Width - textWidth, pos.Y), color,
                     _radians, _origin, _scale, SpriteEffects.None, 0f);
             }
             else if (alignment == FlxJustification.Center)
             {
                 spriteBatch.DrawString(_font, _text,
-                    new Vector2(pos.X + ((width - textWidth) / 2), pos.Y), color,
+                    new Vector2(pos.X + ((Width - textWidth) / 2), pos.Y), color,
                     _radians, _origin, _scale, SpriteEffects.None, 0f);
             }
         }

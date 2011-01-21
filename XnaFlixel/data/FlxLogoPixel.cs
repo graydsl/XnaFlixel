@@ -54,7 +54,7 @@ namespace XnaFlixel.data
         {
             for (int i = 0; i <= _curlayer; i++)
             {
-                spriteBatch.Draw(_tex, new Rectangle((int)X, (int)Y, (int)width, (int)height),
+                spriteBatch.Draw(_tex, new Rectangle((int)X, (int)Y, (int)Width, (int)Height),
                     rctSrc, _layers[i]);
             }
         }

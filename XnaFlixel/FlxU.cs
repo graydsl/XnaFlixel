@@ -418,8 +418,8 @@ namespace XnaFlixel
 		/// </summary>
         static public bool overlap(FlxObject Object1, FlxObject Object2, SpriteCollisionEvent Callback)
 		{
-			if( (Object1 == null) || !Object1.exists ||
-				(Object2 == null) || !Object2.exists )
+			if( (Object1 == null) || !Object1.Exists ||
+				(Object2 == null) || !Object2.Exists )
 				return false;
 			quadTree = new FlxQuadTree(FlxQuadTree.bounds.x,FlxQuadTree.bounds.y,FlxQuadTree.bounds.width,FlxQuadTree.bounds.height, null);
 			quadTree.add(Object1,FlxQuadTree.A_LIST);
@@ -442,8 +442,8 @@ namespace XnaFlixel
 		/// </summary>
 		static public bool collide(FlxObject Object1, FlxObject Object2)
 		{
-			if( (Object1 == null) || !Object1.exists ||
-				(Object2 == null) || !Object2.exists )
+			if( (Object1 == null) || !Object1.Exists ||
+				(Object2 == null) || !Object2.Exists )
 				return false;
 			quadTree = new FlxQuadTree(FlxQuadTree.bounds.x,FlxQuadTree.bounds.y,FlxQuadTree.bounds.width,FlxQuadTree.bounds.height,null);
 			quadTree.add(Object1,FlxQuadTree.A_LIST);
@@ -513,7 +513,7 @@ namespace XnaFlixel
 					(obj1MovePos && obj2MovePos && (((o1>0)?o1:-o1) > ((o2>0)?o2:-o2))) ); //both moving right, obj1 overtakes obj2
 			
 			//Check to see if these objects allow these collisions
-            if (p1hn2 ? (!e.Object1.collideRight || !e.Object2.collideLeft) : (!e.Object1.collideLeft || !e.Object2.collideRight))
+            if (p1hn2 ? (!e.Object1.CollideRight || !e.Object2.CollideLeft) : (!e.Object1.CollideLeft || !e.Object2.CollideRight))
                 return false;
 			
 			//this looks insane, but we're just looping through collision offsets on each object
@@ -570,8 +570,8 @@ namespace XnaFlixel
 					overlap = r1 - r2;
 					
 					//Slightly smarter version of checking if objects are 'fixed' in space or not
-					f1 = e.Object1.@fixed;
-					f2 = e.Object2.@fixed;
+					f1 = e.Object1.Fixed;
+					f2 = e.Object2.Fixed;
 					if(f1 && f2)
 					{
 						f1 &= (e.Object1.colVector.X == 0) && (o1 == 0);
@@ -725,7 +725,7 @@ namespace XnaFlixel
 				(obj1MovePos && obj2MovePos && (((o1>0)?o1:-o1) > ((o2>0)?o2:-o2))) ); //both moving down, obj1 overtakes obj2
 			
 			//Check to see if these objects allow these collisions
-            if (p1hn2 ? (!e.Object1.collideBottom || !e.Object2.collideTop) : (!e.Object1.collideTop || !e.Object2.collideBottom))
+            if (p1hn2 ? (!e.Object1.CollideBottom || !e.Object2.CollideTop) : (!e.Object1.CollideTop || !e.Object2.CollideBottom))
                 return false;
 			
 			//this looks insane, but we're just looping through collision offsets on each object
@@ -787,8 +787,8 @@ namespace XnaFlixel
 					}
 
 					//Slightly smarter version of checking if objects are 'fixed' in space or not
-					f1 = e.Object1.@fixed;
-					f2 = e.Object2.@fixed;
+					f1 = e.Object1.Fixed;
+					f2 = e.Object2.Fixed;
 					if(f1 && f2)
 					{
 						f1 &= (e.Object1.colVector.X == 0) && (o1 == 0);
@@ -857,7 +857,7 @@ namespace XnaFlixel
 							obj1Hull.y = obj1Hull.y - overlap;
 							
 							//This code helps stuff ride horizontally moving platforms.
-							if(f2 && e.Object2.moves)
+							if(f2 && e.Object2.Moves)
 							{
 								sv1 = e.Object2.colVector.X;
 								e.Object1.X += sv1;
@@ -883,7 +883,7 @@ namespace XnaFlixel
 							obj2Hull.height += overlap;
 						
 							//This code helps stuff ride horizontally moving platforms.
-							if(f1 && e.Object1.moves)
+							if(f1 && e.Object1.Moves)
 							{
 								sv2 = e.Object1.colVector.X;
 								e.Object2.X += sv2;

@@ -12,26 +12,11 @@ namespace XnaFlixel
 	/// </summary>
     public class FlxObject
     {
-        /// <summary>
-        /// Kind of a global on/off switch for any objects descended from <code>FlxObject</code>.
-        /// </summary>
-        public bool exists;
-        /// <summary>
-        /// If an object is not alive, the game loop will not automatically call <code>update()</code> on it.
-        /// </summary>
-        public bool active;
-        /// <summary>
-        /// If an object is not visible, the game loop will not automatically call <code>render()</code> on it.
-        /// </summary>
-        public bool visible;
-		/// <summary>
-		/// Internal tracker for whether or not the object collides (see <code>solid</code>).
-		/// </summary>
-		protected bool _solid;
-		/// <summary>
-		/// Internal tracker for whether an object will move/alter position after a collision (see <code>fixed</code>).
-		/// </summary>
-		protected bool _fixed;
+		#region Constants
+
+		#endregion
+
+		#region Fields
 
 		/// <summary>
 		/// The basic speed of this object.
@@ -52,57 +37,19 @@ namespace XnaFlixel
 		/// to cap the speed automatically (very useful!).
 		/// </summary>
 		public Vector2 maxVelocity;
-		/// <summary>
-		/// Set the angle of a sprite to rotate it.
-		/// WARNING: rotating sprites decreases rendering
-		/// performance for this sprite by a factor of 10x!
-		/// </summary>
-        public float angle
-        {
-            get { return _angle; }
-            set { _angle = value; _radians = MathHelper.ToRadians(_angle); }
-        }
-        //@benbaird We keep some private angle-related members in X-flixel due to XNA rotation differences
-        protected float _angle = 0f;
-        protected float _radians = 0f;
 
-        /// <summary>
-        /// This is how fast you want this sprite to spin.
-        /// </summary>
-		public float angularVelocity;
-		/// <summary>
-		/// How fast the spin speed should change.
-		/// </summary>
-		public float angularAcceleration;
-		/// <summary>
-		/// Like <code>drag</code> but for spinning.
-		/// </summary>
-		public float angularDrag;
-		/// <summary>
-		/// Use in conjunction with <code>angularAcceleration</code> for fluid spin speed control.
-		/// </summary>
-		public float maxAngular;
+		//@benbaird We keep some private angle-related members in X-flixel due to XNA rotation differences
+		protected float _angle = 0f;
+		protected float _radians = 0f;
+
 		/// <summary>
 		/// WARNING: The origin of the sprite will default to its center.
 		/// If you change this, the visuals and the collisions will likely be
 		/// pretty out-of-sync if you do any rotation.
 		/// </summary>
-        // modified for X-flixel
-        protected Vector2 _origin = Vector2.Zero;
-        virtual public Vector2 origin
-        {
-            get { return _origin; }
-            set { _origin = value; }
-        }
-		/// <summary>
-		/// If you want to do Asteroids style stuff, check out thrust,
-		/// instead of directly accessing the object's velocity or acceleration.
-		/// </summary>
-		public float thrust;
-		/// <summary>
-		/// Used to cap <code>thrust</code>, helpful and easy!
-		/// </summary>
-		public float maxThrust;
+		// modified for X-flixel
+		protected Vector2 _origin = Vector2.Zero;
+
 		/// <summary>
 		/// A handy "empty point" object
 		/// </summary>
@@ -124,14 +71,6 @@ namespace XnaFlixel
 		/// Internal helper used for retro-style flickering.
 		/// </summary>
 		protected float _flickerTimer;
-		/// <summary>
-		/// Handy for storing health percentage or armor points or whatever.
-		/// </summary>
-		public float health;
-		/// <summary>
-		/// Handy for tracking gameplay or animations.
-		/// </summary>
-        public bool dead;
 
 		/// <summary>
 		/// This is just a pre-allocated x-y point container to be used however you like
@@ -145,12 +84,7 @@ namespace XnaFlixel
 		/// This is a pre-allocated Flash Point object, which is useful for certain Flash graphics API calls
 		/// </summary>
 		protected Vector2 _flashPoint;
-		/// <summary>
-		/// Set this to false if you want to skip the automatic motion/movement stuff (see <code>updateMotion()</code>).
-		/// FlxObject and FlxSprite default to true.
-		/// FlxText, FlxTileblock, FlxTilemap and FlxSound default to false.
-		/// </summary>
-		public bool moves;
+
 		/// <summary>
 		/// These store a couple of useful numbers for speeding up collision resolution.
 		/// </summary>
@@ -158,7 +92,7 @@ namespace XnaFlixel
 		/// <summary>
 		/// These store a couple of useful numbers for speeding up collision resolution.
 		/// </summary>
-        public FlxRect colHullY;
+		public FlxRect colHullY;
 		/// <summary>
 		/// These store a couple of useful numbers for speeding up collision resolution.
 		/// </summary>
@@ -171,101 +105,216 @@ namespace XnaFlixel
 		/// Dedicated internal flag for whether or not this class is a FlxGroup.
 		/// </summary>
 		internal bool _group;
+
+		#endregion
+
+		#region Properties
+
+		/// <summary>
+		/// Set <code>solid</code> to true if you want to collide this object.
+		/// </summary>
+		public bool Solid { get; set; }
+
+		/// <summary>
+		/// Set <code>fixed</code> to true if you want the object to stay in place during collisions.
+		/// Useful for levels and other environmental objects.
+		/// </summary>
+		public bool Fixed { get; set; }
+
+		/// <summary>
+		/// Kind of a global on/off switch for any objects descended from <code>FlxObject</code>.
+		/// </summary>
+		public bool Exists { get; set; }
+
+		/// <summary>
+		/// If an object is not alive, the game loop will not automatically call <code>update()</code> on it.
+		/// </summary>
+		public bool Active { get; set; }
+
+		/// <summary>
+		/// If an object is not visible, the game loop will not automatically call <code>render()</code> on it.
+		/// </summary>
+		public bool Visible { get; set; }
+
+		/// <summary>
+		/// Set the angle of a sprite to rotate it.
+		/// WARNING: rotating sprites decreases rendering
+		/// performance for this sprite by a factor of 10x!
+		/// </summary>
+		public float Angle
+		{
+			get { return _angle; }
+			set { _angle = value; _radians = MathHelper.ToRadians(_angle); }
+		}
+
+		/// <summary>
+		/// This is how fast you want this sprite to spin.
+		/// </summary>
+		public float AngularVelocity { get; set; }
+
+		/// <summary>
+		/// How fast the spin speed should change.
+		/// </summary>
+		public float AngularAcceleration { get; set; }
+
+		/// <summary>
+		/// Like <code>drag</code> but for spinning.
+		/// </summary>
+		public float AngularDrag { get; set; }
+
+		/// <summary>
+		/// Use in conjunction with <code>angularAcceleration</code> for fluid spin speed control.
+		/// </summary>
+		public float MaxAngular { get; set; }
+
+		virtual public Vector2 origin
+		{
+			get { return _origin; }
+			set { _origin = value; }
+		}
+
+		/// <summary>
+		/// If you want to do Asteroids style stuff, check out thrust,
+		/// instead of directly accessing the object's velocity or acceleration.
+		/// </summary>
+		public float Thrust { get; set; }
+
+		/// <summary>
+		/// Used to cap <code>thrust</code>, helpful and easy!
+		/// </summary>
+		public float MaxThrust { get; set; }
+
+		/// <summary>
+		/// Handy for storing health percentage or armor points or whatever.
+		/// </summary>
+		public float Health { get; set; }
+
+		/// <summary>
+		/// Handy for tracking gameplay or animations.
+		/// </summary>
+		public bool Dead { get; set; }
+
+		/// <summary>
+		/// Set this to false if you want to skip the automatic motion/movement stuff (see <code>updateMotion()</code>).
+		/// FlxObject and FlxSprite default to true.
+		/// FlxText, FlxTileblock, FlxTilemap and FlxSound default to false.
+		/// </summary>
+		public bool Moves { get; set; }
+
 		/// <summary>
 		/// Flag that indicates whether or not you just hit the floor.
 		/// Primarily useful for platformers, this flag is reset during the <code>updateMotion()</code>.
 		/// </summary>
-		public bool onFloor;
+		public bool OnFloor { get; set; }
+
 		/// <summary>
 		/// Flag for direction collision resolution.
 		/// </summary>
-		public bool collideLeft;
+		public bool CollideLeft { get; set; }
+
 		/// <summary>
 		/// Flag for direction collision resolution.
 		/// </summary>
-		public bool collideRight;
+		public bool CollideRight { get; set; }
+
 		/// <summary>
 		/// Flag for direction collision resolution.
 		/// </summary>
-		public bool collideTop;
+		public bool CollideTop { get; set; }
+
 		/// <summary>
 		/// Flag for direction collision resolution.
 		/// </summary>
-		public bool collideBottom;
+		public bool CollideBottom { get; set; }
 
-        // X-flixel only: Positioning variables to compensate for the fact that in
-        // standard flixel, FlxObject inherits from FlxRect.
-        public float X;
-        public float Y;
-        public float width;
-        public float height;
+		// X-flixel only: Positioning variables to compensate for the fact that in
+		// standard flixel, FlxObject inherits from FlxRect.
+		public float X { get; set; }
+		public float Y { get; set; }
+		public float Width { get; set; }
+		public float Height { get; set; }
 
+		#endregion
 
-        /// <summary>
-        /// Creates a new <code>FlxObject</code>.
-        /// 
-        /// @param	X		The X-coordinate of the point in space.
-        /// @param	Y		The Y-coordinate of the point in space.
-        /// @param	Width	Desired width of the rectangle.
-        /// @param	Height	Desired height of the rectangle.
-        /// </summary>
-        public FlxObject()
-        {
-            constructor1(0, 0, 0, 0);
-        }
-        public FlxObject(float X, float Y, float Width, float Height)
-        {
-            constructor1(X, Y, Width, Height);
-        }
-        private void constructor1(float X, float Y, float Width, float Height)
-        {
-            this.X = X;
-            this.Y = Y;
-            width = Width;
-            height = Height;
+		#region Constructors
 
-            exists = true;
-            active = true;
-            visible = true;
-            _solid = true;
-            _fixed = false;
-            moves = true;
+		/// <summary>
+		/// Creates a new <code>FlxObject</code>.
+		/// 
+		/// @param	X		The X-coordinate of the point in space.
+		/// @param	Y		The Y-coordinate of the point in space.
+		/// @param	Width	Desired width of the rectangle.
+		/// @param	Height	Desired height of the rectangle.
+		/// </summary>
+		public FlxObject()
+		{
+			constructor1(0, 0, 0, 0);
+		}
+		public FlxObject(float X, float Y, float Width, float Height)
+		{
+			constructor1(X, Y, Width, Height);
+		}
+		private void constructor1(float X, float Y, float Width, float Height)
+		{
+			this.X = X;
+			this.Y = Y;
+			this.Width = Width;
+			this.Height = Height;
 
-            collideLeft = true;
-            collideRight = true;
-            collideTop = true;
-            collideBottom = true;
+			Exists = true;
+			Active = true;
+			Visible = true;
+			Solid = true;
+			Fixed = false;
+			Moves = true;
 
-            _origin = Vector2.Zero;
+			CollideLeft = true;
+			CollideRight = true;
+			CollideTop = true;
+			CollideBottom = true;
 
-            velocity = Vector2.Zero;
-            acceleration = Vector2.Zero;
-            drag = Vector2.Zero;
-            maxVelocity = new Vector2(10000, 10000);
+			_origin = Vector2.Zero;
 
-            angle = 0;
-            angularVelocity = 0;
-            angularAcceleration = 0;
-            angularDrag = 0;
-            maxAngular = 10000;
+			velocity = Vector2.Zero;
+			acceleration = Vector2.Zero;
+			drag = Vector2.Zero;
+			maxVelocity = new Vector2(10000, 10000);
 
-            thrust = 0;
+			Angle = 0;
+			AngularVelocity = 0;
+			AngularAcceleration = 0;
+			AngularDrag = 0;
+			MaxAngular = 10000;
 
-            scrollFactor = new Vector2(1, 1);
-            _flicker = false;
-            _flickerTimer = -1;
-            health = 1;
-            dead = false;
-            _point = Vector2.Zero;
-            _rect = Rectangle.Empty;
-            _flashPoint = Vector2.Zero;
+			Thrust = 0;
 
-            colHullX = FlxRect.Empty;
-            colHullY = FlxRect.Empty;
-            colVector = Vector2.Zero;
-            colOffsets.Add(Vector2.Zero);
-            _group = false;
-        }
+			scrollFactor = new Vector2(1, 1);
+			_flicker = false;
+			_flickerTimer = -1;
+			Health = 1;
+			Dead = false;
+			_point = Vector2.Zero;
+			_rect = Rectangle.Empty;
+			_flashPoint = Vector2.Zero;
+
+			colHullX = FlxRect.Empty;
+			colHullY = FlxRect.Empty;
+			colVector = Vector2.Zero;
+			colOffsets.Add(Vector2.Zero);
+			_group = false;
+		}
+
+		#endregion
+
+		#region Methods for/from SuperClass/Interface
+
+		#endregion
+
+		#region Static Methods
+
+		#endregion
+
+		#region Public Methods
 
 		/// <summary>
 		/// Called by <code>FlxGroup</code>, commonly when game states are changed.
@@ -275,134 +324,63 @@ namespace XnaFlixel
 			//Nothing to destroy yet
 		}
 
-        /// <summary>
-        /// Set <code>solid</code> to true if you want to collide this object.
-        /// </summary>
-        public bool solid
-        {
-            get { return _solid; }
-            set { _solid = value; }
-        }
-
-        /// <summary>
-        /// Set <code>fixed</code> to true if you want the object to stay in place during collisions.
-        /// Useful for levels and other environmental objects.
-        /// </summary>
-        public bool @fixed
-        {
-            get { return _fixed; }
-            set { _fixed = value; }
-        }
-
 		/// <summary>
 		/// Called by <code>FlxObject.updateMotion()</code> and some constructors to
 		/// rebuild the basic collision data for this object.
 		/// </summary>
-        virtual public void refreshHulls()
+		virtual public void refreshHulls()
 		{
 			colHullX.x = X;
 			colHullX.y = Y;
-			colHullX.width = width;
-			colHullX.height = height;
+			colHullX.width = Width;
+			colHullX.height = Height;
 			colHullY.x = X;
 			colHullY.y = Y;
-			colHullY.width = width;
-			colHullY.height = height;
+			colHullY.width = Width;
+			colHullY.height = Height;
 		}
 
 		/// <summary>
-		/// Internal function for updating the position and speed of this object.
-		/// Useful for cases when you need to update this but are buried down in too many supers.
+		/// Just updates the retro-style flickering.
+		/// Considered update logic rather than rendering because it toggles visibility.
 		/// </summary>
-        protected void updateMotion()
-        {
-            if (!moves)
-                return;
-
-            if (_solid)
-                refreshHulls();
-            onFloor = false;
-
-            // Motion/physics
-            angularVelocity = FlxU.computeVelocity(angularVelocity, angularAcceleration, angularDrag, maxAngular);
-            angle += angularVelocity * FlxG.elapsed;
-            Vector2 thrustComponents;
-            if (thrust != 0)
-            {
-                thrustComponents = FlxU.rotatePoint(-thrust, 0, 0, 0, angle);
-                Vector2 maxComponents = FlxU.rotatePoint(-maxThrust, 0, 0, 0, angle);
-                float max = Math.Abs(maxComponents.X);
-                if (max > Math.Abs(maxComponents.Y))
-                    maxComponents.Y = max;
-                else
-                    max = Math.Abs(maxComponents.Y);
-                maxVelocity.X = Math.Abs(max);
-                maxVelocity.Y = Math.Abs(max);
-            }
-            else
-            {
-                thrustComponents = Vector2.Zero;
-            }
-            velocity.X = FlxU.computeVelocity(velocity.X, acceleration.X + thrustComponents.X, drag.X, maxVelocity.X);
-            velocity.Y = FlxU.computeVelocity(velocity.Y, acceleration.Y + thrustComponents.Y, drag.Y, maxVelocity.Y);
-            X += velocity.X * FlxG.elapsed;
-            Y += velocity.Y * FlxG.elapsed;
-
-            //Update collision data with new movement results
-            if (!_solid)
-                return;
-            colVector.X = velocity.X * FlxG.elapsed;
-            colVector.Y = velocity.Y * FlxG.elapsed;
-            colHullX.width += ((colVector.X > 0) ? colVector.X : -colVector.X);
-            if (colVector.X < 0)
-                colHullX.x += colVector.X;
-            colHullY.x = X;
-            colHullY.height += ((colVector.Y > 0) ? colVector.Y : -colVector.Y);
-            if (colVector.Y < 0)
-                colHullY.y += colVector.Y;
-        }
-
-        /// <summary>
-        /// Just updates the retro-style flickering.
-        /// Considered update logic rather than rendering because it toggles visibility.
-        /// </summary>
-        public virtual void updateFlickering()
-        {
-            if (flickering())
-            {
-                if (_flickerTimer > 0)
-                {
-                    _flickerTimer -= FlxG.elapsed;
-                    if (_flickerTimer == 0)
-                    {
-                        _flickerTimer = -1;
-                    }
-                }
-                if (_flickerTimer < 0) flicker(-1);
-                else
-                {
-                    _flicker = !_flicker;
-                    visible = !_flicker;
-                }
-            }
-        }
+		public virtual void updateFlickering()
+		{
+			if (flickering())
+			{
+				if (_flickerTimer > 0)
+				{
+					_flickerTimer -= FlxG.elapsed;
+					if (_flickerTimer == 0)
+					{
+						_flickerTimer = -1;
+					}
+				}
+				if (_flickerTimer < 0) flicker(-1);
+				else
+				{
+					_flicker = !_flicker;
+					Visible = !_flicker;
+				}
+			}
+		}
 
 		/// <summary>
 		/// Called by the main game loop, handles motion/physics and game logic
 		/// </summary>
-        virtual public void update()
+		virtual public void update()
 		{
 			updateMotion();
 			updateFlickering();
 		}
 
-        /// <summary>
-        /// Override this function to draw graphics (see <code>FlxSprite</code>).
-        /// </summary>
-        virtual public void render(SpriteBatch spriteBatch)
-        {
-            //Objects don't have any visual logic/display of their own.
-        }
+		/// <summary>
+		/// Override this function to draw graphics (see <code>FlxSprite</code>).
+		/// </summary>
+		virtual public void render(SpriteBatch spriteBatch)
+		{
+			//Objects don't have any visual logic/display of their own.
+		}
 
 		/// <summary>
 		/// Checks to see if some <code>FlxObject</code> object overlaps this <code>FlxObject</code> object.
@@ -411,13 +389,13 @@ namespace XnaFlixel
 		/// 
 		/// @return	Whether or not the two objects overlap.
 		/// </summary>
-        virtual public bool overlaps(FlxObject Object)
+		virtual public bool overlaps(FlxObject Object)
 		{
-            _point = getScreenXY();
+			_point = getScreenXY();
 			float tx = _point.X;
 			float ty = _point.Y;
-            _point = Object.getScreenXY();
-			if((_point.X <= tx-Object.width) || (_point.X >= tx+width) || (_point.Y <= ty-Object.height) || (_point.Y >= ty+height))
+			_point = Object.getScreenXY();
+			if((_point.X <= tx-Object.Width) || (_point.X >= tx+Width) || (_point.Y <= ty-Object.Height) || (_point.Y >= ty+Height))
 				return false;
 			return true;
 		}
@@ -431,16 +409,16 @@ namespace XnaFlixel
 		/// 
 		/// @return	Whether or not the point overlaps this object.
 		/// </summary>
-        virtual public bool overlapsPoint(float X, float Y)
-        {
-            return overlapsPoint(X, Y, false);
-        }
-        virtual public bool overlapsPoint(float X, float Y, bool PerPixel)
+		virtual public bool overlapsPoint(float X, float Y)
+		{
+			return overlapsPoint(X, Y, false);
+		}
+		virtual public bool overlapsPoint(float X, float Y, bool PerPixel)
 		{
 			X = X + FlxU.floor(FlxG.scroll.X);
 			Y = Y + FlxU.floor(FlxG.scroll.Y);
-            _point = getScreenXY();
-			if((X <= _point.X) || (X >= _point.X+width) || (Y <= _point.Y) || (Y >= _point.Y+height))
+			_point = getScreenXY();
+			if((X <= _point.X) || (X >= _point.X+Width) || (Y <= _point.Y) || (Y >= _point.Y+Height))
 				return false;
 			return true;
 		}
@@ -452,7 +430,7 @@ namespace XnaFlixel
 		/// 
 		/// @param	Object		The <FlxObject> you want to collide with.
 		/// </summary>
-        virtual public bool collide(FlxObject Object)
+		virtual public bool collide(FlxObject Object)
 		{
 			return FlxU.collide(this,((Object==null)?this:Object));
 		}
@@ -464,7 +442,7 @@ namespace XnaFlixel
 		/// 
 		/// @param	Object	The <code>FlxObject</code> you're about to run into.
 		/// </summary>
-        virtual public void preCollide(FlxObject Object)
+		virtual public void preCollide(FlxObject Object)
 		{
 			//Most objects don't have to do anything here.
 		}
@@ -488,7 +466,7 @@ namespace XnaFlixel
 		/// @param	Contact		The <code>FlxObject</code> you just ran into.
 		/// @param	Velocity	The suggested new velocity for this object.
 		/// </summary>
-        virtual public void hitRight(FlxObject Contact, float Velocity)
+		virtual public void hitRight(FlxObject Contact, float Velocity)
 		{
 			hitSide(Contact,Velocity);
 		}
@@ -500,9 +478,9 @@ namespace XnaFlixel
 		/// @param	Contact		The <code>FlxObject</code> you just ran into.
 		/// @param	Velocity	The suggested new velocity for this object.
 		/// </summary>
-        virtual public void hitSide(FlxObject Contact, float Velocity)
+		virtual public void hitSide(FlxObject Contact, float Velocity)
 		{
-			if(!@fixed || (Contact.@fixed && ((velocity.Y != 0) || (velocity.X != 0))))
+			if(!Fixed || (Contact.Fixed && ((velocity.Y != 0) || (velocity.X != 0))))
 				velocity.X = Velocity;
 		}
 
@@ -512,9 +490,9 @@ namespace XnaFlixel
 		/// @param	Contact		The <code>FlxObject</code> you just ran into.
 		/// @param	Velocity	The suggested new velocity for this object.
 		/// </summary>
-        virtual public void hitTop(FlxObject Contact, float Velocity)
+		virtual public void hitTop(FlxObject Contact, float Velocity)
 		{
-			if(!@fixed || (Contact.@fixed && ((velocity.Y != 0) || (velocity.X != 0))))
+			if(!Fixed || (Contact.Fixed && ((velocity.Y != 0) || (velocity.X != 0))))
 				velocity.Y = Velocity;
 		}
 
@@ -524,10 +502,10 @@ namespace XnaFlixel
 		/// @param	Contact		The <code>FlxObject</code> you just ran into.
 		/// @param	Velocity	The suggested new velocity for this object.
 		/// </summary>
-        virtual public void hitBottom(FlxObject Contact, float Velocity)
+		virtual public void hitBottom(FlxObject Contact, float Velocity)
 		{
-			onFloor = true;
-			if(!@fixed || (Contact.@fixed && ((velocity.Y != 0) || (velocity.X != 0))))
+			OnFloor = true;
+			if(!Fixed || (Contact.Fixed && ((velocity.Y != 0) || (velocity.X != 0))))
 				velocity.Y = Velocity;
 		}
 
@@ -538,18 +516,18 @@ namespace XnaFlixel
 		/// </summary>
 		virtual public void hurt(float Damage)
 		{
-			health = health - Damage;
-			if(health <= 0)
+			Health = Health - Damage;
+			if(Health <= 0)
 				kill();
 		}
 		
 		/// <summary>
 		/// Call this function to "kill" a sprite so that it no longer 'exists'.
 		/// </summary>
-        virtual public void kill()
+		virtual public void kill()
 		{
-			exists = false;
-			dead = true;
+			Exists = false;
+			Dead = true;
 		}
 
 		/// <summary>
@@ -557,7 +535,7 @@ namespace XnaFlixel
 		/// 
 		/// @param	Duration	How many seconds to flicker for.
 		/// </summary>
-		public void flicker(float Duration) { _flickerTimer = Duration; if(_flickerTimer < 0) { _flicker = false; visible = true; } }
+		public void flicker(float Duration) { _flickerTimer = Duration; if(_flickerTimer < 0) { _flicker = false; Visible = true; } }
 		
 		/// <summary>
 		/// Check to see if the object is still flickering.
@@ -573,9 +551,9 @@ namespace XnaFlixel
 		/// 
 		/// @return	The <code>Point</code> you passed in, or a new <code>Point</code> if you didn't pass one, containing the screen X and Y position of this object.
 		/// </summary>
-        virtual public Vector2 getScreenXY()
+		virtual public Vector2 getScreenXY()
 		{
-            Vector2 Point = Vector2.Zero;
+			Vector2 Point = Vector2.Zero;
 			Point.X = FlxU.floor(X + FlxU.roundingError)+FlxU.floor(FlxG.scroll.X*scrollFactor.X);
 			Point.Y = FlxU.floor(Y + FlxU.roundingError)+FlxU.floor(FlxG.scroll.Y*scrollFactor.Y);
 			return Point;
@@ -586,10 +564,10 @@ namespace XnaFlixel
 		/// 
 		/// @return	Whether the object is on screen or not.
 		/// </summary>
-        virtual public bool onScreen()
+		virtual public bool onScreen()
 		{
-            _point = getScreenXY();
-			if((_point.X + width < 0) || (_point.X > FlxG.width) || (_point.Y + height < 0) || (_point.Y > FlxG.height))
+			_point = getScreenXY();
+			if((_point.X + Width < 0) || (_point.X > FlxG.width) || (_point.Y + Height < 0) || (_point.Y > FlxG.height))
 				return false;
 			return true;
 		}
@@ -601,12 +579,12 @@ namespace XnaFlixel
 		/// @param	X	The new X position of this object.
 		/// @param	Y	The new Y position of this object.
 		/// </summary>
-        virtual public void reset(float X, float Y)
+		virtual public void reset(float X, float Y)
 		{
 			this.X = X;
 			this.Y = Y;
-			exists = true;
-			dead = false;
+			Exists = true;
+			Dead = false;
 		}
 
 		/// <summary>
@@ -614,9 +592,9 @@ namespace XnaFlixel
 		/// </summary>
 		public Color getBoundingColor()
 		{
-			if(solid)
+			if(Solid)
 			{
-				if(@fixed)
+				if(Fixed)
 					return new Color(0x00, 0xf2, 0x25, 0x7f);
 				else
 					return new Color(0xff, 0x00, 0x12, 0x7f);
@@ -625,5 +603,62 @@ namespace XnaFlixel
 				return new Color(0x00, 0x90, 0xe9, 0x7f);
 		}
 
+		#endregion
+
+		#region Private Methods
+
+		#endregion
+
+		/// <summary>
+		/// Internal function for updating the position and speed of this object.
+		/// Useful for cases when you need to update this but are buried down in too many supers.
+		/// </summary>
+        protected void updateMotion()
+        {
+            if (!Moves)
+                return;
+
+            if (Solid)
+                refreshHulls();
+            OnFloor = false;
+
+            // Motion/physics
+            AngularVelocity = FlxU.computeVelocity(AngularVelocity, AngularAcceleration, AngularDrag, MaxAngular);
+            Angle += AngularVelocity * FlxG.elapsed;
+            Vector2 thrustComponents;
+            if (Thrust != 0)
+            {
+                thrustComponents = FlxU.rotatePoint(-Thrust, 0, 0, 0, Angle);
+                Vector2 maxComponents = FlxU.rotatePoint(-MaxThrust, 0, 0, 0, Angle);
+                float max = Math.Abs(maxComponents.X);
+                if (max > Math.Abs(maxComponents.Y))
+                    maxComponents.Y = max;
+                else
+                    max = Math.Abs(maxComponents.Y);
+                maxVelocity.X = Math.Abs(max);
+                maxVelocity.Y = Math.Abs(max);
+            }
+            else
+            {
+                thrustComponents = Vector2.Zero;
+            }
+            velocity.X = FlxU.computeVelocity(velocity.X, acceleration.X + thrustComponents.X, drag.X, maxVelocity.X);
+            velocity.Y = FlxU.computeVelocity(velocity.Y, acceleration.Y + thrustComponents.Y, drag.Y, maxVelocity.Y);
+            X += velocity.X * FlxG.elapsed;
+            Y += velocity.Y * FlxG.elapsed;
+
+            //Update collision data with new movement results
+            if (!Solid)
+                return;
+            colVector.X = velocity.X * FlxG.elapsed;
+            colVector.Y = velocity.Y * FlxG.elapsed;
+            colHullX.width += ((colVector.X > 0) ? colVector.X : -colVector.X);
+            if (colVector.X < 0)
+                colHullX.x += colVector.X;
+            colHullY.x = X;
+            colHullY.height += ((colVector.Y > 0) ? colVector.Y : -colVector.Y);
+            if (colVector.Y < 0)
+                colHullY.y += colVector.Y;
+        }
     }
 }

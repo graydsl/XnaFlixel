@@ -143,7 +143,7 @@ namespace XnaFlixel
     		while(i < l)
     		{
     			o = members[i++];
-    			if((o != null) && o.exists && o.active)
+    			if((o != null) && o.Exists && o.Active)
     				o.update();
     		}
     	}
@@ -175,27 +175,38 @@ namespace XnaFlixel
 
     	#region Public Methods
 
-    	/// <summary>
-    	/// This function generates a new array of sprites to attach to the emitter.
-    	/// 
-    	/// @param	graphics		If you opted to not pre-configure an array of FlxSprite objects, you can simply pass in a particle image or sprite sheet.
-    	/// @param	quantity		The number of particles to generate when using the "create from image" option.
-    	/// @param	Multiple		Whether the image in the graphics param is a single particle or a bunch of particles (if it's a bunch, they need to be square!).
-    	/// @param	Collide			Whether the particles should be flagged as not 'dead' (non-colliding particles are higher performance).  0 means no collisions, 0-1 controls scale of particle's bounding box.
-    	/// @param	Bounce			Whether the particles should bounce after colliding with things.  0 means no bounce, 1 means full reflection.
-    	/// 
-    	/// @return	This FlxEmitter instance (nice for chaining stuff together, if you're into that).
-    	/// </summary>
+		/// <summary>
+		/// This function generates a new array of sprites to attach to the emitter.
+		/// </summary>
+		/// <param name="graphics">If you opted to not pre-configure an array of FlxSprite objects, you can simply pass in a particle image or sprite sheet.</param>
+		/// <param name="quantity">The number of particles to generate when using the "create from image" option.</param>
+		/// <returns>his FlxEmitter instance (nice for chaining stuff together, if you're into that).</returns>
     	public FlxEmitter CreateSprites(Texture2D graphics, int quantity)
     	{
     		return CreateSprites(graphics, quantity, true, 0, 0);
     	}
 
+		/// <summary>
+		/// This function generates a new array of sprites to attach to the emitter.
+		/// </summary>
+		/// <param name="graphics">If you opted to not pre-configure an array of FlxSprite objects, you can simply pass in a particle image or sprite sheet.</param>
+		/// <param name="quantity">The number of particles to generate when using the "create from image" option.</param>
+		/// <param name="Multiple">Whether the image in the graphics param is a single particle or a bunch of particles (if it's a bunch, they need to be square!).</param>
+		/// <returns>his FlxEmitter instance (nice for chaining stuff together, if you're into that).</returns>
     	public FlxEmitter CreateSprites(Texture2D graphics, int quantity, bool Multiple)
     	{
     		return CreateSprites(graphics, quantity, Multiple, 0, 0);
     	}
 
+		/// <summary>
+		/// This function generates a new array of sprites to attach to the emitter.
+		/// </summary>
+		/// <param name="graphics">If you opted to not pre-configure an array of FlxSprite objects, you can simply pass in a particle image or sprite sheet.</param>
+		/// <param name="quantity">The number of particles to generate when using the "create from image" option.</param>
+		/// <param name="Multiple">Whether the image in the graphics param is a single particle or a bunch of particles (if it's a bunch, they need to be square!).</param>
+		/// <param name="Collide">Whether the particles should be flagged as not 'dead' (non-colliding particles are higher performance).  0 means no collisions, 0-1 controls scale of particle's bounding box.</param>
+		/// <param name="Bounce">Whether the particles should bounce after colliding with things.  0 means no bounce, 1 means full reflection.</param>
+		/// <returns>his FlxEmitter instance (nice for chaining stuff together, if you're into that).</returns>
     	public FlxEmitter CreateSprites(Texture2D graphics, int quantity, bool Multiple, float Collide, float Bounce)
     	{
     		members = new List<FlxObject>();
@@ -237,17 +248,17 @@ namespace XnaFlixel
     			}
     			if(Collide > 0)
     			{
-    				sw = s.width;
-    				sh = s.height;
-    				s.width = (int)(s.width * Collide);
-    				s.height = (int)(s.height * Collide);
-    				s.offset.X = (int)(sw-s.width)/2;
-    				s.offset.Y = (int)(sh-s.height)/2;
-    				s.solid = true;
+    				sw = s.Width;
+    				sh = s.Height;
+    				s.Width = (int)(s.Width * Collide);
+    				s.Height = (int)(s.Height * Collide);
+    				s.offset.X = (int)(sw-s.Width)/2;
+    				s.offset.Y = (int)(sh-s.Height)/2;
+    				s.Solid = true;
     			}
     			else
-    				s.solid = false;
-    			s.exists = false;
+    				s.Solid = false;
+    			s.Exists = false;
     			s.scrollFactor = scrollFactor;
     			add(s);
     			i++;
@@ -264,8 +275,8 @@ namespace XnaFlixel
     	/// </summary>
     	public void SetSize(int Width, int Height)
     	{
-    		width = Width;
-    		height = Height;
+    		((FlxObject) this).Width = Width;
+    		((FlxObject) this).Height = Height;
     	}
 
     	/// <summary>
@@ -346,12 +357,12 @@ namespace XnaFlixel
     		_explode = Explode;
     		if(!_explode)
     			_counter = 0;
-    		if(!exists)
+    		if(!Exists)
     			_particle = 0;
-    		exists = true;
-    		visible = true;
-    		active = true;
-    		dead = false;
+    		Exists = true;
+    		Visible = true;
+    		Active = true;
+    		Dead = false;
     		On = true;
     		_timer = 0;
     		if(this.Quantity == 0)
@@ -379,19 +390,19 @@ namespace XnaFlixel
     	{
     		_counter++;
     		FlxSprite s = members[_particle] as FlxSprite;
-    		s.visible = true;
-    		s.exists = true;
-    		s.active = true;
-    		s.X = X - ((int)s.width >> 1) + FlxU.random() * width;
-    		s.Y = Y - ((int)s.height >> 1) + FlxU.random() * height;
+    		s.Visible = true;
+    		s.Exists = true;
+    		s.Active = true;
+    		s.X = X - ((int)s.Width >> 1) + FlxU.random() * Width;
+    		s.Y = Y - ((int)s.Height >> 1) + FlxU.random() * Height;
     		s.velocity.X = minParticleSpeed.X;
     		if(minParticleSpeed.X != maxParticleSpeed.X) s.velocity.X += FlxU.random()*(maxParticleSpeed.X-minParticleSpeed.X);
     		s.velocity.Y = minParticleSpeed.Y;
     		if(minParticleSpeed.Y != maxParticleSpeed.Y) s.velocity.Y += FlxU.random()*(maxParticleSpeed.Y-minParticleSpeed.Y);
     		s.acceleration.Y = Gravity;
-    		s.angularVelocity = MinRotation;
-    		if(MinRotation != MaxRotation) s.angularVelocity += FlxU.random()*(MaxRotation-MinRotation);
-    		if(s.angularVelocity != 0) s.angle = FlxU.random()*360-180;
+    		s.AngularVelocity = MinRotation;
+    		if(MinRotation != MaxRotation) s.AngularVelocity += FlxU.random()*(MaxRotation-MinRotation);
+    		if(s.AngularVelocity != 0) s.Angle = FlxU.random()*360-180;
     		s.drag.X = particleDrag.X;
     		s.drag.Y = particleDrag.Y;
     		_particle++;
@@ -439,8 +450,8 @@ namespace XnaFlixel
     	{
     		X = x;
     		Y = y;
-    		width = 0;
-    		height = 0;
+    		Width = 0;
+    		Height = 0;
 
     		minParticleSpeed = new Vector2(-100, -100);
     		maxParticleSpeed = new Vector2(100, 100);
@@ -452,7 +463,7 @@ namespace XnaFlixel
     		Quantity = 0;
     		_counter = 0;
     		_explode = true;
-    		exists = false;
+    		Exists = false;
     		On = false;
     		justEmitted = false;
     	}

@@ -40,7 +40,7 @@ namespace XnaFlixel.data
             _consoleColor = new Color(0, 0, 0, 0x7F);
 
             _consoleText = new FlxText(targetLeft, -800, targetWidth, "").setFormat(null, 1, Color.White, FlxJustification.Left, Color.White);
-            _consoleText.height = FlxG.height; //FlxG.spriteBatch.GraphicsDevice.Viewport.Height;
+            _consoleText.Height = FlxG.height; //FlxG.spriteBatch.GraphicsDevice.Viewport.Height;
 
             _consoleFPS = new FlxText(targetLeft + targetWidth - 30, -800, 30, "").setFormat(null, 1, Color.White, FlxJustification.Right, Color.White);
 

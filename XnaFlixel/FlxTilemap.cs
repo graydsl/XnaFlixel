@@ -120,11 +120,11 @@ namespace XnaFlixel
 			_tileHeight = 0;
 			_rects = null;
 			_block = new FlxObject();
-			_block.width = _block.height = 0;
-			_block.@fixed = true;
+			_block.Width = _block.Height = 0;
+			_block.Fixed = true;
 			//_callbacks = new Array();
-			@fixed = true;
-            moves = false;
+			Fixed = true;
+            Moves = false;
 		}
 
 		/// <summary>
@@ -189,12 +189,12 @@ namespace XnaFlixel
 			_tileHeight = TileHeight;
 			if(_tileHeight == 0)
 				_tileHeight = _tileWidth;
-			_block.width = _tileWidth;
-			_block.height = _tileHeight;
+			_block.Width = _tileWidth;
+			_block.Height = _tileHeight;
 			
 			//Then go through and create the actual map
-			width = widthInTiles*_tileWidth;
-			height = heightInTiles*_tileHeight;
+			Width = widthInTiles*_tileWidth;
+			Height = heightInTiles*_tileHeight;
 			_rects = new List<Rectangle>();
 			i = 0;
             while (i < totalTiles)
@@ -286,8 +286,8 @@ namespace XnaFlixel
 			//First make a list of all the blocks we'll use for collision
 			int ix = (int)FlxU.floor((Core.X - X)/_tileWidth);
 			int iy = (int)FlxU.floor((Core.Y - Y)/_tileHeight);
-            int iw = (int)FlxU.ceil((float)Core.width / (float)_tileWidth) + 1;
-            int ih = (int)FlxU.ceil((float)Core.height / (float)_tileHeight) + 1;
+            int iw = (int)FlxU.ceil((float)Core.Width / (float)_tileWidth) + 1;
+            int ih = (int)FlxU.ceil((float)Core.Height / (float)_tileHeight) + 1;
 			int r = 0;
 			int c;
 			while(r < ih)
@@ -373,8 +373,8 @@ namespace XnaFlixel
 			int rs;
 			int ix = (int)FlxU.floor((Object.X - X)/_tileWidth);
 			int iy = (int)FlxU.floor((Object.Y - Y)/_tileHeight);
-            int iw = ix + (int)FlxU.ceil((float)Object.width / (float)_tileWidth) + 1;
-            int ih = iy + (int)FlxU.ceil((float)Object.height / (float)_tileHeight) + 1;
+            int iw = ix + (int)FlxU.ceil((float)Object.Width / (float)_tileWidth) + 1;
+            int ih = iy + (int)FlxU.ceil((float)Object.Height / (float)_tileHeight) + 1;
 			if(ix < 0)
 				ix = 0;
 			if(iy < 0)
@@ -529,7 +529,7 @@ namespace XnaFlixel
         }
 		public void follow(int Border)
 		{
-            FlxG.followBounds((int)X + Border * _tileWidth, (int)Y + Border * _tileHeight, (int)width - Border * _tileWidth, (int)height - Border * _tileHeight);
+            FlxG.followBounds((int)X + Border * _tileWidth, (int)Y + Border * _tileHeight, (int)Width - Border * _tileWidth, (int)Height - Border * _tileHeight);
 		}
 
 		/// <summary>
@@ -566,7 +566,7 @@ namespace XnaFlixel
 				curX += stepX;
 				curY += stepY;
 				
-				if((curX < 0) || (curX > width) || (curY < 0) || (curY > height))
+				if((curX < 0) || (curX > Width) || (curY < 0) || (curY > Height))
 				{
 					i++;
 					continue;

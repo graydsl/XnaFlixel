@@ -202,29 +202,29 @@ namespace XnaFlixel
 				while(i < l)
 				{
 					m = members[i++] as FlxObject;
-					if((m != null) && m.exists)
+					if((m != null) && m.Exists)
 					{
 						if(m._group)
 							add(m,List);
-						else if(m.solid)
+						else if(m.Solid)
 						{
 							_o = m;
 							_ol = _o.X;
 							_ot = _o.Y;
-							_or = _o.X + _o.width;
-							_ob = _o.Y + _o.height;
+							_or = _o.X + _o.Width;
+							_ob = _o.Y + _o.Height;
 							addObject();
 						}
 					}
 				}
 			}
-			if(Object.solid)
+			if(Object.Solid)
 			{
 				_o = Object;
 				_ol = _o.X;
 				_ot = _o.Y;
-				_or = _o.X + _o.width;
-				_ob = _o.Y + _o.height;
+				_or = _o.X + _o.Width;
+				_ob = _o.Y + _o.Height;
 				addObject();
 			}
 		}
@@ -367,7 +367,7 @@ namespace XnaFlixel
 					while(itr != null)
 					{
 						_o = itr.@object;
-						if(_o.exists && _o.solid && overlapNode())
+						if(_o.Exists && _o.Solid && overlapNode())
 							c = true;
 						itr = itr.next;
 					}
@@ -379,7 +379,7 @@ namespace XnaFlixel
 					while(itr != null)
 					{
 						_o = itr.@object;
-						if(_o.exists && _o.solid)
+						if(_o.Exists && _o.Solid)
 						{
 							if((_nw != null) && _nw.overlapNode())
 								c = true;
@@ -403,7 +403,7 @@ namespace XnaFlixel
 					while(itr != null)
 					{
 						_o = itr.@object;
-						if(_o.exists && _o.solid && overlapNode(itr.next))
+						if(_o.Exists && _o.Solid && overlapNode(itr.next))
 							c = true;
 						itr = itr.next;
 					}
@@ -455,11 +455,11 @@ namespace XnaFlixel
 				while(itr != null)
 				{
 					co = itr.@object;
-					if( (_o == co) || !co.exists || !_o.exists || !co.solid || !_o.solid ||
-						(_o.X + _o.width  < co.X + FlxU.roundingError) ||
-						(_o.X + FlxU.roundingError > co.X + co.width) ||
-						(_o.Y + _o.height < co.Y + FlxU.roundingError) ||
-						(_o.Y + FlxU.roundingError > co.Y + co.height) )
+					if( (_o == co) || !co.Exists || !_o.Exists || !co.Solid || !_o.Solid ||
+						(_o.X + _o.Width  < co.X + FlxU.roundingError) ||
+						(_o.X + FlxU.roundingError > co.X + co.Width) ||
+						(_o.Y + _o.Height < co.Y + FlxU.roundingError) ||
+						(_o.Y + FlxU.roundingError > co.Y + co.Height) )
 					{
 						itr = itr.next;
 						continue;

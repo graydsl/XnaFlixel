@@ -93,22 +93,21 @@ namespace XnaFlixel
     	/// <summary>
     	/// Creates a new <code>FlxButton</code> object with a gray background
     	/// and a callback function on the UI thread.
-    	/// 
-    	/// @param	X			The X position of the button.
-    	/// @param	Y			The Y position of the button.
-    	/// @param	Callback	The function to call whenever the button is clicked.
-    	/// </summary>
+		/// </summary>
+		/// <param name="x">The X position of the button.</param>
+		/// <param name="y">The Y position of the button.</param>
+		/// <param name="callback">The function to call whenever the button is clicked.</param>   	
     	public FlxButton(int x, int y, FlxButtonClick callback)
     	{
     		X = x;
     		Y = y;
-    		width = 100;
-    		height = 20;
-    		_off = new FlxSprite().createGraphic((int)width, (int)height, new Color(0x7f, 0x7f, 0x7f));
-    		_off.solid = false;
+    		Width = 100;
+    		Height = 20;
+    		_off = new FlxSprite().createGraphic((int)Width, (int)Height, new Color(0x7f, 0x7f, 0x7f));
+    		_off.Solid = false;
     		add(_off, true);
-    		_on = new FlxSprite().createGraphic((int)width, (int)height, Color.White);
-    		_on.solid = false;
+    		_on = new FlxSprite().createGraphic((int)Width, (int)Height, Color.White);
+    		_on.Solid = false;
     		add(_on, true);
     		_offT = null;
     		_onT = null;
@@ -147,7 +146,7 @@ namespace XnaFlixel
     				_pressed = true;
     			visibility(!_pressed);
     		}
-    		if (_onToggle) visibility(_off.visible);
+    		if (_onToggle) visibility(_off.Visible);
     	}
 
     	/// <summary>
@@ -162,35 +161,34 @@ namespace XnaFlixel
     	override public void render(SpriteBatch spriteBatch)
     	{
     		base.render(spriteBatch);
-    		if ((_off != null) && _off.exists && _off.visible) _off.render(spriteBatch);
-    		if ((_on != null) && _on.exists && _on.visible) _on.render(spriteBatch);
+    		if ((_off != null) && _off.Exists && _off.Visible) _off.render(spriteBatch);
+    		if ((_on != null) && _on.Exists && _on.Visible) _on.render(spriteBatch);
     		if (_offT != null)
     		{
-    			if ((_offT != null) && _offT.exists && _offT.visible) _offT.render(spriteBatch);
-    			if ((_onT != null) && _onT.exists && _onT.visible) _onT.render(spriteBatch);
+    			if ((_offT != null) && _offT.Exists && _offT.Visible) _offT.render(spriteBatch);
+    			if ((_onT != null) && _onT.Exists && _onT.Visible) _onT.render(spriteBatch);
     		}
     	}
 
     	/// <summary>
     	/// Internal function for handling the visibility of the off and on graphics.
-    	/// 
-    	/// @param	On		Whether the button should be on or off.
-    	/// </summary>
-    	protected void visibility(bool On)
+		/// </summary>
+		/// <param name="on">Whether the button should be on or off.</param>
+    	protected void visibility(bool on)
     	{
-    		if (On)
+			if (on)
     		{
-    			_off.visible = false;
-    			if (_offT != null) _offT.visible = false;
-    			_on.visible = true;
-    			if (_onT != null) _onT.visible = true;
+    			_off.Visible = false;
+    			if (_offT != null) _offT.Visible = false;
+    			_on.Visible = true;
+    			if (_onT != null) _onT.Visible = true;
     		}
     		else
     		{
-    			_on.visible = false;
-    			if (_onT != null) _onT.visible = false;
-    			_off.visible = true;
-    			if (_offT != null) _offT.visible = true;
+    			_on.Visible = false;
+    			if (_onT != null) _onT.Visible = false;
+    			_off.Visible = true;
+    			if (_offT != null) _offT.Visible = true;
     		}
     	}
 
@@ -204,12 +202,10 @@ namespace XnaFlixel
 
     	/// <summary>
     	/// Add a text label to the button.
-    	/// 
-    	/// @param	text				A FlxText object to use to display text on this button (optional).
-    	/// @param	textHighlight		A FlxText object that is used when the button is highlighted (optional).
-    	/// 
-    	/// @return	This FlxButton instance (nice for chaining stuff together, if you're into that).
-    	/// </summary>
+		/// </summary>
+		/// <param name="text">A FlxText object to use to display text on this button (optional).</param>
+		/// <param name="textHighlight">A FlxText object that is used when the button is highlighted (optional).</param>
+		/// <returns>This FlxButton instance (nice for chaining stuff together, if you're into that).</returns>	
     	public FlxButton LoadText(FlxText text, FlxText textHighlight)
     	{
     		if (text != null)
@@ -241,12 +237,10 @@ namespace XnaFlixel
 
     	/// <summary>
     	/// Set your own image as the button background.
-    	/// 
-    	/// @param	image				A FlxSprite object to use for the button background.
-    	/// @param	imageHighlight		A FlxSprite object to use for the button background when highlighted (optional).
-    	/// 
-    	/// @return	This FlxButton instance (nice for chaining stuff together, if you're into that).
-    	/// </summary>
+		/// </summary>
+		/// <param name="image">A FlxSprite object to use for the button background.</param>
+		/// <param name="imageHighlight">A FlxSprite object to use for the button background when highlighted (optional).</param>
+		/// <returns>This FlxButton instance (nice for chaining stuff together, if you're into that).</returns>
     	public FlxButton LoadGraphic(FlxSprite image, FlxSprite imageHighlight)
     	{
     		_off = replace(_off, image) as FlxSprite;
@@ -258,11 +252,11 @@ namespace XnaFlixel
     		}
     		else
     			_on = replace(_on, imageHighlight) as FlxSprite;
-    		_on.solid = _off.solid = false;
+    		_on.Solid = _off.Solid = false;
     		_off.scrollFactor = scrollFactor;
     		_on.scrollFactor = scrollFactor;
-    		width = _off.width;
-    		height = _off.height;
+    		Width = _off.Width;
+    		Height = _off.Height;
     		refreshHulls();
     		return this;
     	}
@@ -276,7 +270,7 @@ namespace XnaFlixel
     	/// </summary>
     	private void OnMouseUp(object sender, FlxMouseEvent mouseEvent)
     	{
-    		if (!exists || !visible || !active || !FlxG.mouse.justReleased() || (FlxG.pause && !PauseProof) || (_callback == null)) return;
+    		if (!Exists || !Visible || !Active || !FlxG.mouse.justReleased() || (FlxG.pause && !PauseProof) || (_callback == null)) return;
     		if (overlapsPoint(FlxG.mouse.x, FlxG.mouse.y)) _callback();
     	}
 

@@ -38,7 +38,7 @@ namespace XnaFlixel
 
         public FlxSound()
         {
-            @fixed = true; //no movement usually
+            Fixed = true; //no movement usually
         }
 
 		/// <summary>
@@ -59,9 +59,9 @@ namespace XnaFlixel
 			_pauseOnFadeOut = false;
 			_fadeInTimer = 0;
 			_fadeInTotal = 0;
-			active = false;
-			visible = false;
-			solid = false;
+			Active = false;
+			Visible = false;
+			Solid = false;
 			playing = false;
 		}
 
@@ -81,7 +81,7 @@ namespace XnaFlixel
 			//NOTE: can't pull ID3 info from embedded sound currently
 			_looped = Looped;
 			updateTransform();
-			active = true;
+			Active = true;
 			return this;
 		}
 
@@ -118,7 +118,7 @@ namespace XnaFlixel
             if (_sound == null) return;
             _sound.Play();
             playing = true;
-            active = true;
+            Active = true;
             _position = 0;
         }
 
@@ -139,7 +139,7 @@ namespace XnaFlixel
 		{
 			_position = 0;
             playing = false;
-            active = false;
+            Active = false;
             if (_sound == null) return;
             _sound.Stop();
 		}
@@ -207,7 +207,7 @@ namespace XnaFlixel
 
             if (_sound.State != SoundState.Playing)
             {
-                active = false;
+                Active = false;
             }
 
 			//Distance-based volume control
@@ -275,7 +275,7 @@ namespace XnaFlixel
 		/// </summary>
         override public void destroy()
 		{
-			if(active)
+			if(Active)
 				stop();
 		}
 

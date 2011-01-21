@@ -206,15 +206,15 @@ namespace XnaFlixel
 				else
                     Width = Graphic.Width;
 			}
-			width = frameWidth = Width;
+			base.Width = frameWidth = Width;
 			if(Height == 0)
 			{
 				if(Animated)
-                    Height = (int)width;
+                    Height = (int)base.Width;
 				else
                     Height = Graphic.Height;
 			}
-			height = frameHeight = Height;
+			base.Height = frameHeight = Height;
 			resetHelpers();
 			return this;
 		}
@@ -236,8 +236,8 @@ namespace XnaFlixel
 
             frameWidth = 1;
             frameHeight = 1;
-			width = Width;
-			height = Height;
+			base.Width = Width;
+			base.Height = Height;
             _color = Color;
 			resetHelpers();
 			return this;
@@ -267,8 +267,8 @@ namespace XnaFlixel
                 _flashRect.Width = frameWidth;
                 _flashRect.Height = frameHeight;
 
-                _flashRect2.Width = (int)width;
-                _flashRect2.Height = (int)height;
+                _flashRect2.Width = (int)Width;
+                _flashRect2.Height = (int)Height;
             }
 
 			_origin.X = frameWidth*0.5f;
@@ -322,7 +322,7 @@ namespace XnaFlixel
         /// </summary>
         public override void render(SpriteBatch spriteBatch)
         {
-            if (visible == false || exists == false)
+            if (Visible == false || Exists == false)
             {
                 return;
             }
@@ -332,19 +332,19 @@ namespace XnaFlixel
             Vector2 vc = Vector2.Zero;
 
             pos = getScreenXY() + origin;
-            pos += (new Vector2(_flashRect.Width - width, _flashRect.Height - height)
-                * (origin / new Vector2(width, height)));
+            pos += (new Vector2(_flashRect.Width - Width, _flashRect.Height - Height)
+                * (origin / new Vector2(Width, Height)));
 
             //the origin must be recalculated based on the difference between the
             //object's actual (collision) dimensions and its art (animation) dimensions.
             vc = new Vector2(_flashRect.Width, _flashRect.Height);
             if (!_stretchToFit)
             {
-                vc *= (origin / new Vector2(width, height));
+                vc *= (origin / new Vector2(Width, Height));
             }
             else
             {
-                vc *= (origin / new Vector2(width + 1, height + 1));
+                vc *= (origin / new Vector2(Width + 1, Height + 1));
             }
 
             if (_facing2d == Flx2DFacing.NotUsed)
@@ -353,7 +353,7 @@ namespace XnaFlixel
                 {
                     //if (width == 7)
                     //    vc = vc;
-                    spriteBatch.Draw(_tex, new Rectangle((int)pos.X, (int)pos.Y, (int)width, (int)height),
+                    spriteBatch.Draw(_tex, new Rectangle((int)pos.X, (int)pos.Y, (int)Width, (int)Height),
                                     _flashRect, _color,
                                     _radians, vc, SpriteEffects.None, 0);
                 }
@@ -410,7 +410,7 @@ namespace XnaFlixel
             }
             else
             {
-                if ((X <= _point.X) || (X >= _point.X + width) || (Y <= _point.Y) || (Y >= _point.Y + height))
+                if ((X <= _point.X) || (X >= _point.X + Width) || (Y <= _point.Y) || (Y >= _point.Y + Height))
                     return false;
             }
 			return true;
@@ -583,7 +583,7 @@ namespace XnaFlixel
         {
             spriteBatch.Draw(FlxG.XnaSheet,
                 new Rectangle((int)(FlxU.floor(base.X + FlxU.roundingError) + FlxU.floor(FlxG.scroll.X * scrollFactor.X)),
-                    (int)(FlxU.floor(base.Y + FlxU.roundingError) + FlxU.floor(FlxG.scroll.Y * scrollFactor.Y)), (int)width, (int)height),
+                    (int)(FlxU.floor(base.Y + FlxU.roundingError) + FlxU.floor(FlxG.scroll.Y * scrollFactor.Y)), (int)Width, (int)Height),
                 new Rectangle(1, 1, 1, 1), getBoundingColor());
         }
 

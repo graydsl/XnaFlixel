@@ -132,7 +132,7 @@ namespace XnaFlixel
 			_soundTrayVisible = false;
 			
             _soundCaption = new FlxText((FlxG.width - 80) / 2, -10, 80, "VOLUME");
-            _soundCaption.setFormat(null, 1, Color.White, FlxJustification.Center, Color.White).height = 10;
+            _soundCaption.setFormat(null, 1, Color.White, FlxJustification.Center, Color.White).Height = 10;
 
 			int bx = 10;
 			int by = 14;
@@ -140,8 +140,8 @@ namespace XnaFlixel
 			for(int i = 0; i < 10; i++)
 			{
                 _soundTrayBars[i] = new FlxSprite(_soundTrayRect.X + (bx * 1), -i, null);
-                _soundTrayBars[i].width = 4;
-                _soundTrayBars[i].height = i + 1;
+                _soundTrayBars[i].Width = 4;
+                _soundTrayBars[i].Height = i + 1;
                 _soundTrayBars[i].scrollFactor = Vector2.Zero;
 				bx += 6;
 				by--;
@@ -249,7 +249,7 @@ namespace XnaFlixel
                 _soundCaption.Y = (_soundTrayRect.Y + 4);
                 for (int i = 0; i < _soundTrayBars.Length; i++)
                 {
-                    _soundTrayBars[i].Y = (_soundTrayRect.Y + _soundTrayRect.Height - _soundTrayBars[i].height - 2);
+                    _soundTrayBars[i].Y = (_soundTrayRect.Y + _soundTrayRect.Height - _soundTrayBars[i].Height - 2);
                 }
 				if(_soundTrayRect.Y < -_soundTrayRect.Height)
 					_soundTrayVisible = false;
@@ -296,9 +296,9 @@ namespace XnaFlixel
                 FlxG.state.update();
 
                 //Update the various special effects
-                if (FlxG.flash.exists)
+                if (FlxG.flash.Exists)
                     FlxG.flash.update();
-                if (FlxG.fade.exists)
+                if (FlxG.fade.Exists)
                     FlxG.fade.update();
                 FlxG.quake.update();
                 _quakeOffset.X = FlxG.quake.x;
@@ -318,12 +318,12 @@ namespace XnaFlixel
                 FlxG.state.render(FlxG.spriteBatch);
 
                 FlxG.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.NonPremultiplied, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise);
-                if (FlxG.flash.exists)
+                if (FlxG.flash.Exists)
                     FlxG.flash.render(FlxG.spriteBatch);
-                if (FlxG.fade.exists)
+                if (FlxG.fade.Exists)
                     FlxG.fade.render(FlxG.spriteBatch);
 
-                if (FlxG.mouse.cursor.visible)
+                if (FlxG.mouse.cursor.Visible)
                     FlxG.mouse.cursor.render(FlxG.spriteBatch);
 
                 FlxG.spriteBatch.End();
@@ -390,7 +390,7 @@ namespace XnaFlixel
 				gv = 0;
 			for (int i = 0; i < _soundTrayBars.Length; i++)
 			{
-                _soundTrayBars[i].Y = (_soundTrayRect.Y + _soundTrayRect.Height - _soundTrayBars[i].height - 2);
+                _soundTrayBars[i].Y = (_soundTrayRect.Y + _soundTrayRect.Height - _soundTrayBars[i].Height - 2);
 				if(i < gv) _soundTrayBars[i].alpha = 1;
 				else _soundTrayBars[i].alpha = 0.5f;
 			}
