@@ -103,12 +103,12 @@ namespace XnaFlixel
     		Y = y;
     		Width = 100;
     		Height = 20;
-    		_off = new FlxSprite().createGraphic((int)Width, (int)Height, new Color(0x7f, 0x7f, 0x7f));
+    		_off = new FlxSprite().CreateGraphic((int)Width, (int)Height, new Color(0x7f, 0x7f, 0x7f));
     		_off.Solid = false;
-    		add(_off, true);
-    		_on = new FlxSprite().createGraphic((int)Width, (int)Height, Color.White);
+    		Add(_off, true);
+    		_on = new FlxSprite().CreateGraphic((int)Width, (int)Height, Color.White);
     		_on.Solid = false;
-    		add(_on, true);
+    		Add(_on, true);
     		_offT = null;
     		_onT = null;
     		_callback = callback;
@@ -126,7 +126,7 @@ namespace XnaFlixel
     	/// <summary>
     	/// Called by the game loop automatically, handles mouseover and click detection.
     	/// </summary>
-    	override public void update()
+    	override public void Update()
     	{
     		if (!_initialized)
     		{
@@ -135,10 +135,10 @@ namespace XnaFlixel
     			_initialized = true;
     		}
 
-    		base.update();
+    		base.Update();
 
     		visibility(false);
-    		if (overlapsPoint(FlxG.mouse.x, FlxG.mouse.y))
+    		if (OverlapsPoint(FlxG.mouse.x, FlxG.mouse.y))
     		{
     			if (!FlxG.mouse.pressed())
     				_pressed = false;
@@ -152,21 +152,21 @@ namespace XnaFlixel
     	/// <summary>
     	/// Called by the game state when state is changed (if this object belongs to the state)
     	/// </summary>
-    	override public void destroy()
+    	override public void Destroy()
     	{
     		if (FlxG.mouse != null)
     			FlxG.mouse.removeMouseListener(OnMouseUp);
     	}
 
-    	override public void render(SpriteBatch spriteBatch)
+    	override public void Render(SpriteBatch spriteBatch)
     	{
-    		base.render(spriteBatch);
-    		if ((_off != null) && _off.Exists && _off.Visible) _off.render(spriteBatch);
-    		if ((_on != null) && _on.Exists && _on.Visible) _on.render(spriteBatch);
+    		base.Render(spriteBatch);
+    		if ((_off != null) && _off.Exists && _off.Visible) _off.Render(spriteBatch);
+    		if ((_on != null) && _on.Exists && _on.Visible) _on.Render(spriteBatch);
     		if (_offT != null)
     		{
-    			if ((_offT != null) && _offT.Exists && _offT.Visible) _offT.render(spriteBatch);
-    			if ((_onT != null) && _onT.Exists && _onT.Visible) _onT.render(spriteBatch);
+    			if ((_offT != null) && _offT.Exists && _offT.Visible) _offT.Render(spriteBatch);
+    			if ((_onT != null) && _onT.Exists && _onT.Visible) _onT.Render(spriteBatch);
     		}
     	}
 
@@ -213,10 +213,10 @@ namespace XnaFlixel
     			if (_offT == null)
     			{
     				_offT = text;
-    				add(_offT);
+    				Add(_offT);
     			}
     			else
-    				_offT = replace(_offT, text) as FlxText;
+    				_offT = Replace(_offT, text) as FlxText;
     		}
     		if (textHighlight == null)
     			_onT = _offT;
@@ -225,10 +225,10 @@ namespace XnaFlixel
     			if (_onT == null)
     			{
     				_onT = textHighlight;
-    				add(_onT);
+    				Add(_onT);
     			}
     			else
-    				_onT = replace(_onT, textHighlight) as FlxText;
+    				_onT = Replace(_onT, textHighlight) as FlxText;
     		}
     		_offT.scrollFactor = scrollFactor;
     		_onT.scrollFactor = scrollFactor;
@@ -243,21 +243,21 @@ namespace XnaFlixel
 		/// <returns>This FlxButton instance (nice for chaining stuff together, if you're into that).</returns>
     	public FlxButton LoadGraphic(FlxSprite image, FlxSprite imageHighlight)
     	{
-    		_off = replace(_off, image) as FlxSprite;
+    		_off = Replace(_off, image) as FlxSprite;
     		if (imageHighlight == null)
     		{
     			if (_on != _off)
-    				remove(_on);
+    				Remove(_on);
     			_on = _off;
     		}
     		else
-    			_on = replace(_on, imageHighlight) as FlxSprite;
+    			_on = Replace(_on, imageHighlight) as FlxSprite;
     		_on.Solid = _off.Solid = false;
     		_off.scrollFactor = scrollFactor;
     		_on.scrollFactor = scrollFactor;
     		Width = _off.Width;
     		Height = _off.Height;
-    		refreshHulls();
+    		RefreshHulls();
     		return this;
     	}
 
@@ -271,7 +271,7 @@ namespace XnaFlixel
     	private void OnMouseUp(object sender, FlxMouseEvent mouseEvent)
     	{
     		if (!Exists || !Visible || !Active || !FlxG.mouse.justReleased() || (FlxG.pause && !PauseProof) || (_callback == null)) return;
-    		if (overlapsPoint(FlxG.mouse.x, FlxG.mouse.y)) _callback();
+    		if (OverlapsPoint(FlxG.mouse.x, FlxG.mouse.y)) _callback();
     	}
 
     	#endregion

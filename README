@@ -3,7 +3,8 @@
 * /** ... */ comments converted to C# /// xml comments
 	* @params and @returns not yet converted
 * FlxButton converted
-* FlxEmitter conversion started...
+* FlxEmitter converted
+* some more classes converted...
 
 X-Flixel 2.43 -> XnaFlixel 0.1
 ===============================================================================

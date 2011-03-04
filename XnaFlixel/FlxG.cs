@@ -84,7 +84,7 @@ namespace XnaFlixel
             }
             set
             {
-                _flxGame.switchState(value);
+                _flxGame.SwitchState(value);
             }
         }
 
@@ -247,12 +247,12 @@ namespace XnaFlixel
                     _pause = value;
                     if (_pause)
                     {
-                        _flxGame.pauseGame();
+                        _flxGame.PauseGame();
                         pauseSounds();
                     }
                     else
                     {
-                        _flxGame.unpauseGame();
+                        _flxGame.UnpauseGame();
                         playSounds();
                     }
                 }
@@ -320,11 +320,11 @@ namespace XnaFlixel
 			if(music == null)
 				music = new FlxSound();
 			else if(music.Active)
-				music.stop();
-			music.loadEmbedded(Music,true);
+				music.Stop();
+			music.LoadEmbedded(Music,true);
 			music.volume = Volume;
 			music.survive = true;
-			music.play();
+			music.Play();
 		}
 
 		/// <summary>
@@ -356,9 +356,9 @@ namespace XnaFlixel
 			}
 			if(i >= sl)
 				sounds.Add(new FlxSound());
-            sounds[i].loadEmbedded(EmbeddedSound, Looped);
+            sounds[i].LoadEmbedded(EmbeddedSound, Looped);
             sounds[i].volume = Volume;
-            sounds[i].play();
+            sounds[i].Play();
             return sounds[i];
 		}
 
@@ -410,7 +410,7 @@ namespace XnaFlixel
 			if(sounds == null)
 				return;
 			if((music != null) && (ForceDestroy || !music.survive))
-				music.destroy();
+				music.Destroy();
 			int i = 0;
 			FlxSound s;
 			int sl = sounds.Count;
@@ -418,7 +418,7 @@ namespace XnaFlixel
 			{
 				s = sounds[i++] as FlxSound;
 				if((s != null) && (ForceDestroy || !s.survive))
-					s.destroy();
+					s.Destroy();
 			}
 		}
 
@@ -428,7 +428,7 @@ namespace XnaFlixel
 		static protected void changeSounds()
 		{
 			if((music != null) && music.Active)
-				music.updateTransform();
+				music.UpdateTransform();
 			int i = 0;
 			FlxSound s;
 			int sl = sounds.Count;
@@ -436,7 +436,7 @@ namespace XnaFlixel
 			{
 				s = sounds[i++] as FlxSound;
 				if((s != null) && s.Active)
-					s.updateTransform();
+					s.UpdateTransform();
 			}
 		}
 
@@ -446,7 +446,7 @@ namespace XnaFlixel
 		static internal void updateSounds()
 		{
 			if((music != null) && music.Active)
-				music.update();
+				music.Update();
 			int i = 0;
 			FlxSound s;
 			int sl = sounds.Count;
@@ -454,7 +454,7 @@ namespace XnaFlixel
 			{
 				s = sounds[i++] as FlxSound;
 				if((s != null) && s.Active)
-					s.update();
+					s.Update();
 			}
 		}
 
@@ -464,7 +464,7 @@ namespace XnaFlixel
 		static protected void pauseSounds()
 		{
 			if((music != null) && music.Active)
-				music.pause();
+				music.Pause();
 			int i = 0;
 			FlxSound s;
 			int sl = sounds.Count;
@@ -472,7 +472,7 @@ namespace XnaFlixel
 			{
 				s = sounds[i++] as FlxSound;
 				if((s != null) && s.Active)
-					s.pause();
+					s.Pause();
 			}
 		}
 
@@ -482,7 +482,7 @@ namespace XnaFlixel
 		static protected void playSounds()
 		{
 			if((music != null) && music.Active)
-				music.play();
+				music.Play();
 			int i = 0;
             FlxSound s;
 			int sl = sounds.Count;
@@ -490,7 +490,7 @@ namespace XnaFlixel
 			{
 				s = sounds[i++] as FlxSound;
 				if((s != null) && s.Active)
-					s.play();
+					s.Play();
 			}
 		}
 

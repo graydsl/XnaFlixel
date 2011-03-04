@@ -27,7 +27,7 @@ namespace XnaFlixel
 		public FlxTileblock(int X, int Y, int Width, int Height)
             : base(X,Y)
 		{
-			createGraphic(Width,Height,Color.Black);		
+			CreateGraphic(Width,Height,Color.Black);		
 			Fixed = true;
 		}
 
@@ -100,19 +100,19 @@ namespace XnaFlixel
 		/// 
 		/// @return	This FlxSprite instance (nice for chaining stuff together, if you're into that).
 		/// </summary>
-		override public FlxSprite loadGraphic(Texture2D Graphic) //,Animated:Boolean=false,Reverse:Boolean=false,Width:uint=0,Height:uint=0,Unique:Boolean=false)
+		override public FlxSprite LoadGraphic(Texture2D Graphic) //,Animated:Boolean=false,Reverse:Boolean=false,Width:uint=0,Height:uint=0,Unique:Boolean=false)
 		{
 			loadTiles(Graphic);
 			return this;
 		}
 
         //@desc		Draws this block
-        public override void render(SpriteBatch spriteBatch)
+        public override void Render(SpriteBatch spriteBatch)
         {
             if (_tex == null)
                 return;
 
-            _p = getScreenXY();
+            _p = GetScreenXy();
             int opx = (int)_p.X;
             for (int i = 0; i < _rects.Length; i++)
             {

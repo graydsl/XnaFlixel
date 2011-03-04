@@ -9,14 +9,14 @@ namespace XnaFlixel.data
 			_bounce = Bounce;
 		}
 		
-		override public void hitSide(FlxObject Contact, float Velocity)
+		override public void HitSide(FlxObject Contact, float Velocity)
 		{
 			velocity.X = -velocity.X * _bounce;
 			if(AngularVelocity != 0)
 				AngularVelocity = -AngularVelocity * _bounce;
 		}
 		
-		override public void hitBottom(FlxObject Contact, float Velocity)
+		override public void HitBottom(FlxObject Contact, float Velocity)
 		{
 			OnFloor = true;
 			if(((velocity.Y > 0)?velocity.Y:-velocity.Y) > _bounce*100)
@@ -28,7 +28,7 @@ namespace XnaFlixel.data
 			else
 			{
 				AngularVelocity = 0;
-				base.hitBottom(Contact,Velocity);
+				base.HitBottom(Contact,Velocity);
 			}
 			velocity.X *= _bounce;
 		}

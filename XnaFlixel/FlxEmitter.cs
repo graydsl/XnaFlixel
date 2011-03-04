@@ -135,7 +135,7 @@ namespace XnaFlixel
     	/// Internal function that actually goes through and updates all the group members.
     	/// Overridden here to remove the position update code normally used by a FlxGroup.
     	/// </summary>
-    	override protected void updateMembers()
+    	override protected void UpdateMembers()
     	{
     		FlxObject o;
     		int i = 0;
@@ -144,26 +144,26 @@ namespace XnaFlixel
     		{
     			o = members[i++];
     			if((o != null) && o.Exists && o.Active)
-    				o.update();
+    				o.Update();
     		}
     	}
 
     	/// <summary>
     	/// Called automatically by the game loop, decides when to launch particles and when to "die".
     	/// </summary>
-    	override public void update()
+    	override public void Update()
     	{
     		justEmitted = false;
-    		base.update();
+    		base.Update();
     		UpdateEmitter();
     	}
 
     	/// <summary>
     	/// Call this function to turn off all the particles and the emitter.
     	/// </summary>
-    	override public void kill()
+    	override public void Kill()
     	{
-    		base.kill();
+    		base.Kill();
     		On = false;
     	}
 
@@ -218,7 +218,7 @@ namespace XnaFlixel
     		if(Multiple)
     		{
     			s = new FlxSprite();
-    			s.loadGraphic(graphics,true);
+    			s.LoadGraphic(graphics,true);
     			tf = s.frames;
     		}
     		int i = 0;
@@ -235,7 +235,7 @@ namespace XnaFlixel
     				//    s.loadRotatedGraphic(graphics,BakedRotations,r);
     				//else
     				//{
-    				s.loadGraphic(graphics,true);
+    				s.LoadGraphic(graphics,true);
     				s.frame = r;
     				//}
     			}
@@ -244,7 +244,7 @@ namespace XnaFlixel
     				//if(BakedRotations > 0)
     				//    s.loadRotatedGraphic(graphics,BakedRotations);
     				//else
-    				s.loadGraphic(graphics);
+    				s.LoadGraphic(graphics);
     			}
     			if(Collide > 0)
     			{
@@ -260,7 +260,7 @@ namespace XnaFlixel
     				s.Solid = false;
     			s.Exists = false;
     			s.scrollFactor = scrollFactor;
-    			add(s);
+    			Add(s);
     			i++;
     		}
     		return this;
@@ -408,7 +408,7 @@ namespace XnaFlixel
     		_particle++;
     		if(_particle >= members.Count)
     			_particle = 0;
-    		s.onEmit();
+    		s.OnEmit();
     		justEmitted = true;
     	}
 
@@ -478,7 +478,7 @@ namespace XnaFlixel
     			_timer += FlxG.elapsed;
     			if((delay > 0) && (_timer > delay))
     			{
-    				kill();
+    				Kill();
     				return;
     			}
     			if(On)

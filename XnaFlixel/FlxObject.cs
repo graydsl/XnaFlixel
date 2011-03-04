@@ -248,13 +248,15 @@ namespace XnaFlixel
 		/// </summary>
 		public FlxObject()
 		{
-			constructor1(0, 0, 0, 0);
+			Initialize(0, 0, 0, 0);
 		}
+
 		public FlxObject(float X, float Y, float Width, float Height)
 		{
-			constructor1(X, Y, Width, Height);
+			Initialize(X, Y, Width, Height);
 		}
-		private void constructor1(float X, float Y, float Width, float Height)
+
+		private void Initialize(float X, float Y, float Width, float Height)
 		{
 			this.X = X;
 			this.Y = Y;
@@ -319,7 +321,7 @@ namespace XnaFlixel
 		/// <summary>
 		/// Called by <code>FlxGroup</code>, commonly when game states are changed.
 		/// </summary>
-		virtual public void destroy()
+		virtual public void Destroy()
 		{
 			//Nothing to destroy yet
 		}
@@ -328,25 +330,25 @@ namespace XnaFlixel
 		/// Called by <code>FlxObject.updateMotion()</code> and some constructors to
 		/// rebuild the basic collision data for this object.
 		/// </summary>
-		virtual public void refreshHulls()
+		virtual public void RefreshHulls()
 		{
 			colHullX.x = X;
 			colHullX.y = Y;
-			colHullX.width = Width;
-			colHullX.height = Height;
+			colHullX.Width = Width;
+			colHullX.Height = Height;
 			colHullY.x = X;
 			colHullY.y = Y;
-			colHullY.width = Width;
-			colHullY.height = Height;
+			colHullY.Width = Width;
+			colHullY.Height = Height;
 		}
 
 		/// <summary>
 		/// Just updates the retro-style flickering.
 		/// Considered update logic rather than rendering because it toggles visibility.
 		/// </summary>
-		public virtual void updateFlickering()
+		public virtual void UpdateFlickering()
 		{
-			if (flickering())
+			if (Flickering())
 			{
 				if (_flickerTimer > 0)
 				{
@@ -356,7 +358,7 @@ namespace XnaFlixel
 						_flickerTimer = -1;
 					}
 				}
-				if (_flickerTimer < 0) flicker(-1);
+				if (_flickerTimer < 0) Flicker(-1);
 				else
 				{
 					_flicker = !_flicker;
@@ -368,16 +370,16 @@ namespace XnaFlixel
 		/// <summary>
 		/// Called by the main game loop, handles motion/physics and game logic
 		/// </summary>
-		virtual public void update()
+		virtual public void Update()
 		{
-			updateMotion();
-			updateFlickering();
+			UpdateMotion();
+			UpdateFlickering();
 		}
 
 		/// <summary>
 		/// Override this function to draw graphics (see <code>FlxSprite</code>).
 		/// </summary>
-		virtual public void render(SpriteBatch spriteBatch)
+		virtual public void Render(SpriteBatch spriteBatch)
 		{
 			//Objects don't have any visual logic/display of their own.
 		}
@@ -389,12 +391,12 @@ namespace XnaFlixel
 		/// 
 		/// @return	Whether or not the two objects overlap.
 		/// </summary>
-		virtual public bool overlaps(FlxObject Object)
+		virtual public bool Overlaps(FlxObject Object)
 		{
-			_point = getScreenXY();
+			_point = GetScreenXy();
 			float tx = _point.X;
 			float ty = _point.Y;
-			_point = Object.getScreenXY();
+			_point = Object.GetScreenXy();
 			if((_point.X <= tx-Object.Width) || (_point.X >= tx+Width) || (_point.Y <= ty-Object.Height) || (_point.Y >= ty+Height))
 				return false;
 			return true;
@@ -409,15 +411,15 @@ namespace XnaFlixel
 		/// 
 		/// @return	Whether or not the point overlaps this object.
 		/// </summary>
-		virtual public bool overlapsPoint(float X, float Y)
+		virtual public bool OverlapsPoint(float X, float Y)
 		{
-			return overlapsPoint(X, Y, false);
+			return OverlapsPoint(X, Y, false);
 		}
-		virtual public bool overlapsPoint(float X, float Y, bool PerPixel)
+		virtual public bool OverlapsPoint(float X, float Y, bool PerPixel)
 		{
 			X = X + FlxU.floor(FlxG.scroll.X);
 			Y = Y + FlxU.floor(FlxG.scroll.Y);
-			_point = getScreenXY();
+			_point = GetScreenXy();
 			if((X <= _point.X) || (X >= _point.X+Width) || (Y <= _point.Y) || (Y >= _point.Y+Height))
 				return false;
 			return true;
@@ -430,7 +432,7 @@ namespace XnaFlixel
 		/// 
 		/// @param	Object		The <FlxObject> you want to collide with.
 		/// </summary>
-		virtual public bool collide(FlxObject Object)
+		virtual public bool Collide(FlxObject Object)
 		{
 			return FlxU.collide(this,((Object==null)?this:Object));
 		}
@@ -442,7 +444,7 @@ namespace XnaFlixel
 		/// 
 		/// @param	Object	The <code>FlxObject</code> you're about to run into.
 		/// </summary>
-		virtual public void preCollide(FlxObject Object)
+		virtual public void PreCollide(FlxObject Object)
 		{
 			//Most objects don't have to do anything here.
 		}
@@ -454,9 +456,9 @@ namespace XnaFlixel
 		/// @param	Contact		The <code>FlxObject</code> you just ran into.
 		/// @param	Velocity	The suggested new velocity for this object.
 		/// </summary>
-		virtual public void hitLeft(FlxObject Contact, float Velocity)
+		virtual public void HitLeft(FlxObject Contact, float Velocity)
 		{
-			hitSide(Contact,Velocity);
+			HitSide(Contact,Velocity);
 		}
 		
 		/// <summary>
@@ -466,9 +468,9 @@ namespace XnaFlixel
 		/// @param	Contact		The <code>FlxObject</code> you just ran into.
 		/// @param	Velocity	The suggested new velocity for this object.
 		/// </summary>
-		virtual public void hitRight(FlxObject Contact, float Velocity)
+		virtual public void HitRight(FlxObject Contact, float Velocity)
 		{
-			hitSide(Contact,Velocity);
+			HitSide(Contact,Velocity);
 		}
 
 		/// <summary>
@@ -478,7 +480,7 @@ namespace XnaFlixel
 		/// @param	Contact		The <code>FlxObject</code> you just ran into.
 		/// @param	Velocity	The suggested new velocity for this object.
 		/// </summary>
-		virtual public void hitSide(FlxObject Contact, float Velocity)
+		virtual public void HitSide(FlxObject Contact, float Velocity)
 		{
 			if(!Fixed || (Contact.Fixed && ((velocity.Y != 0) || (velocity.X != 0))))
 				velocity.X = Velocity;
@@ -490,7 +492,7 @@ namespace XnaFlixel
 		/// @param	Contact		The <code>FlxObject</code> you just ran into.
 		/// @param	Velocity	The suggested new velocity for this object.
 		/// </summary>
-		virtual public void hitTop(FlxObject Contact, float Velocity)
+		virtual public void HitTop(FlxObject Contact, float Velocity)
 		{
 			if(!Fixed || (Contact.Fixed && ((velocity.Y != 0) || (velocity.X != 0))))
 				velocity.Y = Velocity;
@@ -502,7 +504,7 @@ namespace XnaFlixel
 		/// @param	Contact		The <code>FlxObject</code> you just ran into.
 		/// @param	Velocity	The suggested new velocity for this object.
 		/// </summary>
-		virtual public void hitBottom(FlxObject Contact, float Velocity)
+		virtual public void HitBottom(FlxObject Contact, float Velocity)
 		{
 			OnFloor = true;
 			if(!Fixed || (Contact.Fixed && ((velocity.Y != 0) || (velocity.X != 0))))
@@ -514,17 +516,17 @@ namespace XnaFlixel
 		/// 
 		/// @param	Damage		How much health to take away (use a negative number to give a health bonus).
 		/// </summary>
-		virtual public void hurt(float Damage)
+		virtual public void Hurt(float Damage)
 		{
 			Health = Health - Damage;
 			if(Health <= 0)
-				kill();
+				Kill();
 		}
 		
 		/// <summary>
 		/// Call this function to "kill" a sprite so that it no longer 'exists'.
 		/// </summary>
-		virtual public void kill()
+		virtual public void Kill()
 		{
 			Exists = false;
 			Dead = true;
@@ -535,14 +537,14 @@ namespace XnaFlixel
 		/// 
 		/// @param	Duration	How many seconds to flicker for.
 		/// </summary>
-		public void flicker(float Duration) { _flickerTimer = Duration; if(_flickerTimer < 0) { _flicker = false; Visible = true; } }
+		public void Flicker(float Duration) { _flickerTimer = Duration; if(_flickerTimer < 0) { _flicker = false; Visible = true; } }
 		
 		/// <summary>
 		/// Check to see if the object is still flickering.
 		/// 
 		/// @return	Whether the object is flickering or not.
 		/// </summary>
-		public bool flickering() { return _flickerTimer >= 0; }
+		public bool Flickering() { return _flickerTimer >= 0; }
 
 		/// <summary>
 		/// Call this function to figure out the on-screen position of the object.
@@ -551,7 +553,7 @@ namespace XnaFlixel
 		/// 
 		/// @return	The <code>Point</code> you passed in, or a new <code>Point</code> if you didn't pass one, containing the screen X and Y position of this object.
 		/// </summary>
-		virtual public Vector2 getScreenXY()
+		virtual public Vector2 GetScreenXy()
 		{
 			Vector2 Point = Vector2.Zero;
 			Point.X = FlxU.floor(X + FlxU.roundingError)+FlxU.floor(FlxG.scroll.X*scrollFactor.X);
@@ -564,9 +566,9 @@ namespace XnaFlixel
 		/// 
 		/// @return	Whether the object is on screen or not.
 		/// </summary>
-		virtual public bool onScreen()
+		virtual public bool OnScreen()
 		{
-			_point = getScreenXY();
+			_point = GetScreenXy();
 			if((_point.X + Width < 0) || (_point.X > FlxG.width) || (_point.Y + Height < 0) || (_point.Y > FlxG.height))
 				return false;
 			return true;
@@ -579,7 +581,7 @@ namespace XnaFlixel
 		/// @param	X	The new X position of this object.
 		/// @param	Y	The new Y position of this object.
 		/// </summary>
-		virtual public void reset(float X, float Y)
+		virtual public void Reset(float X, float Y)
 		{
 			this.X = X;
 			this.Y = Y;
@@ -590,7 +592,7 @@ namespace XnaFlixel
 		/// <summary>
 		/// Returns the appropriate color for the bounding box depending on object state.
 		/// </summary>
-		public Color getBoundingColor()
+		public Color GetBoundingColor()
 		{
 			if(Solid)
 			{
@@ -613,13 +615,13 @@ namespace XnaFlixel
 		/// Internal function for updating the position and speed of this object.
 		/// Useful for cases when you need to update this but are buried down in too many supers.
 		/// </summary>
-        protected void updateMotion()
+        protected void UpdateMotion()
         {
             if (!Moves)
                 return;
 
             if (Solid)
-                refreshHulls();
+                RefreshHulls();
             OnFloor = false;
 
             // Motion/physics
@@ -652,11 +654,11 @@ namespace XnaFlixel
                 return;
             colVector.X = velocity.X * FlxG.elapsed;
             colVector.Y = velocity.Y * FlxG.elapsed;
-            colHullX.width += ((colVector.X > 0) ? colVector.X : -colVector.X);
+            colHullX.Width += ((colVector.X > 0) ? colVector.X : -colVector.X);
             if (colVector.X < 0)
                 colHullX.x += colVector.X;
             colHullY.x = X;
-            colHullY.height += ((colVector.Y > 0) ? colVector.Y : -colVector.Y);
+            colHullY.Height += ((colVector.Y > 0) ? colVector.Y : -colVector.Y);
             if (colVector.Y < 0)
                 colHullY.y += colVector.Y;
         }

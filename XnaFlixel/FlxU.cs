@@ -396,9 +396,9 @@ namespace XnaFlixel
 			FlxQuadTree.bounds.x = X;
 			FlxQuadTree.bounds.y = Y;
 			if(Width > 0)
-				FlxQuadTree.bounds.width = Width;
+				FlxQuadTree.bounds.Width = Width;
 			if(Height > 0)
-				FlxQuadTree.bounds.height = Height;
+				FlxQuadTree.bounds.Height = Height;
 			if(Divisions > 0)
 				FlxQuadTree.divisions = Divisions;
 		}
@@ -421,12 +421,12 @@ namespace XnaFlixel
 			if( (Object1 == null) || !Object1.Exists ||
 				(Object2 == null) || !Object2.Exists )
 				return false;
-			quadTree = new FlxQuadTree(FlxQuadTree.bounds.x,FlxQuadTree.bounds.y,FlxQuadTree.bounds.width,FlxQuadTree.bounds.height, null);
-			quadTree.add(Object1,FlxQuadTree.A_LIST);
+			quadTree = new FlxQuadTree(FlxQuadTree.bounds.x,FlxQuadTree.bounds.y,FlxQuadTree.bounds.Width,FlxQuadTree.bounds.Height, null);
+			quadTree.Add(Object1,FlxQuadTree.A_LIST);
 			if(Object1 == Object2)
-				return quadTree.overlap(false,Callback);
-			quadTree.add(Object2,FlxQuadTree.B_LIST);
-			return quadTree.overlap(true,Callback);
+				return quadTree.Overlap(false,Callback);
+			quadTree.Add(Object2,FlxQuadTree.B_LIST);
+			return quadTree.Overlap(true,Callback);
 		}
 
 		/// <summary>
@@ -445,13 +445,13 @@ namespace XnaFlixel
 			if( (Object1 == null) || !Object1.Exists ||
 				(Object2 == null) || !Object2.Exists )
 				return false;
-			quadTree = new FlxQuadTree(FlxQuadTree.bounds.x,FlxQuadTree.bounds.y,FlxQuadTree.bounds.width,FlxQuadTree.bounds.height,null);
-			quadTree.add(Object1,FlxQuadTree.A_LIST);
+			quadTree = new FlxQuadTree(FlxQuadTree.bounds.x,FlxQuadTree.bounds.y,FlxQuadTree.bounds.Width,FlxQuadTree.bounds.Height,null);
+			quadTree.Add(Object1,FlxQuadTree.A_LIST);
 			bool match = Object1 == Object2;
 			if(!match)
-				quadTree.add(Object2,FlxQuadTree.B_LIST);
-			bool cx = quadTree.overlap(!match,solveXCollision);
-			bool cy = quadTree.overlap(!match,solveYCollision);
+				quadTree.Add(Object2,FlxQuadTree.B_LIST);
+			bool cx = quadTree.Overlap(!match,solveXCollision);
+			bool cy = quadTree.Overlap(!match,solveYCollision);
 			return cx || cy;			
 		}
 
@@ -471,8 +471,8 @@ namespace XnaFlixel
                 return false;
 			
 			//Give the objects a heads up that we're about to resolve some collisions
-			e.Object1.preCollide(e.Object2);
-			e.Object2.preCollide(e.Object1);
+			e.Object1.PreCollide(e.Object2);
+			e.Object2.PreCollide(e.Object1);
 
 			//Basic resolution variables
 			bool f1;
@@ -533,10 +533,10 @@ namespace XnaFlixel
 					obj2Hull.y += oy2;
 					
 					//See if it's a actually a valid collision
-					if( (obj1Hull.x + obj1Hull.width  < obj2Hull.x + roundingError) ||
-						(obj1Hull.x + roundingError > obj2Hull.x + obj2Hull.width) ||
-						(obj1Hull.y + obj1Hull.height < obj2Hull.y + roundingError) ||
-						(obj1Hull.y + roundingError > obj2Hull.y + obj2Hull.height) )
+					if( (obj1Hull.x + obj1Hull.Width  < obj2Hull.x + roundingError) ||
+						(obj1Hull.x + roundingError > obj2Hull.x + obj2Hull.Width) ||
+						(obj1Hull.y + obj1Hull.Height < obj2Hull.y + roundingError) ||
+						(obj1Hull.y + roundingError > obj2Hull.y + obj2Hull.Height) )
 					{
 						obj2Hull.x = obj2Hull.x - ox2;
 						obj2Hull.y = obj2Hull.y - oy2;
@@ -548,24 +548,24 @@ namespace XnaFlixel
 					if(p1hn2)
 					{
 						if(obj1MoveNeg)
-							r1 = obj1Hull.x + e.Object1.colHullY.width;
+							r1 = obj1Hull.x + e.Object1.colHullY.Width;
 						else
-							r1 = obj1Hull.x + obj1Hull.width;
+							r1 = obj1Hull.x + obj1Hull.Width;
 						if(obj2MoveNeg)
 							r2 = obj2Hull.x;
 						else
-							r2 = obj2Hull.x + obj2Hull.width - e.Object2.colHullY.width;
+							r2 = obj2Hull.x + obj2Hull.Width - e.Object2.colHullY.Width;
 					}
 					else
 					{
 						if(obj2MoveNeg)
-							r1 = -obj2Hull.x - e.Object2.colHullY.width;
+							r1 = -obj2Hull.x - e.Object2.colHullY.Width;
 						else
-							r1 = -obj2Hull.x - obj2Hull.width;
+							r1 = -obj2Hull.x - obj2Hull.Width;
 						if(obj1MoveNeg)
 							r2 = -obj1Hull.x;
 						else
-							r2 = -obj1Hull.x - obj1Hull.width + e.Object1.colHullY.width;
+							r2 = -obj1Hull.x - obj1Hull.Width + e.Object1.colHullY.Width;
 					}
 					overlap = r1 - r2;
 					
@@ -580,8 +580,8 @@ namespace XnaFlixel
 
 					//Last chance to skip out on a bogus collision resolution
 					if( (overlap == 0) ||
-						((!f1 && ((overlap>0)?overlap:-overlap) > obj1Hull.width*0.8)) ||
-						((!f2 && ((overlap>0)?overlap:-overlap) > obj2Hull.width*0.8)) )
+						((!f1 && ((overlap>0)?overlap:-overlap) > obj1Hull.Width*0.8)) ||
+						((!f2 && ((overlap>0)?overlap:-overlap) > obj2Hull.Width*0.8)) )
 					{
 						obj2Hull.x = obj2Hull.x - ox2;
 						obj2Hull.y = obj2Hull.y - oy2;
@@ -596,14 +596,14 @@ namespace XnaFlixel
 					if(!f1 && f2)
 					{
 						if(e.Object1._group)
-							e.Object1.reset((e.Object1.X - overlap), e.Object1.Y);
+							e.Object1.Reset((e.Object1.X - overlap), e.Object1.Y);
 						else
 							e.Object1.X = e.Object1.X - overlap;
 					}
 					else if(f1 && !f2)
 					{
 						if(e.Object2._group)
-							e.Object2.reset((e.Object2.X + overlap),e.Object2.Y);
+							e.Object2.Reset((e.Object2.X + overlap),e.Object2.Y);
 						else
 							e.Object2.X += overlap;
 					}
@@ -611,11 +611,11 @@ namespace XnaFlixel
 					{
 						overlap /= 2;
 						if(e.Object1._group)
-							e.Object1.reset((e.Object1.X - overlap),e.Object1.Y);
+							e.Object1.Reset((e.Object1.X - overlap),e.Object1.Y);
 						else
 							e.Object1.X = e.Object1.X - overlap;
 						if(e.Object2._group)
-							e.Object2.reset((e.Object2.X + overlap),e.Object2.Y);
+							e.Object2.Reset((e.Object2.X + overlap),e.Object2.Y);
 						else
 							e.Object2.X += overlap;
 						sv1 *= 0.5f;
@@ -623,24 +623,24 @@ namespace XnaFlixel
 					}
 					if(p1hn2)
 					{
-                        e.Object1.hitRight(e.Object2, sv1);
-                        e.Object2.hitLeft(e.Object1, sv2);
+                        e.Object1.HitRight(e.Object2, sv1);
+                        e.Object2.HitLeft(e.Object1, sv2);
 					}
 					else
 					{
-                        e.Object1.hitLeft(e.Object2, sv1);
-                        e.Object2.hitRight(e.Object1, sv2);
+                        e.Object1.HitLeft(e.Object2, sv1);
+                        e.Object2.HitRight(e.Object1, sv2);
 					}
 					
 					//Adjust collision hulls if necessary
 					if(!f1 && (overlap != 0))
 					{
 						if(p1hn2)
-							obj1Hull.width = obj1Hull.width - overlap;
+							obj1Hull.Width = obj1Hull.Width - overlap;
 						else
 						{
 							obj1Hull.x = obj1Hull.x - overlap;
-							obj1Hull.width += overlap;
+							obj1Hull.Width += overlap;
 						}
                         e.Object1.colHullY.x = e.Object1.colHullY.x - overlap;
 					}
@@ -649,10 +649,10 @@ namespace XnaFlixel
 						if(p1hn2)
 						{
 							obj2Hull.x += overlap;
-							obj2Hull.width = obj2Hull.width - overlap;
+							obj2Hull.Width = obj2Hull.Width - overlap;
 						}
 						else
-							obj2Hull.width += overlap;
+							obj2Hull.Width += overlap;
 						e.Object2.colHullY.x += overlap;
 					}
 					obj2Hull.x = obj2Hull.x - ox2;
@@ -683,8 +683,8 @@ namespace XnaFlixel
                 return false;
 
 			//Give the objects a heads up that we're about to resolve some collisions
-			e.Object1.preCollide(e.Object2);
-			e.Object2.preCollide(e.Object1);
+			e.Object1.PreCollide(e.Object2);
+			e.Object2.PreCollide(e.Object1);
 			
 			//Basic resolution variables
 			bool f1;
@@ -745,10 +745,10 @@ namespace XnaFlixel
 					obj2Hull.y += oy2;
 					
 					//See if it's a actually a valid collision
-					if( (obj1Hull.x + obj1Hull.width  < obj2Hull.x + roundingError) ||
-						(obj1Hull.x + roundingError > obj2Hull.x + obj2Hull.width) ||
-						(obj1Hull.y + obj1Hull.height < obj2Hull.y + roundingError) ||
-						(obj1Hull.y + roundingError > obj2Hull.y + obj2Hull.height) )
+					if( (obj1Hull.x + obj1Hull.Width  < obj2Hull.x + roundingError) ||
+						(obj1Hull.x + roundingError > obj2Hull.x + obj2Hull.Width) ||
+						(obj1Hull.y + obj1Hull.Height < obj2Hull.y + roundingError) ||
+						(obj1Hull.y + roundingError > obj2Hull.y + obj2Hull.Height) )
 					{
 						obj2Hull.x = obj2Hull.x - ox2;
 						obj2Hull.y = obj2Hull.y - oy2;
@@ -760,24 +760,24 @@ namespace XnaFlixel
 					if(p1hn2)
 					{
 						if(obj1MoveNeg)
-							r1 = obj1Hull.y + e.Object1.colHullX.height;
+							r1 = obj1Hull.y + e.Object1.colHullX.Height;
 						else
-							r1 = obj1Hull.y + obj1Hull.height;
+							r1 = obj1Hull.y + obj1Hull.Height;
 						if(obj2MoveNeg)
 							r2 = obj2Hull.y;
 						else
-							r2 = obj2Hull.y + obj2Hull.height - e.Object2.colHullX.height;
+							r2 = obj2Hull.y + obj2Hull.Height - e.Object2.colHullX.Height;
 					}
 					else
 					{
 						if(obj2MoveNeg)
-							r1 = -obj2Hull.y - e.Object2.colHullX.height;
+							r1 = -obj2Hull.y - e.Object2.colHullX.Height;
 						else
-							r1 = -obj2Hull.y - obj2Hull.height;
+							r1 = -obj2Hull.y - obj2Hull.Height;
 						if(obj1MoveNeg)
 							r2 = -obj1Hull.y;
 						else
-							r2 = -obj1Hull.y - obj1Hull.height + e.Object1.colHullX.height;
+							r2 = -obj1Hull.y - obj1Hull.Height + e.Object1.colHullX.Height;
 					}
 					overlap = r1 - r2;
 					if (overlap > -0.00008f && overlap < 0.00008f)
@@ -797,8 +797,8 @@ namespace XnaFlixel
 					
 					//Last chance to skip out on a bogus collision resolution
 					if( (overlap == 0) ||
-						((!f1 && ((overlap>0)?overlap:-overlap) > obj1Hull.height*0.8)) ||
-						((!f2 && ((overlap>0)?overlap:-overlap) > obj2Hull.height*0.8)) )
+						((!f1 && ((overlap>0)?overlap:-overlap) > obj1Hull.Height*0.8)) ||
+						((!f2 && ((overlap>0)?overlap:-overlap) > obj2Hull.Height*0.8)) )
 					{
 						obj2Hull.x = obj2Hull.x - ox2;
 						obj2Hull.y = obj2Hull.y - oy2;
@@ -813,14 +813,14 @@ namespace XnaFlixel
 					if(!f1 && f2)
 					{
 						if(e.Object1._group)
-                            e.Object1.reset(e.Object1.X, (e.Object1.Y - overlap));
+                            e.Object1.Reset(e.Object1.X, (e.Object1.Y - overlap));
 						else
 							e.Object1.Y = e.Object1.Y - overlap;
 					}
 					else if(f1 && !f2)
 					{
 						if(e.Object2._group)
-                            e.Object2.reset(e.Object2.X, (e.Object2.Y + overlap));
+                            e.Object2.Reset(e.Object2.X, (e.Object2.Y + overlap));
 						else
 							e.Object2.Y += overlap;
 					}
@@ -828,11 +828,11 @@ namespace XnaFlixel
 					{
 						overlap /= 2;
 						if(e.Object1._group)
-                            e.Object1.reset(e.Object1.X, (e.Object1.Y - overlap));
+                            e.Object1.Reset(e.Object1.X, (e.Object1.Y - overlap));
 						else
 							e.Object1.Y = e.Object1.Y - overlap;
 						if(e.Object2._group)
-                            e.Object2.reset(e.Object2.X, (e.Object2.Y + overlap));
+                            e.Object2.Reset(e.Object2.X, (e.Object2.Y + overlap));
 						else
 							e.Object2.Y += overlap;
 						sv1 *= 0.5f;
@@ -840,13 +840,13 @@ namespace XnaFlixel
 					}
 					if(p1hn2)
 					{
-						e.Object1.hitBottom(e.Object2,sv1);
-						e.Object2.hitTop(e.Object1,sv2);
+						e.Object1.HitBottom(e.Object2,sv1);
+						e.Object2.HitTop(e.Object1,sv2);
 					}
 					else
 					{
-						e.Object1.hitTop(e.Object2,sv1);
-						e.Object2.hitBottom(e.Object1,sv2);
+						e.Object1.HitTop(e.Object2,sv1);
+						e.Object2.HitBottom(e.Object1,sv2);
 					}
 					
 					//Adjust collision hulls if necessary
@@ -868,7 +868,7 @@ namespace XnaFlixel
 						else
 						{
 							obj1Hull.y = obj1Hull.y - overlap;
-							obj1Hull.height += overlap;
+							obj1Hull.Height += overlap;
 						}
 					}
 					if(!f2 && (overlap != 0))
@@ -876,11 +876,11 @@ namespace XnaFlixel
 						if(p1hn2)
 						{
 							obj2Hull.y += overlap;
-							obj2Hull.height = obj2Hull.height - overlap;
+							obj2Hull.Height = obj2Hull.Height - overlap;
 						}
 						else
 						{
-							obj2Hull.height += overlap;
+							obj2Hull.Height += overlap;
 						
 							//This code helps stuff ride horizontally moving platforms.
 							if(f1 && e.Object1.Moves)

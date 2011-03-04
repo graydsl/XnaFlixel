@@ -21,9 +21,9 @@ namespace XnaFlixel.data
         {
         }
 
-        public override void create()
+        public override void Create()
         {
-            base.create();
+            base.Create();
             _f = null;
 
 			_poweredBy = FlxG.Game.Content.Load<Texture2D>("flixel/poweredby");
@@ -38,7 +38,7 @@ namespace XnaFlixel.data
             _nextScreen = nextScreen;
         }
 
-        public override void update()
+        public override void Update()
         {
             if (_f == null)
             {
@@ -53,25 +53,25 @@ namespace XnaFlixel.data
                 pwrscale = ((float)pixelsize / 24f);
 
                 //Add logo pixels
-                add(new FlxLogoPixel(left + pixelsize, top, pixelsize, 0, _fc));
-                add(new FlxLogoPixel(left, top + pixelsize, pixelsize, 1, _fc));
-                add(new FlxLogoPixel(left, top + (pixelsize * 2), pixelsize, 2, _fc));
-                add(new FlxLogoPixel(left + pixelsize, top + (pixelsize * 2), pixelsize, 3, _fc));
-                add(new FlxLogoPixel(left, top + (pixelsize * 3), pixelsize, 4, _fc));
+                Add(new FlxLogoPixel(left + pixelsize, top, pixelsize, 0, _fc));
+                Add(new FlxLogoPixel(left, top + pixelsize, pixelsize, 1, _fc));
+                Add(new FlxLogoPixel(left, top + (pixelsize * 2), pixelsize, 2, _fc));
+                Add(new FlxLogoPixel(left + pixelsize, top + (pixelsize * 2), pixelsize, 3, _fc));
+                Add(new FlxLogoPixel(left, top + (pixelsize * 3), pixelsize, 4, _fc));
 
                 FlxSprite pwr = new FlxSprite((FlxG.width - (int)((float)_poweredBy.Width * pwrscale)) / 2, top + (pixelsize * 4) + 16, _poweredBy);
-                pwr.loadGraphic(_poweredBy, false, false, (int)((float)_poweredBy.Width * pwrscale), (int)((float)_poweredBy.Height * pwrscale));
+                pwr.LoadGraphic(_poweredBy, false, false, (int)((float)_poweredBy.Width * pwrscale), (int)((float)_poweredBy.Height * pwrscale));
 
                 pwr.color = _fc;
                 pwr.scale = pwrscale;
-                add(pwr);
+                Add(pwr);
 
                 _fSound.Play(FlxG.volume, 0f, 0f);
             }
 
             _logoTimer += FlxG.elapsed;
 
-            base.update();
+            base.Update();
 
             if (_logoTimer > 2.5f)
             {

@@ -80,7 +80,7 @@ namespace XnaFlixel.data
             _pauseRect.Y = (FlxG.height - _pauseRect.Height) / 2;
 
             _pauseText = new FlxText(_pauseRect.X, _pauseRect.Y + (7 * _pauseScale), _pauseRect.Width, "GAME PAUSED");
-            _pauseText.setFormat(null, (2 * _pauseScale) - 1, Color.White, FlxJustification.Center, Color.White);
+            _pauseText.SetFormat(null, (2 * _pauseScale) - 1, Color.White, FlxJustification.Center, Color.White);
 
             _posKeyX *= _pauseScale;
             _posKeyC *= _pauseScale;
@@ -114,7 +114,7 @@ namespace XnaFlixel.data
         {
             spriteBatch.Draw(FlxG.XnaSheet, _pauseRect, new Rectangle(1, 1, 1, 1), _pauseColor);
 
-            _pauseText.render(spriteBatch);
+            _pauseText.Render(spriteBatch);
 
             spriteBatch.Draw(_imgKeyX, _posKeyX, null, Color.White, 0, Vector2.Zero, _pauseScale, SpriteEffects.None, 0f);
             spriteBatch.DrawString(FlxG.Font, _strKeyX, new Vector2(_posKeyX.X + (14 * _pauseScale), _posKeyX.Y),

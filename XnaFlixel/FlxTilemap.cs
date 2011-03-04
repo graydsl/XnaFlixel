@@ -212,7 +212,7 @@ namespace XnaFlixel
 				_screenCols = widthInTiles;
 			
 			generateBoundingTiles();
-			refreshHulls();
+			RefreshHulls();
 			
 			_flashRect.X = 0;
 			_flashRect.Y = 0;
@@ -232,10 +232,10 @@ namespace XnaFlixel
         /// <summary>
         /// Draws the tilemap.
         /// </summary>
-        public override void render(SpriteBatch spriteBatch)
+        public override void Render(SpriteBatch spriteBatch)
         {
             //NOTE: While this will only draw the tiles that are actually on screen, it will ALWAYS draw one screen's worth of tiles
-            Vector2 _p = getScreenXY();
+            Vector2 _p = GetScreenXy();
             int bX = (int)Math.Floor(-_p.X / _tileWidth);
             int bY = (int)Math.Floor(-_p.Y / _tileHeight);
             int eX = (int)Math.Floor((-_p.X + FlxG.width - 1) / _tileWidth);
@@ -276,7 +276,7 @@ namespace XnaFlixel
         /// 
         /// @param	Core		The <code>FlxObject</code> you want to check against.
         /// </summary>
-        override public bool overlaps(FlxObject Core)
+        override public bool Overlaps(FlxObject Core)
 		{
 			int d;
 			
@@ -313,7 +313,7 @@ namespace XnaFlixel
 			{
 				_block.X = blocks[i].x;
 				_block.Y = blocks[i++].y;
-				if(_block.overlaps(Core))
+				if(_block.Overlaps(Core))
 					return true;
 			}
 			return false;
@@ -328,11 +328,11 @@ namespace XnaFlixel
 		/// 
 		/// @return	Whether or not the point overlaps this object.
 		/// </summary>
-        override public bool overlapsPoint(float X, float Y)
+        override public bool OverlapsPoint(float X, float Y)
         {
-            return overlapsPoint(X, Y, false);
+            return OverlapsPoint(X, Y, false);
         }
-		override public bool overlapsPoint(float X, float Y, bool PerPixel)
+		override public bool OverlapsPoint(float X, float Y, bool PerPixel)
 		{
 			return getTile((int)((X-base.X)/_tileWidth),(int)((Y-base.Y)/_tileHeight)) >= this.collideIndex;
 		}
@@ -341,16 +341,16 @@ namespace XnaFlixel
 		/// Called by <code>FlxObject.updateMotion()</code> and some constructors to
 		/// rebuild the basic collision data for this object.
 		/// </summary>
-        override public void refreshHulls()
+        override public void RefreshHulls()
 		{
 			colHullX.x = 0;
 			colHullX.y = 0;
-			colHullX.width = _tileWidth;
-			colHullX.height = _tileHeight;
+			colHullX.Width = _tileWidth;
+			colHullX.Height = _tileHeight;
 			colHullY.x = 0;
 			colHullY.y = 0;
-			colHullY.width = _tileWidth;
-			colHullY.height = _tileHeight;
+			colHullY.Width = _tileWidth;
+			colHullY.Height = _tileHeight;
 		}
 
 		/// <summary>
@@ -360,7 +360,7 @@ namespace XnaFlixel
 		/// 
 		/// @param	Object	The <code>FlxObject</code> you're about to run into.
 		/// </summary>
-		override public void preCollide(FlxObject Object)
+		override public void PreCollide(FlxObject Object)
 		{
 			//Collision fix, in case updateMotion() is called
 			colHullX.x = 0;

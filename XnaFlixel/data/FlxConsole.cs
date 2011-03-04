@@ -39,10 +39,10 @@ namespace XnaFlixel.data
                 FlxG.spriteBatch.GraphicsDevice.Viewport.Width, FlxG.spriteBatch.GraphicsDevice.Viewport.Height);
             _consoleColor = new Color(0, 0, 0, 0x7F);
 
-            _consoleText = new FlxText(targetLeft, -800, targetWidth, "").setFormat(null, 1, Color.White, FlxJustification.Left, Color.White);
+            _consoleText = new FlxText(targetLeft, -800, targetWidth, "").SetFormat(null, 1, Color.White, FlxJustification.Left, Color.White);
             _consoleText.Height = FlxG.height; //FlxG.spriteBatch.GraphicsDevice.Viewport.Height;
 
-            _consoleFPS = new FlxText(targetLeft + targetWidth - 30, -800, 30, "").setFormat(null, 1, Color.White, FlxJustification.Right, Color.White);
+            _consoleFPS = new FlxText(targetLeft + targetWidth - 30, -800, 30, "").SetFormat(null, 1, Color.White, FlxJustification.Right, Color.White);
 
             _consoleLines = new List<string>();
 
@@ -130,8 +130,8 @@ namespace XnaFlixel.data
 
             spriteBatch.Draw(FlxG.XnaSheet, _consoleRect,
                 _srcRect, _consoleColor);
-            _consoleText.render(spriteBatch);
-            _consoleFPS.render(spriteBatch);
+            _consoleText.Render(spriteBatch);
+            _consoleFPS.Render(spriteBatch);
         }
 
     }

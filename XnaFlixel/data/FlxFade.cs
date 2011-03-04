@@ -23,7 +23,7 @@ namespace XnaFlixel.data
 		public FlxFade()
             : base(0, 0)
 		{
-            createGraphic(FlxG.width, FlxG.height, Color.Black);
+            CreateGraphic(FlxG.width, FlxG.height, Color.Black);
 			scrollFactor.X = 0;
 			scrollFactor.Y = 0;
 			Exists = false;
@@ -68,7 +68,7 @@ namespace XnaFlixel.data
 		/// <summary>
 		/// Updates and/or animates this special effect
 		/// </summary>
-		override public void update()
+		override public void Update()
 		{
 			alpha += FlxG.elapsed/_delay;
 			if(alpha >= 1)

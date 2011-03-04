@@ -13,7 +13,7 @@ namespace XnaFlixel.data
         public FlxLogoPixel(int xPos, int yPos, int pixelSize, int index, Color finalColor)
             : base(xPos, yPos)
         {
-            createGraphic(pixelSize, pixelSize, Color.White);
+            CreateGraphic(pixelSize, pixelSize, Color.White);
 
             Color[] colors = new Color[]
             {
@@ -34,7 +34,7 @@ namespace XnaFlixel.data
 
         }
 
-        public override void update()
+        public override void Update()
         {
             if (_curlayer == 0)
                 return;
@@ -50,7 +50,7 @@ namespace XnaFlixel.data
             }
         }
 
-        public override void render(SpriteBatch spriteBatch)
+        public override void Render(SpriteBatch spriteBatch)
         {
             for (int i = 0; i <= _curlayer; i++)
             {
